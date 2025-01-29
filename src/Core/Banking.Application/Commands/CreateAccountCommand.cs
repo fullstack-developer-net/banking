@@ -20,6 +20,7 @@ namespace Banking.Application.Commands
                 UserName = request.AccountDto.Email,
                 Email = request.AccountDto.Email,
                 FullName = request.AccountDto.FullName,
+                TemporaryPassword = password,
                 IsActive = true,
             };
 

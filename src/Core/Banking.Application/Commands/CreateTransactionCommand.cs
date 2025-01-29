@@ -1,23 +1,20 @@
-﻿using Banking.Domain.Entities;
+﻿using Banking.Application.Dtos;
+using Banking.Domain.Constants;
+using Banking.Domain.Entities;
 using Banking.Domain.Interfaces;
+using Banking.Domain.Interfaces.Services;
 using MediatR;
 
 namespace Banking.Application.Commands
 {
-    public record CreateTransactionCommand(long FromAccountId, long ToAccountId, decimal Amount) : IRequest<string>;
-    public class CreateTransactionCommandHandler : IRequestHandler<CreateTransactionCommand, string>
+    public record CreateTransactionCommand(long FromAccountId, long ToAccountId, decimal Amount) : IRequest<TransactionMessage>;
+    public class CreateTransactionCommandHandler(IUnitOfWork unitOfWork, ISenderService sender) : IRequestHandler<CreateTransactionCommand, TransactionMessage>
     {
-        private readonly IUnitOfWork _unitOfWork;
-
-        public CreateTransactionCommandHandler(IUnitOfWork unitOfWork)
+        public async Task<TransactionMessage> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
         {
-            _unitOfWork = unitOfWork;
-        }
 
-        public async Task<string> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
-        {
-            var fromAccount = await _unitOfWork.AccountRepository.GetByIdAsync(request.FromAccountId);
-            var toAccount = await _unitOfWork.AccountRepository.GetByIdAsync(request.ToAccountId);
+            var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(request.FromAccountId);
+            var toAccount = await unitOfWork.AccountRepository.GetByIdAsync(request.ToAccountId);
 
             if (fromAccount == null || toAccount == null)
             {
@@ -29,9 +26,6 @@ namespace Banking.Application.Commands
                 throw new Exception("Insufficient funds.");
             }
 
-            // Update balances
-            fromAccount.Balance -= request.Amount;
-            toAccount.Balance += request.Amount;
 
             // Create the transaction
             var transaction = new Transaction
@@ -40,14 +34,29 @@ namespace Banking.Application.Commands
                 ToAccountId = request.ToAccountId,
                 Amount = request.Amount,
                 TransactionTime = DateTime.UtcNow,
+                Status = TransactionStatus.Pending,
+                Note = "Transaction is pending."
             };
 
-            await _unitOfWork.TransactionRepository.AddAsync(transaction);
-            await _unitOfWork.AccountRepository.UpdateAsync(fromAccount);
-            await _unitOfWork.AccountRepository.UpdateAsync(toAccount);
-            await _unitOfWork.CompleteAsync();
+            // Initialize the transaction and store into the database
+            await unitOfWork.TransactionRepository.AddAsync(transaction);
+            await unitOfWork.CompleteAsync();
 
-            return transaction.TransactionId;
+            var message = new TransactionMessage
+            {
+                TransactionId = transaction.TransactionId,
+                FromAccountId = transaction.FromAccountId,
+                ToAccountId = transaction.ToAccountId,
+                Amount = transaction.Amount,
+                Status = transaction.Status,
+                Note = transaction.Note,
+                TransactionTime = transaction.TransactionTime,
+            };
+
+            // Send the transaction request to the queue
+            await sender.SendMessageAsync(message);
+            return message;
+
         }
     }
 }

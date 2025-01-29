@@ -9,6 +9,8 @@ namespace Banking.Domain.Entities
         public long FromAccountId { get; set; }
         public long ToAccountId { get; set; }
         public decimal Amount { get; set; }
+        public string Status { get; set; }
+        public string Note { get; set; }
         public DateTime TransactionTime { get; set; }
         public virtual Account? FromAccount { get; set; }
         public virtual Account? ToAccount { get; set; }

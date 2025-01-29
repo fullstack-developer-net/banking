@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking.Api", "Banking.Api\Banking.Api.csproj", "{6FA4EE04-483D-4189-A39C-585BE566E790}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking.Infrastructure", "..\..\Infrastructure\Banking.Infrastructure\Banking.Infrastructure.csproj", "{50CFB3DE-6400-4B7B-A9DE-BF548C183D08}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking.Persistence", "..\..\Infrastructure\Banking.Persistence\Banking.Persistence.csproj", "{E8613F0C-B861-41FA-A8DC-A90B75EC782D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking.Infrastructure.RabbitMQ", "..\..\Infrastructure\Banking.Infrastructure.RabbitMQ\Banking.Infrastructure.RabbitMQ.csproj", "{632F4028-0AFF-498C-B103-4A1CEC23514A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{E8613F0C-B861-41FA-A8DC-A90B75EC782D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8613F0C-B861-41FA-A8DC-A90B75EC782D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8613F0C-B861-41FA-A8DC-A90B75EC782D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{632F4028-0AFF-498C-B103-4A1CEC23514A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{632F4028-0AFF-498C-B103-4A1CEC23514A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{632F4028-0AFF-498C-B103-4A1CEC23514A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{632F4028-0AFF-498C-B103-4A1CEC23514A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

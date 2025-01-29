@@ -4,22 +4,22 @@ using MediatR;
 
 namespace Banking.Application.Queries
 {
-    public record GetTransactionByIdQuery(string Id) : IRequest<TransactionDto?>;
-    public class GetTransactionByIdQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetTransactionByIdQuery, TransactionDto?>
+    public record GetTransactionByIdQuery(string Id) : IRequest<TransactionMessage?>;
+    public class GetTransactionByIdQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetTransactionByIdQuery, TransactionMessage?>
     {
-        public async Task<TransactionDto?> Handle(GetTransactionByIdQuery request, CancellationToken cancellationToken)
+        public async Task<TransactionMessage?> Handle(GetTransactionByIdQuery request, CancellationToken cancellationToken)
         {
             var transaction = await unitOfWork.TransactionRepository.GetByIdAsync(request.Id);
 
             if (transaction == null) return null;
 
-            return new TransactionDto
+            return new TransactionMessage
             {
-                Id = transaction.TransactionId,
+                TransactionId = transaction.TransactionId,
                 FromAccountId = transaction.FromAccountId,
                 ToAccountId = transaction.ToAccountId,
                 Amount = transaction.Amount,
-                TransactionDate = transaction.TransactionTime
+                TransactionTime = transaction.TransactionTime
             };
         }
     }

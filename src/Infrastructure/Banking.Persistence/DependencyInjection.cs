@@ -1,13 +1,10 @@
-﻿using Banking.Domain.Entities.Identity;
-using Banking.Domain.Interfaces;
+﻿using Banking.Domain.Interfaces;
 using Banking.Domain.Interfaces.Repositories;
 using Banking.Persistence.Repositories;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Runtime.Intrinsics.X86;
 
 namespace Banking.Persistence
 {

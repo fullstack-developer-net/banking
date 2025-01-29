@@ -4,23 +4,23 @@ using MediatR;
 
 namespace Banking.Application.Queries
 {
-    public record GetTransactionsByAccountIdQuery(int AccountId) : IRequest<IEnumerable<TransactionDto>>;
-    public class GetTransactionsByAccountIdQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetTransactionsByAccountIdQuery, IEnumerable<TransactionDto>>
+    public record GetTransactionsByAccountIdQuery(int AccountId) : IRequest<IEnumerable<TransactionMessage>>;
+    public class GetTransactionsByAccountIdQueryHandler(IUnitOfWork unitOfWork) : IRequestHandler<GetTransactionsByAccountIdQuery, IEnumerable<TransactionMessage>>
     {
-        public async Task<IEnumerable<TransactionDto>> Handle(GetTransactionsByAccountIdQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TransactionMessage>> Handle(GetTransactionsByAccountIdQuery request, CancellationToken cancellationToken)
         {
             var sentTransactions = await unitOfWork.TransactionRepository.GetByFromAccountIdAsync(request.AccountId);
             var receivedTransactions = await unitOfWork.TransactionRepository.GetByToAccountIdAsync(request.AccountId);
 
             var allTransactions = sentTransactions.Concat(receivedTransactions);
 
-            return allTransactions.Select(t => new TransactionDto
+            return allTransactions.Select(t => new TransactionMessage
             {
-                Id = t.TransactionId,
+                TransactionId = t.TransactionId,
                 FromAccountId = t.FromAccountId,
                 ToAccountId = t.ToAccountId,
                 Amount = t.Amount,
-                TransactionDate = t.TransactionTime
+                TransactionTime = t.TransactionTime
             });
         }
     }

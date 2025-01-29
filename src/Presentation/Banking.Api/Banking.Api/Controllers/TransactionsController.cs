@@ -11,9 +11,8 @@ namespace Banking.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTransaction([FromBody] CreateTransactionCommand command)
         {
-
-            var transactionId = await mediator.Send(command);
-            return Ok(new { TransactionId = transactionId });
+            var result = await mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpGet("/{id}")]
