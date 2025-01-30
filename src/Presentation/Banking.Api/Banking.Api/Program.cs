@@ -30,8 +30,9 @@ builder.Services.AddApiVersioning(options =>
 builder.Services.AddControllers()
     .AddOData(opt => opt.Select().Filter().OrderBy().Expand().SetMaxTop(100).Count());  // Add OData configuration
 builder.Services.AddIdentity<User, Role>()
-.AddEntityFrameworkStores<BankingDbContext>()
-.AddDefaultTokenProviders();
+    .AddEntityFrameworkStores<BankingDbContext>()
+    .AddDefaultTokenProviders();
+
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
 
@@ -65,12 +66,44 @@ builder.Services.AddRabbitMQ();
 builder.Services.AddSignalRWebSocket();
 
 // Add the Swagger generator and the Swagger UI middlewares
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-var app = builder.Build();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Version = "v1",
+        Title = "API",
+        Description = "ASP.NET Core Web API"
+    });
 
-app.UseMiddleware<QueryStringAuthMiddleware>();
+    // Add JWT token authentication support
+    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Description = "Please enter a valid token with `Bearer ` prefix",
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+
+    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+}); var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -85,8 +118,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseGlobalExceptionHandler();
+
 app.UseAuthentication();
-//app.UseMiddleware<JwtMiddleware>();
+app.UseMiddleware<JwtMiddleware>();
+
 app.UseAuthorization();
 
 app.MapControllers();

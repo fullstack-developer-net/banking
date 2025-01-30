@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Banking.Api.Controllers
 {
-    public class TransactionsController(IMediator mediator) : BaseBankingController
+    public class TransactionsController(IMediator mediator) : BaseApiController
     {
 
         [HttpPost]

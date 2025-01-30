@@ -1,4 +1,5 @@
-﻿using Banking.Application.Commands;
+﻿using Banking.Api.Filters;
+using Banking.Application.Commands;
 using Banking.Application.Dtos;
 using Banking.Application.Queries;
 using Banking.Core.Interfaces;
@@ -10,11 +11,10 @@ using Microsoft.AspNetCore.OData.Query;
 namespace Banking.Api.Controllers
 {
 
-    public class AccountsController(IMediator mediator, IUnitOfWork unitOfWork) : BaseBankingController
+    public class AccountsController(IMediator mediator, IUnitOfWork unitOfWork) : BaseApiController
     {
         [HttpPost("test-websocket")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login()
+         public async Task<IActionResult> Test()
         {
             var data = new EventData
             {
@@ -29,8 +29,7 @@ namespace Banking.Api.Controllers
         }
 
         [HttpPost("login")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             var result = await mediator.Send(new LoginCommand(loginDto));
 
@@ -38,7 +37,7 @@ namespace Banking.Api.Controllers
         }
 
         [HttpPost("logout")]
-        [Authorize]
+        [Microsoft.AspNetCore.Authorization.Authorize]
         public async Task<IActionResult> Logout()
         {
             await mediator.Send(new LogoutCommand());
@@ -47,7 +46,7 @@ namespace Banking.Api.Controllers
 
 
         [HttpPost("password")]
-        [Authorize]
+        [Microsoft.AspNetCore.Authorization.Authorize]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand command)
         {
             await mediator.Send(command);
