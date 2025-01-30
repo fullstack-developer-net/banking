@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Banking.Core.Entities;
+using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Banking.Domain.Entities.Identity
+namespace Banking.Core.Entities.Identity
 {
     [Table("Users")]
     public class User : IdentityUser

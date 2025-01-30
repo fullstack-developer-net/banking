@@ -1,16 +1,18 @@
-﻿using Banking.Domain.Entities.Identity;
+﻿using Banking.Core.Entities.Identity;
+using Banking.Core.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
 namespace Banking.Application.Queries
 {
-    public record GetUserByIdQuery(string UserId) : IRequest<User>;
+    public record GetUserByAccountIdQuery(long AccountId) : IRequest<User>;
 
-    public class GetUserByIdQueryHandler(SignInManager<User> signInManager) : IRequestHandler<GetUserByIdQuery, User>
+    public class GetUserByAccountIdQueryHandler(SignInManager<User> signInManager, IUnitOfWork unitOfWork) : IRequestHandler<GetUserByAccountIdQuery, User>
     {
-        public async Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        public async Task<User> Handle(GetUserByAccountIdQuery request, CancellationToken cancellationToken)
         {
-            return await signInManager.UserManager.FindByIdAsync(request.UserId) ?? throw new Exception("User not found");
+            var account = await unitOfWork.AccountRepository.GetByIdAsync(request.AccountId) ?? throw new Exception("Account not found");
+            return await signInManager.UserManager.FindByIdAsync(account.UserId) ?? throw new Exception("User not found");
         }
     }
 }

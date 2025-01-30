@@ -1,65 +1,61 @@
-﻿using Banking.Domain.Constants;
-using Banking.Domain.Entities;
-using Banking.Domain.Interfaces;
+﻿using Banking.Application.Dtos;
+using Banking.Common.Constants;
+using Banking.Core.Entities;
+using Banking.Core.Interfaces;
+using Banking.Core.Interfaces.Services;
 using MediatR;
 
 namespace Banking.Application.Commands
 {
-    public record ProcessTransactionCommand(string TransactionId) : IRequest<bool>;
-    public class ProcessTransactionCommandHandler(IUnitOfWork unitOfWork) : IRequestHandler<ProcessTransactionCommand, bool>
+    public record ProcessTransactionCommand(long FromAccountId, long ToAccountId, decimal Amount) : IRequest<TransactionMessage>;
+    public class ProcessTransactionCommandHandler(IUnitOfWork unitOfWork, ISenderService sender) : IRequestHandler<ProcessTransactionCommand, TransactionMessage>
     {
-        public async Task<bool> Handle(ProcessTransactionCommand request, CancellationToken cancellationToken)
+        public async Task<TransactionMessage> Handle(ProcessTransactionCommand request, CancellationToken cancellationToken)
         {
-            Transaction transaction = await unitOfWork.TransactionRepository.GetByIdAsync(request.TransactionId);
 
-            if (transaction == null)
+            var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(request.FromAccountId);
+            var toAccount = await unitOfWork.AccountRepository.GetByIdAsync(request.ToAccountId);
+
+            if (fromAccount == null || toAccount == null)
             {
-                return false;
+                throw new Exception("Invalid account(s) supplied.");
             }
 
-            try
+            if (fromAccount.Balance < request.Amount)
             {
-                var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.FromAccountId);
-                var toAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.ToAccountId);
-
-                if (fromAccount == null)
-                {
-                    transaction.Status = TransactionStatus.Failed;
-                    transaction.Note = "Invalid sender account";
-                    return false;
-                }
-                if (toAccount == null)
-                {
-                    transaction.Status = TransactionStatus.Failed;
-                    transaction.Note = "Invalid receiver account";
-                    return false;
-                }
-                if (fromAccount.Balance < transaction.Amount)
-                {
-                    transaction.Status = TransactionStatus.Failed;
-                    transaction.Note = "Insufficient funds.";
-                }
-
-                fromAccount.Balance -= transaction.Amount;
-                toAccount.Balance += transaction.Amount;
-                transaction.Status = TransactionStatus.Completed;
-                transaction.Note = "Transaction completed successfully.";
-
-
-                // Initialize the transaction and store into the database
-                await unitOfWork.TransactionRepository.UpdateAsync(transaction);
-                await unitOfWork.AccountRepository.UpdateAsync(toAccount);
-                await unitOfWork.AccountRepository.UpdateAsync(fromAccount);
-                await unitOfWork.CompleteAsync();
-            }
-            catch (Exception ex)
-            {
-                transaction.Status = TransactionStatus.Failed;
-                transaction.Note = "Internal server error: " + ex.Message;
-                return false;
+                throw new Exception("Insufficient funds.");
             }
 
-            return true;
+
+            // Create the transaction
+            var transaction = new Transaction
+            {
+                FromAccountId = request.FromAccountId,
+                ToAccountId = request.ToAccountId,
+                Amount = request.Amount,
+                TransactionTime = DateTime.UtcNow,
+                Status = TransactionStatus.Pending,
+                Note = "Transaction is pending."
+            };
+
+            // Initialize the transaction and store into the database
+            await unitOfWork.TransactionRepository.AddAsync(transaction);
+            await unitOfWork.CompleteAsync();
+
+            var message = new TransactionMessage
+            {
+                TransactionId = transaction.TransactionId,
+                FromAccountId = transaction.FromAccountId,
+                ToAccountId = transaction.ToAccountId,
+                Amount = transaction.Amount,
+                Status = transaction.Status,
+                Note = transaction.Note,
+                TransactionTime = transaction.TransactionTime,
+            };
+
+            // Send the transaction request to the queue
+            await sender.SendMessageAsync(QueueNames.Transaction, message);
+            return message;
 
         }
     }

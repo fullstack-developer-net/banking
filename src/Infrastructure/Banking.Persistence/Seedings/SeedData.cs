@@ -1,5 +1,5 @@
-﻿using Banking.Domain.Constants;
-using Banking.Domain.Entities.Identity;
+﻿using Banking.Common.Constants;
+using Banking.Core.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Persistence.Seedings

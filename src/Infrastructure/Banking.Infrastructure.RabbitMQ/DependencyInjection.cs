@@ -1,9 +1,9 @@
-﻿using Banking.Domain.Interfaces.Services;
+﻿using Banking.Core.Interfaces.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
-namespace Banking.Infrastructure.RabbitMQ
+namespace Banking.Infrastructure.MessageQueue
 {
     public static class DependencyInjection
     {

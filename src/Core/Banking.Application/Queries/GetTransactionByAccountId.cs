@@ -1,5 +1,5 @@
 ﻿using Banking.Application.Dtos;
-using Banking.Domain.Interfaces;
+using Banking.Core.Interfaces;
 using MediatR;
 
 namespace Banking.Application.Queries

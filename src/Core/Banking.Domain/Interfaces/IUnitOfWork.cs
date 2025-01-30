@@ -1,6 +1,6 @@
-﻿using Banking.Domain.Interfaces.Repositories;
+﻿using Banking.Core.Interfaces.Repositories;
 
-namespace Banking.Domain.Interfaces
+namespace Banking.Core.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

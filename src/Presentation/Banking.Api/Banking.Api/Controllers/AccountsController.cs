@@ -1,7 +1,7 @@
 ﻿using Banking.Application.Commands;
 using Banking.Application.Dtos;
 using Banking.Application.Queries;
-using Banking.Domain.Interfaces;
+using Banking.Core.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +12,21 @@ namespace Banking.Api.Controllers
 
     public class AccountsController(IMediator mediator, IUnitOfWork unitOfWork) : BaseBankingController
     {
+        [HttpPost("test-websocket")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login()
+        {
+            var data = new EventData
+            {
+                UserId = "1",
+                Type = "Test",
+                CreatedAt = DateTime.Now,
+                Message = "Test message"
+            };
+            var result = mediator.Send(new SendEventCommand(data));
+
+            return result == null ? BadRequest("Login failure") : Ok(result);
+        }
 
         [HttpPost("login")]
         [AllowAnonymous]

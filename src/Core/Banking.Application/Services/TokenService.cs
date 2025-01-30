@@ -1,5 +1,5 @@
-﻿using Banking.Domain.Interfaces;
-using Banking.Domain.Settings;
+﻿using Banking.Common.Models;
+using Banking.Core.Interfaces.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;

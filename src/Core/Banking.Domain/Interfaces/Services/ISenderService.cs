@@ -1,7 +1,7 @@
-﻿namespace Banking.Domain.Interfaces.Services
+﻿namespace Banking.Core.Interfaces.Services
 {
     public interface ISenderService
     {
-        Task SendMessageAsync(object message);
+        Task SendMessageAsync(string queueName, object message);
     }
 }

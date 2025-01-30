@@ -9,7 +9,7 @@ namespace Banking.Api.Controllers
     {
 
         [HttpPost]
-        public async Task<IActionResult> CreateTransaction([FromBody] CreateTransactionCommand command)
+        public async Task<IActionResult> CreateTransaction([FromBody] ProcessTransactionCommand command)
         {
             var result = await mediator.Send(command);
             return Ok(result);

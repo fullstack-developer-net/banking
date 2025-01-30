@@ -1,4 +1,4 @@
-﻿namespace Banking.Infrastructure.RabbitMQ
+﻿namespace Banking.Infrastructure.MessageQueue
 {
     public class RabbitMQSettings
     {

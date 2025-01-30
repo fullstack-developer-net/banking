@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Banking.Domain.Entities.Identity
+namespace Banking.Core.Entities.Identity
 {
-    public class Role:IdentityRole
+    public class Role : IdentityRole
     {
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Banking.Domain.Constants
+﻿namespace Banking.Common.Constants
 {
     public static class RoleConstant
     {

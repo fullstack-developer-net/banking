@@ -1,4 +1,4 @@
-﻿namespace Banking.Domain.Settings
+﻿namespace Banking.Common.Models
 {
     public class JwtSettings
     {

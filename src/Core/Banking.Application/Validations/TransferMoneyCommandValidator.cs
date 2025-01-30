@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Banking.Application.Validations
 {
-    public class TransferMoneyCommandValidator : AbstractValidator<CreateTransactionCommand>
+    public class TransferMoneyCommandValidator : AbstractValidator<ProcessTransactionCommand>
     {
         public TransferMoneyCommandValidator()
         {

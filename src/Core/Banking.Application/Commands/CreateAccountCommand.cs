@@ -1,8 +1,8 @@
 ﻿using Banking.Application.Dtos;
-using Banking.Domain.Entities;
-using Banking.Domain.Entities.Identity;
-using Banking.Domain.Helpers;
-using Banking.Domain.Interfaces;
+using Banking.Common.Helpers;
+using Banking.Core.Entities;
+using Banking.Core.Entities.Identity;
+using Banking.Core.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 

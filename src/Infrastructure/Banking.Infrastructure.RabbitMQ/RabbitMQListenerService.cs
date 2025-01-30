@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 
-namespace Banking.Infrastructure.RabbitMQ
+namespace Banking.Infrastructure.MessageQueue
 {
     public abstract class RabbitMQListenerService(IConnectionFactory factory) : BackgroundService
     {

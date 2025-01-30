@@ -1,5 +1,5 @@
-﻿using Banking.Domain.Entities;
-using Banking.Domain.Interfaces.Repositories;
+﻿using Banking.Core.Entities;
+using Banking.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Persistence.Repositories

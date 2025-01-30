@@ -1,4 +1,4 @@
-﻿using Banking.Domain.Entities.Identity;
+﻿using Banking.Core.Entities.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 

@@ -1,5 +1,5 @@
-﻿using Banking.Domain.Entities.Identity;
-using Banking.Domain.Interfaces;
+﻿using Banking.Core.Entities.Identity;
+using Banking.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Identity;
 
 namespace Banking.Api.Middlewares

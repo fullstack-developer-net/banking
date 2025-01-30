@@ -1,6 +1,6 @@
-﻿using Banking.Domain.Entities;
-using Banking.Domain.Entities.Identity;
-using Banking.Domain.Helpers;
+﻿using Banking.Common.Helpers;
+using Banking.Core.Entities;
+using Banking.Core.Entities.Identity;
 using Banking.Persistence.Seedings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -91,6 +91,47 @@ namespace Banking.Persistence
                 .HasForeignKey(t => t.ToAccountId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
+
+        public override int SaveChanges()
+        {
+            BeforeSaving();
+            var result = base.SaveChanges();
+            AfterSaving();
+            return result;
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            BeforeSaving();
+            var result = await base.SaveChangesAsync(cancellationToken);
+            AfterSaving();
+            return result;
+        }
+
+        private void BeforeSaving()
+        {
+            UpdateTransactionTime();
+        }
+        private void AfterSaving()
+        {
+            UpdateBankAccountNumbersAfterSave();
+        }
+
+        private void UpdateBankAccountNumbersAfterSave()
+        {
+            var newAccounts = ChangeTracker.Entries<Account>()
+                .Where(e => e.State == EntityState.Added)
+                .Select(e => e.Entity);
+
+            foreach (var account in newAccounts)
+            {
+                account.AccountNumber = CommonHelper.GenerateAccountNumber(account.AccountId);
+            }
+
+            // Save changes again to persist the account numbers
+            base.SaveChanges();
+        }
+
         private void UpdateTransactionTime()
         {
             if (!ChangeTracker.Entries<Transaction>().Any(e => e.State == EntityState.Added)) return;
@@ -103,36 +144,7 @@ namespace Banking.Persistence
                 transaction.TransactionTime = DateTime.UtcNow;
             }
         }
-        private void UpdateBankAccountNumbers()
-        {
-            if (!ChangeTracker.Entries<Account>().Any(e => e.State == EntityState.Added)) return;
 
-            var newAccounts = ChangeTracker.Entries<Account>()
-                .Where(e => e.State == EntityState.Added)
-                .Select(e => e.Entity);
-
-            foreach (var account in newAccounts)
-            {
-                account.AccountNumber = CommonHelper.GenerateAccountNumber(account.AccountId);
-            }
-        }
-        public override int SaveChanges()
-        {
-            PrepareEntitiesForSave();
-            return base.SaveChanges();
-        }
-
-        private void PrepareEntitiesForSave()
-        {
-            UpdateBankAccountNumbers();
-            UpdateTransactionTime();
-        }
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            PrepareEntitiesForSave();
-            return base.SaveChangesAsync(cancellationToken);
-        }
 
     }
 }

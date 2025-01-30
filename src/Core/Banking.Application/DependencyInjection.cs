@@ -1,7 +1,7 @@
 ﻿using Banking.Application.Commands;
 using Banking.Application.Services;
-using Banking.Domain.Entities.Identity;
-using Banking.Domain.Interfaces;
+using Banking.Core.Entities.Identity;
+using Banking.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 

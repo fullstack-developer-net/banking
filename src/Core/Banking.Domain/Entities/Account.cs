@@ -1,7 +1,7 @@
-﻿using Banking.Domain.Entities.Identity;
+﻿using Banking.Core.Entities.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Banking.Domain.Entities
+namespace Banking.Core.Entities
 {
     [Table("Accounts")]
     public class Account

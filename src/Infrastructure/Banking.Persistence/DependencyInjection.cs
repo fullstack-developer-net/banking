@@ -1,5 +1,5 @@
-﻿using Banking.Domain.Interfaces;
-using Banking.Domain.Interfaces.Repositories;
+﻿using Banking.Core.Interfaces;
+using Banking.Core.Interfaces.Repositories;
 using Banking.Persistence.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

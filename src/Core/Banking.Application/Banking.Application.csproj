@@ -16,8 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\Banking.Infrastructure.RabbitMQ\Banking.Infrastructure.RabbitMQ.csproj" />
-    <ProjectReference Include="..\Banking.Domain\Banking.Domain.csproj" />
+    <ProjectReference Include="..\..\Banking.Common\Banking.Common.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Banking.Infrastructure.RabbitMQ\Banking.Infrastructure.MessageQueue.csproj" />
+    <ProjectReference Include="..\Banking.Domain\Banking.Core.csproj" />
   </ItemGroup>
 
 </Project>

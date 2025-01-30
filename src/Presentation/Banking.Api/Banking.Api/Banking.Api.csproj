@@ -28,7 +28,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Banking.Application\Banking.Application.csproj" />
-    <ProjectReference Include="..\..\..\Infrastructure\Banking.Infrastructure.RabbitMQ\Banking.Infrastructure.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Banking.Infrastructure.Notification\Banking.Infrastructure.WebSocket.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Banking.Infrastructure.RabbitMQ\Banking.Infrastructure.MessageQueue.csproj" />
     <ProjectReference Include="..\..\..\Infrastructure\Banking.Persistence\Banking.Persistence.csproj" />
   </ItemGroup>
 

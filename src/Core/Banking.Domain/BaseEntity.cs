@@ -1,4 +1,4 @@
-﻿namespace Banking.Domain
+﻿namespace Banking.Core
 {
     public class BaseEntity
     {

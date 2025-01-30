@@ -1,4 +1,4 @@
-﻿namespace Banking.Domain.Interfaces
+﻿namespace Banking.Core.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {

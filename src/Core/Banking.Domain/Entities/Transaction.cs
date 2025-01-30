@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Banking.Domain.Entities
+namespace Banking.Core.Entities
 {
     [Table("Transactions")]
     public class Transaction

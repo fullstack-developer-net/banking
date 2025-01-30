@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Banking.Domain.Helpers
+namespace Banking.Common.Helpers
 {
     public static class CommonHelper
     {
