@@ -1,6 +1,7 @@
 ﻿using Banking.Application.Dtos;
 using Banking.Core.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Application.Queries
 {
@@ -9,19 +10,18 @@ namespace Banking.Application.Queries
     {
         public async Task<IEnumerable<TransactionMessage>> Handle(GetTransactionsByAccountIdQuery request, CancellationToken cancellationToken)
         {
-            var sentTransactions = await unitOfWork.TransactionRepository.GetByFromAccountIdAsync(request.AccountId);
-            var receivedTransactions = await unitOfWork.TransactionRepository.GetByToAccountIdAsync(request.AccountId);
+            var allTransactions = await unitOfWork.TransactionRepository.AsQueryable()
+                .Where(x => x.FromAccountId == request.AccountId || x.ToAccountId == request.AccountId)
+              .Select(t => new TransactionMessage
+              {
+                  TransactionId = t.TransactionId,
+                  FromAccountId = t.FromAccountId,
+                  ToAccountId = t.ToAccountId,
+                  Amount = t.Amount,
+                  TransactionTime = t.TransactionTime
+              }).ToListAsync(cancellationToken: cancellationToken);
 
-            var allTransactions = sentTransactions.Concat(receivedTransactions);
-
-            return allTransactions.Select(t => new TransactionMessage
-            {
-                TransactionId = t.TransactionId,
-                FromAccountId = t.FromAccountId,
-                ToAccountId = t.ToAccountId,
-                Amount = t.Amount,
-                TransactionTime = t.TransactionTime
-            });
+            return allTransactions;
         }
     }
 }

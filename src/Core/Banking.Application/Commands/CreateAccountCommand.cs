@@ -5,6 +5,7 @@ using Banking.Core.Entities.Identity;
 using Banking.Core.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace Banking.Application.Commands
@@ -15,7 +16,7 @@ namespace Banking.Application.Commands
     {
         public async Task<CreateAccountResponse> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
-            var password = $"P@ssw0rd{DateTime.Now.Year}{CommonHelper.RandomString(6)}";
+            var password = $"P@ssw0rd{DateTime.Now.ToLongTimeString()}{CommonHelper.RandomString(6)}";
 
             var user = new User
             {
@@ -43,7 +44,7 @@ namespace Banking.Application.Commands
 
             await unitOfWork.CompleteAsync();
 
-            var account = await unitOfWork.AccountRepository.GetAccountByUserIdAsync(user.Id);
+            var account = await unitOfWork.AccountRepository.AsQueryable().FirstOrDefaultAsync(a => a.UserId == user.Id, cancellationToken: cancellationToken);
             return new CreateAccountResponse
             {
                 Password = password,

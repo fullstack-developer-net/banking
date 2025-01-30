@@ -27,7 +27,7 @@ namespace Banking.Application.Commands
 
             user.RefreshToken = newRefreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(options.Value.RefreshTokenExpiryInDays);
-
+            await userManager.UpdateAsync(user);
             return new RefreshTokenDto
             {
                 Token = newJwtToken,

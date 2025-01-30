@@ -2,6 +2,7 @@
 using Banking.Common.Models;
 using Banking.Common.Services;
 using Banking.Core.Entities.Identity;
+using Banking.Core.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ using Microsoft.Extensions.Options;
 namespace Banking.Application.Commands
 {
     public record LoginCommand(LoginDto LoginDto) : IRequest<RefreshTokenDto?>;
-    public class LoginCommandHandler(IOptions<JwtSettings> options, UserManager<User> userManager, SignInManager<User> signInManager, TokenService tokenService) : IRequestHandler<LoginCommand, RefreshTokenDto?>
+    public class LoginCommandHandler(IOptions<JwtSettings> options, UserManager<User> userManager,  TokenService tokenService, IUnitOfWork unitOfWork) : IRequestHandler<LoginCommand, RefreshTokenDto?>
     {
 
         public async Task<RefreshTokenDto?> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -26,7 +27,7 @@ namespace Banking.Application.Commands
                 user.RefreshToken = refreshToken;
                 user.RefreshTokenExpiryTime = DateTime.Now.AddDays(options.Value.RefreshTokenExpiryInDays);
                 await userManager.UpdateAsync(user);
-
+                
                 return new RefreshTokenDto
                 {
                     Token = jwtToken,

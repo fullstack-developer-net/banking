@@ -1,20 +1,21 @@
-﻿using Banking.Core.Interfaces;
-using Banking.Core.Interfaces.Repositories;
+﻿using Banking.Core.Entities;
+using Banking.Core.Entities.Identity;
+using Banking.Core.Interfaces;
 
 namespace Banking.Persistence
 {
-    public class UnitOfWork(BankingDbContext context, IAccountRepository accountRepository, ITransactionRepository transactionRepository) : IUnitOfWork
+    public class UnitOfWork(BankingDbContext context) : IUnitOfWork
     {
-        public BankingDbContext Context { get; } = context;
-        public IAccountRepository AccountRepository { get; } = accountRepository;
-
-        public ITransactionRepository TransactionRepository { get; } = transactionRepository;
+        public IGenericRepository<Account> AccountRepository { get; } = new GenericRepository<Account>(context);
+        public IGenericRepository<User> UserRepository { get; } = new GenericRepository<User>(context);
+        public IGenericRepository<Role> RoleRepository { get; } = new GenericRepository<Role>(context);
+        public IGenericRepository<Transaction> TransactionRepository { get; } = new GenericRepository<Transaction>(context);
 
         public async Task<int> CompleteAsync()
         {
-            return await Context.SaveChangesAsync();
+            return await context.SaveChangesAsync();
         }
 
-        public void Dispose() => Context.Dispose();
+        public void Dispose() => context.Dispose();
     }
 }

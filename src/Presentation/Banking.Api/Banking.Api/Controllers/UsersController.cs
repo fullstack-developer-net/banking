@@ -58,7 +58,7 @@ namespace Banking.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> CreateAdminAccount([FromBody] CreateUserDto user)
         {
-            var password = $"P@ssw0rd{DateTime.Now.Year}{CommonHelper.RandomString(6)}";
+            var password = $"P@ssw0rd{DateTime.Now.ToLongTimeString()}{CommonHelper.RandomString(6)}";
 
             var newUser = new User
             {

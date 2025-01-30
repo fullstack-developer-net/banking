@@ -1,6 +1,4 @@
 ﻿using Banking.Core.Interfaces;
-using Banking.Core.Interfaces.Repositories;
-using Banking.Persistence.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,14 +10,12 @@ namespace Banking.Persistence
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
- 
+
             var connectionString = configuration.GetConnectionString("BankingDb");
             services.AddDbContext<BankingDbContext>(options =>
                  options.UseSqlServer(connectionString));
             services.AddScoped<DbContext, BankingDbContext>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IAccountRepository, AccountRepository>();
-            services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.Configure<IdentityOptions>(options =>
