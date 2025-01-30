@@ -5,7 +5,6 @@ namespace Banking.Common.Helpers
     public static class CommonHelper
     {
         private static readonly Random _random = new();
-        private const long BaseNumber = 100000000000000L;
 
         public static T DeepClone<T>(this T obj)
         {
@@ -21,7 +20,8 @@ namespace Banking.Common.Helpers
 
         public static string GenerateAccountNumber(long accountId)
         {
-            return (BaseNumber + accountId).ToString();
+            if (accountId <= 0) return string.Empty;
+            return accountId.ToString().PadLeft(14, '0');
         }
 
 

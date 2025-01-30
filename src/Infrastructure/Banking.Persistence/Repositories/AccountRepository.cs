@@ -10,11 +10,6 @@ namespace Banking.Persistence.Repositories
         {
             return await context.Set<Account>().FirstOrDefaultAsync(a => a.UserId == userId);
         }
-        public async Task<Account> GetByAccountNumberAsync(string accountNumber)
-        {
-            return await context.Set<Account>()
-                                 .Include(a => a.User)
-                                 .FirstOrDefaultAsync(a => a.AccountNumber == accountNumber);
-        }
+ 
     }
 }

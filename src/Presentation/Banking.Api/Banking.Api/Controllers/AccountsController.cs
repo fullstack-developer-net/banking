@@ -4,55 +4,17 @@ using Banking.Application.Dtos;
 using Banking.Application.Queries;
 using Banking.Core.Interfaces;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 
 namespace Banking.Api.Controllers
 {
 
-    public class AccountsController(IMediator mediator, IUnitOfWork unitOfWork) : BaseApiController
+    public class AccountsController(IMediator mediator, IUnitOfWork unitOfWork ) : BaseApiController
     {
-        [HttpPost("test-websocket")]
-         public async Task<IActionResult> Test()
-        {
-            var data = new EventData
-            {
-                UserId = "1",
-                Type = "Test",
-                CreatedAt = DateTime.Now,
-                Message = "Test message"
-            };
-            var result = mediator.Send(new SendEventCommand(data));
-
-            return result == null ? BadRequest("Login failure") : Ok(result);
-        }
-
-        [HttpPost("login")]
-         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
-        {
-            var result = await mediator.Send(new LoginCommand(loginDto));
-
-            return result == null ? BadRequest("Login failure") : Ok(result);
-        }
-
-        [HttpPost("logout")]
-        [Microsoft.AspNetCore.Authorization.Authorize]
-        public async Task<IActionResult> Logout()
-        {
-            await mediator.Send(new LogoutCommand());
-            return Ok("Logout successful.");
-        }
-
-
-        [HttpPost("password")]
-        [Microsoft.AspNetCore.Authorization.Authorize]
-        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand command)
-        {
-            await mediator.Send(command);
-            return Ok();
-        }
+     
         [HttpPost()]
+        [AllowRoles(["Admin"])]
         public async Task<IActionResult> CreateAccount([FromBody] CreateAccountRequest command)
         {
 
@@ -77,7 +39,6 @@ namespace Banking.Api.Controllers
             {
                 Email = a.User.Email ?? string.Empty,
                 FullName = a.User.FullName,
-                AccountNumber = a.AccountNumber,
                 Balance = a.Balance,
                 IsActive = a.IsActive,
             });

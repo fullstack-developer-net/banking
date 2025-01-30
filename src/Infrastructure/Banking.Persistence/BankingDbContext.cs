@@ -1,14 +1,13 @@
-﻿using Banking.Common.Helpers;
+﻿using Banking.Common.Constants;
 using Banking.Core.Entities;
 using Banking.Core.Entities.Identity;
-using Banking.Persistence.Seedings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Persistence
 {
-    public class BankingDbContext(DbContextOptions<BankingDbContext> options) : IdentityDbContext<User>(options)
+    public class BankingDbContext(DbContextOptions<BankingDbContext> options) : IdentityDbContext<User, Role, string>(options)
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
@@ -21,52 +20,30 @@ namespace Banking.Persistence
 
         }
 
-        private void SeedData(ModelBuilder builder)
+        private static void SeedData(ModelBuilder builder)
         {
-            builder.SeedRoles();
+            builder.Entity<Role>().HasData(
+                new Role { Id = "admin", Name = "Admin", NormalizedName = RoleConstant.Admin },
+                new Role { Id = "user", Name = "User", NormalizedName = RoleConstant.User }
+            );
         }
 
         private static void SetupEntityRelationships(ModelBuilder builder)
         {
-            builder.Entity<User>(b =>
-            {
-                b.ToTable("Users");
-            });
-            builder.Entity<IdentityRole>(b =>
-            {
-                b.ToTable("Roles");
-            });
+            builder.Entity<User>().ToTable("Users").Property(x=>x.Id).ValueGeneratedOnAdd();
+            builder.Entity<Role>().ToTable("Roles");
+            builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+            builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+            builder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+            builder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+            builder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
 
-            builder.Entity<IdentityUserRole<string>>(b =>
-            {
-                b.ToTable("UserRoles");
-            });
-
-            builder.Entity<IdentityUserClaim<string>>(b =>
-            {
-                b.ToTable("UserClaims");
-            });
-
-            builder.Entity<IdentityUserLogin<string>>(b =>
-            {
-                b.ToTable("UserLogins");
-            });
-
-            builder.Entity<IdentityRoleClaim<string>>(b =>
-            {
-                b.ToTable("RoleClaims");
-            });
-
-            builder.Entity<IdentityUserToken<string>>(b =>
-            {
-                b.ToTable("UserTokens");
-            });
 
             // Relationship configurations
+            builder.Entity<Account>().ToTable("Accounts").HasKey(a => a.AccountId);
             builder.Entity<Account>()
                 .HasOne(a => a.User)
-                .WithOne(u => u.Account)
-                .HasPrincipalKey<User>(u => u.Id)
+                .WithOne(x => x.Account)
                 .HasForeignKey<Account>(a => a.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
@@ -94,56 +71,17 @@ namespace Banking.Persistence
 
         public override int SaveChanges()
         {
-            BeforeSaving();
             var result = base.SaveChanges();
-            AfterSaving();
             return result;
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            BeforeSaving();
+
             var result = await base.SaveChangesAsync(cancellationToken);
-            AfterSaving();
             return result;
         }
 
-        private void BeforeSaving()
-        {
-            UpdateTransactionTime();
-        }
-        private void AfterSaving()
-        {
-            UpdateBankAccountNumbersAfterSave();
-        }
-
-        private void UpdateBankAccountNumbersAfterSave()
-        {
-            var newAccounts = ChangeTracker.Entries<Account>()
-                .Where(e => e.State == EntityState.Added)
-                .Select(e => e.Entity);
-
-            foreach (var account in newAccounts)
-            {
-                account.AccountNumber = CommonHelper.GenerateAccountNumber(account.AccountId);
-            }
-
-            // Save changes again to persist the account numbers
-            base.SaveChanges();
-        }
-
-        private void UpdateTransactionTime()
-        {
-            if (!ChangeTracker.Entries<Transaction>().Any(e => e.State == EntityState.Added)) return;
-
-            var newTransactions = ChangeTracker.Entries<Transaction>()
-                .Where(e => e.State == EntityState.Added)
-                .Select(e => e.Entity);
-            foreach (var transaction in newTransactions)
-            {
-                transaction.TransactionTime = DateTime.UtcNow;
-            }
-        }
 
 
     }

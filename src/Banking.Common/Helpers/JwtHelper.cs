@@ -1,7 +1,6 @@
 ﻿using Banking.Common.Models;
 using Banking.Core.Entities.Identity;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -11,7 +10,7 @@ namespace Banking.Common.Helpers
 {
     public static class JwtHelper
     {
-        public static string GenerateToken(User user, string secretKey)
+        public static string GenerateToken(User user, string secretKey, string issuer, string audience)
         {
             // generate token that is valid for 7 days
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -20,10 +19,12 @@ namespace Banking.Common.Helpers
             {
                 Subject = new ClaimsIdentity([
                     new Claim("userId", user.Id.ToString()),
-                    new Claim("account", JsonConvert.SerializeObject(user.Account))
-
+                    new Claim(JwtRegisteredClaimNames.Sub,user.Id.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())   
                     ]),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = DateTime.Now.AddMinutes(30),
+                Audience = audience,
+                Issuer = issuer,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -66,16 +67,14 @@ namespace Banking.Common.Helpers
                 return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(secretKey);
             try
             {
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey)),
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
                     ClockSkew = TimeSpan.Zero
                 }, out SecurityToken validatedToken);
 

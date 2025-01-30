@@ -3,6 +3,7 @@ using Banking.Api.BackgroundServices;
 using Banking.Api.Middlewares;
 using Banking.Application;
 using Banking.Common.Models;
+using Banking.Common.Services;
 using Banking.Core.Entities.Identity;
 using Banking.Infrastructure.MessageQueue;
 using Banking.Infrastructure.WebSocket;
@@ -50,6 +51,7 @@ builder.Services.AddAuthentication(options =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = jwtSettings?.Issuer,
+        ClockSkew=TimeSpan.Zero,
         ValidAudience = jwtSettings?.Audience,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings?.SecretKey ?? string.Empty))
     };
@@ -66,7 +68,7 @@ builder.Services.AddRabbitMQ();
 builder.Services.AddSignalRWebSocket();
 
 // Add the Swagger generator and the Swagger UI middlewares
-
+builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -74,8 +76,8 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
     {
         Version = "v1",
-        Title = "API",
-        Description = "ASP.NET Core Web API"
+        Title = "Banking API",
+        Description = "Banking Web API"
     });
 
     // Add JWT token authentication support
@@ -103,7 +105,9 @@ builder.Services.AddSwaggerGen(options =>
             Array.Empty<string>()
         }
     });
-}); var app = builder.Build();
+}); 
+
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

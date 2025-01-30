@@ -1,42 +1,38 @@
 ﻿using Banking.Application.Dtos;
-using Banking.Common.Helpers;
 using Banking.Common.Models;
+using Banking.Common.Services;
 using Banking.Core.Entities.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 namespace Banking.Application.Commands
 {
-    public record LoginCommand(LoginDto LoginDto) : IRequest<string?>;
-    public class LoginCommandHandler(IOptions<JwtSettings> options, UserManager<User> userManager) : IRequestHandler<LoginCommand, string?>
+    public record LoginCommand(LoginDto LoginDto) : IRequest<RefreshTokenDto?>;
+    public class LoginCommandHandler(IOptions<JwtSettings> options, UserManager<User> userManager, SignInManager<User> signInManager, TokenService tokenService) : IRequestHandler<LoginCommand, RefreshTokenDto?>
     {
 
-        public async Task<string?> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<RefreshTokenDto?> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
 
-            var user = await userManager.FindByNameAsync(request.LoginDto.UserName).ConfigureAwait(false);
+            var user = await userManager.FindByNameAsync(request.LoginDto.UserName);
             var checkPassword = await userManager.CheckPasswordAsync(user, request.LoginDto.Password).ConfigureAwait(false);
             if (user != null && checkPassword)
             {
-                var userRoles = await userManager.GetRolesAsync(user).ConfigureAwait(false);
+                var jwtToken = tokenService.GenerateJwtToken(user);
+                var refreshToken = tokenService.GetGenerateRefreshToken();
 
-                var authClaims = new List<Claim>
+                user.RefreshToken = refreshToken;
+                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(options.Value.RefreshTokenExpiryInDays);
+                await userManager.UpdateAsync(user);
+
+                return new RefreshTokenDto
                 {
-                    new(ClaimTypes.Name, request.LoginDto.UserName),
-                    new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    Token = jwtToken,
+                    RefreshToken = refreshToken
                 };
-
-                foreach (var userRole in userRoles)
-                {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
-
-                return JwtHelper.GenerateToken(user, options.Value.SecretKey);
             }
-
             return null;
         }
     }

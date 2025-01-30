@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <Folder Include="Implements\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

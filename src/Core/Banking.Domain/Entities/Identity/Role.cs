@@ -2,7 +2,7 @@
 
 namespace Banking.Core.Entities.Identity
 {
-    public class Role : IdentityRole
+    public class Role: IdentityRole<string>
     {
     }
 }
