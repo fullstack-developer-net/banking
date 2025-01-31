@@ -1,0 +1,12 @@
+{
+  "development": {
+    "apiUrl": "https://localhost:7101/api",
+    "websocket": "https://localhost:7101",
+    "debug": true
+  },
+  "production": {
+    "apiUrl": "https://api.yourbank.com",
+    "websocket": "http://localhost:3000/api",
+    "debug": false
+  }
+}

@@ -16,7 +16,7 @@ namespace Banking.Application.Commands
     {
         public async Task<CreateAccountResponse> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
-            var password = $"P@ssw0rd{DateTime.Now.ToLongTimeString()}{CommonHelper.RandomString(6)}";
+            var password = $"P@ssw0rd{DateTime.UtcNow.Second}{CommonHelper.RandomString(6)}";
 
             var user = new User
             {

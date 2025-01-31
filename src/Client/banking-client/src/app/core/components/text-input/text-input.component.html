@@ -1,0 +1,11 @@
+<div class="form-group">
+  <div class="form-floating mb-3">
+    <input type="password" class="form-control" id="password" formControlName="password" />
+    <label *ngIf="currentControl" for="password">Password</label>
+  </div>
+  <div *ngIf="currentControl.errors && (currentControl.dirty || currentControl.touched)" class="error-message">
+    <ng-container *ngFor="let error of errorMessages">
+      <div *ngIf="currentControl.hasError(error.type)">{{ error.message }}</div>
+    </ng-container>
+  </div>
+</div>

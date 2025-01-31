@@ -14,7 +14,7 @@ namespace Banking.Api.Controllers
     {
      
         [HttpPost()]
-        [AllowRoles(["Admin"])]
+        [AllowRoles(["ADMIN"])]
         public async Task<IActionResult> CreateAccount([FromBody] CreateAccountRequest command)
         {
 

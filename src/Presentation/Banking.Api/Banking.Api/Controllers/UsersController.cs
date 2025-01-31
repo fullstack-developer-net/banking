@@ -58,7 +58,7 @@ namespace Banking.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> CreateAdminAccount([FromBody] CreateUserDto user)
         {
-            var password = $"P@ssw0rd{DateTime.Now.ToLongTimeString()}{CommonHelper.RandomString(6)}";
+            var password = $"P@ssw0rd{DateTime.UtcNow.Second}{CommonHelper.RandomString(6)}";
 
             var newUser = new User
             {
@@ -86,9 +86,9 @@ namespace Banking.Api.Controllers
         }
 
         [HttpPost("refresh")]
-        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenDto model)
+        public async Task<IActionResult> RefreshToken([FromBody] AuthenInfo model)
         {
-            var result =await mediator.Send(new RefreshTokenCommand(new RefreshTokenDto
+            var result =await mediator.Send(new RefreshTokenCommand(new AuthenInfo
             {
                 Token = model.Token,
                 RefreshToken = model.RefreshToken

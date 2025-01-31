@@ -51,7 +51,7 @@ builder.Services.AddAuthentication(options =>
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = jwtSettings?.Issuer,
-        ClockSkew=TimeSpan.Zero,
+        ClockSkew = TimeSpan.Zero,
         ValidAudience = jwtSettings?.Audience,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings?.SecretKey ?? string.Empty))
     };
@@ -66,6 +66,17 @@ builder.Services.AddRabbitMQ();
 
 // Add connection mapping 
 builder.Services.AddSignalRWebSocket();
+
+// Add CORS policy to allow requests from localhost
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("LocalhostPolicy", builder =>
+    {
+        builder.WithOrigins("http://localhost:4200", "http://localhost:*")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
 
 // Add the Swagger generator and the Swagger UI middlewares
 builder.Services.AddScoped<TokenService>();
@@ -93,19 +104,19 @@ builder.Services.AddSwaggerGen(options =>
 
     options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
     {
-        {
-            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-            {
-                Reference = new Microsoft.OpenApi.Models.OpenApiReference
                 {
-                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                    Id = "Bearer"
+                    new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                    {
+                        Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                        {
+                            Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    Array.Empty<string>()
                 }
-            },
-            Array.Empty<string>()
-        }
     });
-}); 
+});
 
 var app = builder.Build();
 
@@ -128,6 +139,8 @@ app.UseAuthentication();
 app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();
+
+app.UseCors("LocalhostPolicy");
 
 app.MapControllers();
 app.MapHub<BaseHub>("/eventhub");

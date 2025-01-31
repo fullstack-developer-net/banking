@@ -8,10 +8,10 @@ using Microsoft.Extensions.Options;
 
 namespace Banking.Application.Commands
 {
-    public record RefreshTokenCommand(RefreshTokenDto Data) : IRequest<RefreshTokenDto?>;
-    public class RefreshTokenCommandHandler(IOptions<JwtSettings> options, UserManager<User> userManager, TokenService tokenService) : IRequestHandler<RefreshTokenCommand, RefreshTokenDto?>
+    public record RefreshTokenCommand(AuthenInfo Data) : IRequest<AuthenInfo?>;
+    public class RefreshTokenCommandHandler(IOptions<JwtSettings> options, UserManager<User> userManager, TokenService tokenService) : IRequestHandler<RefreshTokenCommand, AuthenInfo?>
     {
-        public async Task<RefreshTokenDto?> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+        public async Task<AuthenInfo?> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
         {
 
             var principal = tokenService.GetPrincipalFromExpiredToken(request.Data.Token);
@@ -28,7 +28,7 @@ namespace Banking.Application.Commands
             user.RefreshToken = newRefreshToken;
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(options.Value.RefreshTokenExpiryInDays);
             await userManager.UpdateAsync(user);
-            return new RefreshTokenDto
+            return new AuthenInfo
             {
                 Token = newJwtToken,
                 RefreshToken = newRefreshToken

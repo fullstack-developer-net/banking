@@ -1,60 +1,41 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../../models';
-
+import { AuthModel, User } from '../../models';
+import { BehaviorSubject, map, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { BaseApi } from '../base-api.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private _user: User;
+  private userSubject: BehaviorSubject<User | null>;
+  public user: Observable<User | null>;
 
-  constructor(private httpClient: HttpClient) {}
-
-  // loadUser() {
-  //   const promise = this._userManager.getUser();
-  //   promise.then((user) => {
-  //     if (user && !user.expired) {
-  //       this._user = user;
-  //     }
-  //   });
-  //   return promise;
-  // }
-
-  login(returnUrl: string): any {
-    console.log('Return Url:', returnUrl);
-    localStorage.setItem('returnUrl', returnUrl);
-    // return this._userManager.signinRedirect();
+  constructor(
+    private api: BaseApi,
+    private router: Router
+  ) {
+    this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+    this.user = this.userSubject.asObservable();
   }
 
-  logout(): any {
-    // return this._userManager.signoutRedirect();
+  public get userValue() {
+    return this.userSubject.value;
   }
 
-  isLoggedIn(): any {
-    // return this._user && this._user.access_token && !this._user.expired;
+  login(username: string, password: string): Observable<any> {
+    return this.api.post<AuthModel>(`${this.api.baseApiUrl}/users/login`, { username, password }).pipe(
+      map((auth: AuthModel) => {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        localStorage.setItem('auth', JSON.stringify(auth));
+        return auth;
+      })
+    );
   }
 
-  getAccessToken(): any {
-    // return this._user ? this._user.access_token : '';
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('user');
+    this.userSubject.next(null);
+    this.router.navigate(['/login']);
   }
-
-  signoutRedirectCallback(): any {
-    // return this._userManager.signoutRedirectCallback();
-  }
-
-  getCurrentUser(): any {
-    // return {
-    //   id: this._user.profile.sub,
-    //   userName: 'phongnguyend',
-    //   firstName: 'Phong',
-    //   lastName: 'Nguyen'
-    // };
-  }
-
-  isAuthenticated() {
-    return this.isLoggedIn();
-  }
-
-  updateCurrentUser(firstName: string, lastName: string) {}
 }
