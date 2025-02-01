@@ -1,4 +1,4 @@
-﻿using Banking.Application.Commands;
+﻿using Banking.Application.Requests.Commands;
 using FluentValidation;
 
 namespace Banking.Application.Validations

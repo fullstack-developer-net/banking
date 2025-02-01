@@ -23,6 +23,7 @@ export class BaseApi {
   delete<T>(url: string, options?: any): Observable<T> {
     return this.http.delete<T>(url, { ...options, observe: 'response' }).pipe(map((response: HttpResponse<T>) => response.body as T));
   }
+
   patch<T>(url: string, body: any, options?: any): Observable<T> {
     return this.http.patch<T>(url, body, { ...options, observe: 'response' }).pipe(map((response: HttpResponse<T>) => response.body as T));
   }

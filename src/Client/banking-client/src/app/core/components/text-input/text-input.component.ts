@@ -1,54 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, forwardRef } from '@angular/core';
-import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-  FormControl,
-  NG_VALIDATORS,
-  Validator,
-  ReactiveFormsModule,
-  AbstractControl,
-  ValidationErrors
-} from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ControlContainer, FormGroup, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { BaseInputComponent } from '../base-input.component';
 
 @Component({
   selector: 'app-text-input',
   templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.css'],
-  imports: [ReactiveFormsModule, NgbModule, CommonModule],
+  styleUrls: ['./text-input.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => TextInputComponent),
       multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => TextInputComponent),
-      multi: true
     }
-  ]
+  ],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule]
 })
-export class TextInputComponent implements Validator {
-  @Input() label: string;
-  @Input() placeholder: string;
-  @Input() currentControl: FormControl;
-
-  errorMessages = [
-    { type: 'required', message: 'This field is required.' },
-    { type: 'minlength', message: 'Minimum length not met.' },
-    { type: 'maxlength', message: 'Maximum length exceeded.' },
-    { type: 'pattern', message: 'Invalid format.' }
-  ];
-
-  constructor() {}
-  validate(control: AbstractControl): ValidationErrors | null {
-    throw new Error('Method not implemented.');
-  }
-  registerOnValidatorChange?(fn: () => void): void {
-    throw new Error('Method not implemented.');
+export class TextInputComponent extends BaseInputComponent implements OnInit {
+  constructor(private controlContainer: ControlContainer) {
+    super();
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.formGroup = this.controlContainer.control as FormGroup;
+  }
 }

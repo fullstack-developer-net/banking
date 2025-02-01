@@ -1,0 +1,15 @@
+<div class="row align-items-start">
+  <div class="col">
+    <h5 class="mb-0">{{ fullName }}</h5>
+    <small class="{{ color }}">{{ accountNumber | creditCardNumber }}</small>
+  </div>
+  <div class="col-auto">
+    <h4 class="mb-0">
+      {{ formattedAmount }}
+      <span class="ms-2 align-top avatar avatar-xxs {{ bgColor }} text-white p-2">
+        <i class="{{ icon }} {{ color }}"></i>
+      </span>
+    </h4>
+    <p class="">{{ formattedDate }}</p>
+  </div>
+</div>

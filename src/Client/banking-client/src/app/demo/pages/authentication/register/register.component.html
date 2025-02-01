@@ -1,4 +1,4 @@
-<div class="auth-main">
+<div class="auth-main" [formGroup]="formGroup">
   <div class="auth-wrapper v3">
     <div class="auth-form">
       <div class="card mt-5">
@@ -24,9 +24,8 @@
           <h5 class="my-4 d-flex justify-content-center">Sign Up with Email address</h5>
           <div class="row">
             <div class="col-md-6">
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
-                <label for="floatingInput">First Name</label>
+              <div class="mb-3">
+                <app-text-input formControlName="password" type="password" label="Password" placeholder=""></app-text-input>
               </div>
             </div>
             <div class="col-md-6">

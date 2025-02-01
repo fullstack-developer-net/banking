@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row mb-3 align-items-center">
+      <div class="col">
+        <h4>Transaction history</h4>
+      </div>
+      <div class="col-auto"></div>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      @for (item of ListGroup; track item) {
+        <li class="list-group-item border-0 mt-2">
+          <app-transaction-item
+            [fullName]="item.fullName"
+            [accountNumber]="item.accountNumber"
+            [amount]="item.amount"
+            [createdAt]="item.createdAt"
+          ></app-transaction-item>
+        </li>
+      }
+    </ul>
+    <div class="text-center">
+      <a href="javascript:" class="b-b-primary text-primary f-w-500">
+        View all
+        <i class="ti ti-chevron-right"></i>
+      </a>
+    </div>
+  </div>
+</div>

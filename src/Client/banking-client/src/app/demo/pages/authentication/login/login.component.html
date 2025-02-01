@@ -15,35 +15,25 @@
             </div>
           </div>
 
-          <div [formGroup]="loginForm">
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="floatingInput" formControlName="username" />
-              <label for="floatingInput">Username</label>
+          <form [formGroup]="loginForm">
+            <div class="mb-3">
+              <app-text-input formControlName="email" label="Email" placeholder=""></app-text-input>
+            </div>
+            <div class="mb-3">
+              <app-text-input formControlName="password" type="password" label="Password" placeholder=""></app-text-input>
             </div>
 
-            <div class="form-floating mb-3"></div>
-            <div class="form-floating mb-3">
-              <input type="password" class="form-control" id="password" formControlName="password" />
-              <label for="password">Password</label>
-            </div>
             <div class="d-flex mt-1 justify-content-between">
-              <!-- <div class="form-check">
-                <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" formControlName="rememberMe" />
-                <label class="form-check-label text-muted" for="customCheckc1">Remember me</label>
-              </div> -->
               <h5 class="text-secondary">
                 <a href="javascript:">Forgot Password?</a>
               </h5>
             </div>
-          </div>
+          </form>
 
           <div class="d-grid mt-4">
-            <button type="button" (click)="onSubmit($event)" class="btn btn-secondary">Sign In</button>
+            <button [disabled]="this.loginForm.invalid" type="button" (click)="onSubmit()" class="btn btn-secondary">Sign In</button>
           </div>
           <hr />
-          <!-- <h5 class="d-flex justify-content-center">
-            <a [routerLink]="['/guest/register']">Don't have an account?</a>
-          </h5> -->
         </div>
       </div>
     </div>

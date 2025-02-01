@@ -1,7 +1,7 @@
-﻿using Banking.Application.Commands;
-using Banking.Application.Constants;
+﻿using Banking.Application.Constants;
 using Banking.Application.Dtos;
-using Banking.Application.Queries;
+using Banking.Application.Requests.Commands;
+using Banking.Application.Requests.Queries;
 using Banking.Common.Constants;
 using Banking.Infrastructure.MessageQueue;
 using MediatR;

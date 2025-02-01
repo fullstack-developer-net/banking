@@ -1,7 +1,7 @@
 ﻿using Banking.Api.Filters;
-using Banking.Application.Commands;
 using Banking.Application.Dtos;
-using Banking.Application.Queries;
+using Banking.Application.Requests.Commands;
+using Banking.Application.Requests.Queries;
 using Banking.Core.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.OData.Query;
 namespace Banking.Api.Controllers
 {
 
-    public class AccountsController(IMediator mediator, IUnitOfWork unitOfWork ) : BaseApiController
+    public class AccountsController(IMediator mediator, IUnitOfWork unitOfWork) : BaseApiController
     {
-     
+
         [HttpPost()]
         [AllowRoles(["ADMIN"])]
         public async Task<IActionResult> CreateAccount([FromBody] CreateAccountRequest command)
@@ -44,5 +44,32 @@ namespace Banking.Api.Controllers
             });
             return Ok(accounts);
         }
+
+
+        [HttpPost("validate-registration")]
+        public async Task<IActionResult> ValidateRegistration([FromBody] ValidateRegistrationCommand model)
+        {
+            return Ok(await mediator.Send(model));
+        }
+
+        [HttpGet("details")]
+        public async Task<IActionResult> GetAccount(string? userId, string? accountNumber, long? accountId)
+        {
+            AccountDto? account = null;
+            if (userId != null)
+            {
+                account = await mediator.Send(new GetAccountByUserId(userId));
+            }
+            else if (accountNumber != null)
+            {
+                account = await mediator.Send(new GetAccountByAccountNumber(accountNumber));
+            }
+            else if (accountId != null)
+            {
+                account = await mediator.Send(new GetAccountById(accountId.Value));
+            }
+            return Ok(account);
+        }
+
     }
 }

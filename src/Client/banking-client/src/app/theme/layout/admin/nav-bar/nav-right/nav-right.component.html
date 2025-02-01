@@ -129,11 +129,15 @@
         </a>
         <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown" ngbDropdownMenu>
           <div class="dropdown-header">
-            <h4>
-              Good Morning,
-              <span class="small text-muted">John Doe</span>
+            <h4 class="text-secondary">
+              {{ greating }},
+              <b>
+                {{ auth.fullName }}
+              </b>
             </h4>
-            <p class="text-muted">Project Admin</p>
+
+            <p class="mb-2">{{ auth.roles }}</p>
+
             <form class="header-search">
               <div class="search-btn">
                 <i class="ti ti-search"></i>

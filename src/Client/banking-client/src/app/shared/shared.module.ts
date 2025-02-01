@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BaseApi } from './services/base-api.service';
-import { AuthService } from './services/auth/auth.service';
+import { ServicesModule } from './services/services.module';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule],
+  imports: [CommonModule, ServicesModule],
   providers: []
 })
 export class SharedModule {}

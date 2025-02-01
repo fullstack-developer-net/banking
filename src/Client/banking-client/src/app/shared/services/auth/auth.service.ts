@@ -1,25 +1,35 @@
 import { Injectable } from '@angular/core';
 import { AuthModel, User } from '../../models';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { BaseApi } from '../base-api.service';
+import { isValidEmail } from '../../utils/validation.util';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private authSubject: BehaviorSubject<AuthModel | null>;
   private userSubject: BehaviorSubject<User | null>;
-  public user: Observable<User | null>;
+  public user$: Observable<User | null>;
+  public auth$: Observable<AuthModel | null>;
 
   constructor(
     private api: BaseApi,
     private router: Router
   ) {
     this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
-    this.user = this.userSubject.asObservable();
+    this.authSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('auth')!));
+    this.auth$ = this.authSubject.asObservable();
+    this.user$ = this.userSubject.asObservable();
   }
 
   public get userValue() {
     return this.userSubject.value;
+  }
+
+  public checkEmailExists(email: string) {
+    if (!isValidEmail(email)) return of(false);
+    return this.api.get<boolean>(`${this.api.baseApiUrl}/users/exists?email=${email}`);
   }
 
   login(username: string, password: string): Observable<any> {

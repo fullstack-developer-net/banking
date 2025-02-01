@@ -1,0 +1,15 @@
+.card {
+  height: 200px;
+  padding: 20px;
+}
+
+.earning-card {
+  .round {
+    &.secondary-round {
+      background: #4527a0;
+    }
+    &.primary-round {
+      background: #1565c0;
+    }
+  }
+}

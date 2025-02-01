@@ -1,5 +1,5 @@
-﻿using Banking.Application.Commands;
-using Banking.Application.Queries;
+﻿using Banking.Application.Requests.Commands;
+using Banking.Application.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

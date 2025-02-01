@@ -1,4 +1,4 @@
-﻿using Banking.Application.Commands;
+﻿using Banking.Application.Requests.Commands;
 using Banking.Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
