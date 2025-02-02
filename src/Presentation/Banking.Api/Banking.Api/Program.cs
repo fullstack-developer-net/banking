@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.OData;
 using Microsoft.IdentityModel.Tokens;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -82,53 +84,47 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
+builder.Services.AddOpenApiDocument(document =>
 {
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    document.AddSecurity("JWT", [], new OpenApiSecurityScheme
     {
-        Version = "v1",
-        Title = "Banking API",
-        Description = "Banking Web API"
-    });
-
-    // Add JWT token authentication support
-    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-    {
-        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Description = "Please enter a valid token with `Bearer ` prefix",
+        Type = OpenApiSecuritySchemeType.ApiKey,
         Name = "Authorization",
-        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "Bearer"
+        In = OpenApiSecurityApiKeyLocation.Header,
+        Description = "Type into the textbox: Bearer {your JWT token}."
     });
 
-    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-    {
-                {
-                    new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-                    {
-                        Reference = new Microsoft.OpenApi.Models.OpenApiReference
-                        {
-                            Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    Array.Empty<string>()
-                }
-    });
+    document.OperationProcessors.Add(
+        new AspNetCoreOperationSecurityScopeProcessor("JWT"));
 });
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
+    // Add OpenAPI 3.0 document serving middleware
+    // Available at: http://localhost:<port>/swagger/v1/swagger.json
+    app.UseOpenApi();
+
+    // Add web UIs to interact with the document
+    // Available at: http://localhost:<port>/swagger
+
+    app.UseSwaggerUi(); // UseSwaggerUI Protected by if (env.IsDevelopment())
+    app.MapGet("/index.html", context =>
     {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        options.RoutePrefix = string.Empty;
+        context.Response.Redirect("/swagger/index.html", permanent: false);
+        return Task.CompletedTask;
+    });
+    app.MapGet("/", context =>
+    {
+        context.Response.Redirect("/swagger/index.html", permanent: false);
+        return Task.CompletedTask;
+    });
+    app.MapGet("/swagger", context =>
+    {
+        context.Response.Redirect("/swagger/index.html", permanent: false);
+        return Task.CompletedTask;
     });
 }
 
