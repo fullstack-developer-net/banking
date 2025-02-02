@@ -1,16 +1,16 @@
 // Angular import
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 import { AuthModel } from 'src/app/shared/models';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { getGreeting } from 'src/app/shared/utils/user.util';
-
-// third party import
-import { SharedModule } from 'src/app/theme/shared/shared.module';
 
 @Component({
   selector: 'app-nav-right',
-  imports: [RouterModule, SharedModule],
+  imports: [RouterModule, CommonModule, NgScrollbarModule, SharedModule],
   templateUrl: './nav-right.component.html',
   styleUrls: ['./nav-right.component.scss']
 })
