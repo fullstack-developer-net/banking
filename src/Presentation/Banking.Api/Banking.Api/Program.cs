@@ -74,17 +74,20 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("LocalhostPolicy", builder =>
     {
-        builder.WithOrigins("http://localhost:4200", "http://localhost:*")
-            .AllowAnyHeader()
-            .AllowAnyMethod();
+       builder
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
     });
 
     options.AddPolicy("ProductionPolicy", corsPolicyBuilder =>
     {
         corsPolicyBuilder.WithOrigins("https://mysimplebanking.netlify.app", "http://mysimplebanking.netlify.app",
-                "wss://mysimplebanking.netlify.app")
+                "ws://mysimplebanking.netlify.app")
+            .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowAnyMethod();
+            .AllowCredentials();
     });
 });
 

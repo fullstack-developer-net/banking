@@ -4,6 +4,7 @@ import { AdminComponent } from './theme/layout/admin/admin.component';
 import { GuestComponent } from './theme/layout/guest/guest.component';
 import { AppStateManager } from './shared/app.state-manager';
 import { SharedModule } from './shared/shared.module';
+import { SignalRService } from './shared/services/signalr/signalr.service';
 
 const routes: Routes = [
   {
@@ -41,6 +42,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes), SharedModule],
   exports: [RouterModule],
-  providers: [AppStateManager]
+  providers: [AppStateManager,SignalRService]
 })
 export class AppRoutingModule {}

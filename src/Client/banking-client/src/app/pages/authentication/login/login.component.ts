@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@
 import { Router, RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { TextInputComponent } from 'src/app/core/components/text-input/text-input.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -11,7 +11,7 @@ import { AppStateManager } from 'src/app/shared/app.state-manager';
 import { switchMap } from 'rxjs';
 import { AccountsService } from 'src/app/shared/services/accounts/accounts.service';
 import { AuthModel } from 'src/app/shared/models';
-import { AccountModel } from 'src/app/shared/models/account.model';
+import { SignalRService } from 'src/app/shared/services/signalr/signalr.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,8 @@ export default class LoginComponent {
     private auth: AuthService,
     private router: Router,
     private appState: AppStateManager,
-    private accountService: AccountsService
+    private accountService: AccountsService,
+    private signalrService: SignalRService
   ) {
     this.appState.auth$.pipe(switchMap((auth?: AuthModel) => this.accountService.getAccountByUserId(auth?.userId))).subscribe(
       (account) => {
