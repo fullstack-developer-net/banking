@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ChartDataMonthComponent } from 'src/app/theme/shared/components/apexchart/chart-data-month/chart-data-month.component';
+import { ChartDataMonthComponent } from 'src/app/core/components/apexchart/chart-data-month/chart-data-month.component';
 
 @Component({
   selector: 'app-summary-chart',

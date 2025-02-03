@@ -2,7 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // project import
-import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { AppStateManager } from 'src/app/shared/app.state-manager';
 import { AccountModel } from 'src/app/shared/models/account.model';
 import { AccountBalanceCardComponent } from 'src/app/components/account-balance-card/account-balance-card.component';
@@ -15,7 +14,6 @@ import { SummaryChartComponent } from 'src/app/components/summary-chart/summary-
   selector: 'app-default',
   imports: [
     CommonModule,
-    SharedModule,
     BankAccountCardComponent,
     LatestTransactionsCardComponent,
     AccountBalanceCardComponent,

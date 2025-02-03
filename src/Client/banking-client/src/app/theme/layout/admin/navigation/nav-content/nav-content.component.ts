@@ -12,14 +12,12 @@ import { NavigationItem, NavigationItems } from '../navigation';
 import { NavCollapseComponent } from './nav-collapse/nav-collapse.component';
 import { NavGroupComponent } from './nav-group/nav-group.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
-
-// NgScrollbarModule
-import { SharedModule } from 'src/app/theme/shared/shared.module';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @Component({
   selector: 'app-nav-content',
   standalone: true,
-  imports: [CommonModule, RouterModule, NavCollapseComponent, NavGroupComponent, NavItemComponent, SharedModule],
+  imports: [CommonModule, RouterModule, NavCollapseComponent, NavGroupComponent, NavItemComponent, NgScrollbarModule],
   templateUrl: './nav-content.component.html',
   styleUrl: './nav-content.component.scss'
 })

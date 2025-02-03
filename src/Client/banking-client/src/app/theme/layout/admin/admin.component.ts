@@ -10,7 +10,7 @@ import { BerryConfig } from 'src/app/app-config';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { BreadcrumbComponent } from '../../shared/components/breadcrumbs/breadcrumbs.component';
+import { BreadcrumbComponent } from '../../../core/components/breadcrumbs/breadcrumbs.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({

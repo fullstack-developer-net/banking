@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { AuthModel } from 'src/app/shared/models';
 import { CreditCardNumberPipe } from 'src/app/shared/pipes/credit-card-number.pipe';
-import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { AccountsService } from '../../shared/services/accounts/accounts.service';
+ import { AccountsService } from '../../shared/services/accounts/accounts.service';
 import { AppStateManager } from 'src/app/shared/app.state-manager';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-bank-account-card',
-  imports: [SharedModule, CreditCardNumberPipe],
+  imports: [CreditCardNumberPipe, UpperCasePipe],
   templateUrl: './bank-account-card.component.html',
   styleUrl: './bank-account-card.component.scss'
 })
