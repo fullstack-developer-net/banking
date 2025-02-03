@@ -241,7 +241,7 @@
   optionalDependencies:
     parse5 "^7.1.2"
 
-"@angular/cli@19.0.6":
+"@angular/cli@^19.0.6":
   version "19.0.6"
   resolved "https://registry.npmjs.org/@angular/cli/-/cli-19.0.6.tgz"
   integrity sha512-ZEHhgRRVIdn10dbsAjB8TE9Co32hfuL9/im5Jcfa1yrn6KJefmigz6KN8Xu7FXMH5FkdqfQ11QpLBxJSPb9aww==
