@@ -232,10 +232,10 @@
   optionalDependencies:
     lmdb "3.2.2"
 
-"@angular/cdk@>=17.3.0", "@angular/cdk@19.0.4":
-  version "19.0.4"
-  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-19.0.4.tgz"
-  integrity sha512-P8V1n6AFFjBUJG3YRgw8DiiNDWPZVrwQ42wbwgZxd4s2TQAuNFg3YY8h/DSMVxt2sXpavrshZsoLtP9yLKZjHA==
+"@angular/cdk@>=17.3.0", "@angular/cdk@19.1.2":
+  version "19.1.2"
+  resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-19.1.2.tgz"
+  integrity sha512-rzrZ4BkGNIZWSdw0OsuSB/H9UB5ppPvmBq+uRHdYmZoYjo5wu1pmePxAIZDIBR8xdaNy9rZ4ecS6IebDkgYPrg==
   dependencies:
     tslib "^2.3.0"
   optionalDependencies:
