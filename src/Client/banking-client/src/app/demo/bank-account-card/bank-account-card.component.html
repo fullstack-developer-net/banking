@@ -11,8 +11,8 @@
   </div>
 
   <div class="lower">
-    <span class="text-white d-block f-30 f-w-300 my-3">
-      {{ auth.fullName }}
+    <span class="text-white d-block f-26 f-w-300 my-3">
+      {{ auth?.fullName | uppercase }}
     </span>
     <h2 class="">{{ accountNumber | creditCardNumber }}</h2>
   </div>

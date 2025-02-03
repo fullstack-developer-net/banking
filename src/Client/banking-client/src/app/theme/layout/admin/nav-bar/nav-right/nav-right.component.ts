@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { AppStateManager } from 'src/app/shared/app.state-manager';
 import { AuthModel } from 'src/app/shared/models';
-import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { getGreeting } from 'src/app/shared/utils/user.util';
 
@@ -19,9 +19,9 @@ export class NavRightComponent implements OnInit {
     return getGreeting();
   }
   auth?: AuthModel | null;
-  constructor(private authService: AuthService) {}
+  constructor(private appState: AppStateManager) {}
   ngOnInit(): void {
-    this.authService.auth$.subscribe((auth: AuthModel | null) => {
+    this.appState.account$.subscribe((auth: any) => {
       this.auth = auth;
     });
   }

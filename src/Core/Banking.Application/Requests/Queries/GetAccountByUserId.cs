@@ -14,10 +14,11 @@ namespace Banking.Application.Requests.Queries
 
             if (account == null) return null;
 
+            var user =await unitOfWork.UserRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == account.UserId,cancellationToken);
             return new AccountDto
             {
-                FullName = account.User.FullName,
-                Email = account.User.Email ?? string.Empty,
+                FullName = user.FullName,
+                Email = user.Email ?? string.Empty,
                 IsActive = account.IsActive,
                 Balance = account.Balance,
                 UserId = account.UserId,

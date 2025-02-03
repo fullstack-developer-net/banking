@@ -3,10 +3,15 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@
 import { Router, RouterModule } from '@angular/router';
 import { CoreModule } from 'src/app/core/core.module';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 import { TextInputComponent } from 'src/app/core/components/text-input/text-input.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AppStateManager } from 'src/app/shared/app.state-manager';
+import { switchMap } from 'rxjs';
+import { AccountsService } from 'src/app/shared/services/accounts/accounts.service';
+import { AuthModel } from 'src/app/shared/models';
+import { AccountModel } from 'src/app/shared/models/account.model';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +23,20 @@ export default class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private appState: AppStateManager,
+    private accountService: AccountsService
+  ) {
+    this.appState.auth$.pipe(switchMap((auth?: AuthModel) => this.accountService.getAccountByUserId(auth?.userId))).subscribe(
+      (account) => {
+        this.appState.setAccount(account);
+        console.log('Account : ', account);
+      },
+      (error) => {
+        console.error('Error fetching account', error);
+      }
+    );
+  }
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
