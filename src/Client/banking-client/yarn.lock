@@ -10,15 +10,7 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
-"@angular-devkit/architect@>= 0.1900.0 < 0.2000.0", "@angular-devkit/architect@0.1900.6":
-  version "0.1900.6"
-  resolved "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.1900.6.tgz"
-  integrity sha512-w11bAXQnNWBawTJfQPjvaTRrzrqsOUm9tK9WNvaia/xjiRFpmO0CfmKtn3axNSEJM8jb/czaNQrgTwG+TGc/8g==
-  dependencies:
-    "@angular-devkit/core" "19.0.6"
-    rxjs "7.8.1"
-
-"@angular-devkit/architect@0.1901.5":
+"@angular-devkit/architect@>= 0.1900.0 < 0.2000.0", "@angular-devkit/architect@0.1901.5":
   version "0.1901.5"
   resolved "https://registry.npmjs.org/@angular-devkit/architect/-/architect-0.1901.5.tgz"
   integrity sha512-zlRudZx34FkFZnSdaQCjxDleHwbQYNLdBFcLi+FBwt0UXqxmhbEIasK3l/3kCOC3QledrjUzVXgouji+OZ/WGQ==
@@ -97,19 +89,7 @@
     "@angular-devkit/architect" "0.1901.5"
     rxjs "7.8.1"
 
-"@angular-devkit/core@>= 19.0.0 < 20.0.0", "@angular-devkit/core@19.0.6":
-  version "19.0.6"
-  resolved "https://registry.npmjs.org/@angular-devkit/core/-/core-19.0.6.tgz"
-  integrity sha512-WUWJhzQDsovfMY6jtb9Ktz/5sJszsaErj+XV2aXab85f1OweI/Iv2urPZnJwUSilvVN5Ok/fy3IJ6SuihK4Ceg==
-  dependencies:
-    ajv "8.17.1"
-    ajv-formats "3.0.1"
-    jsonc-parser "3.3.1"
-    picomatch "4.0.2"
-    rxjs "7.8.1"
-    source-map "0.7.4"
-
-"@angular-devkit/core@19.1.5":
+"@angular-devkit/core@>= 19.0.0 < 20.0.0", "@angular-devkit/core@19.1.5":
   version "19.1.5"
   resolved "https://registry.npmjs.org/@angular-devkit/core/-/core-19.1.5.tgz"
   integrity sha512-wGKV+i5mCM/Hd/3CsdrIYcVi5G2Wg/D5941bUDXivrbsqHfKVINxAkI3OI1eaD90VnAL8ICrQEoAhh6ni2Umkg==
@@ -121,14 +101,14 @@
     rxjs "7.8.1"
     source-map "0.7.4"
 
-"@angular-devkit/schematics@>= 19.0.0 < 20.0.0", "@angular-devkit/schematics@19.0.6":
-  version "19.0.6"
-  resolved "https://registry.npmjs.org/@angular-devkit/schematics/-/schematics-19.0.6.tgz"
-  integrity sha512-R9hlHfAh1HKoIWgnYJlOEKhUezhTNl0fpUmHxG2252JSY5FLRxmYArTtJYYmbNdBbsBLNg3UHyM/GBPvJSA3NQ==
+"@angular-devkit/schematics@>= 19.0.0 < 20.0.0", "@angular-devkit/schematics@19.1.5":
+  version "19.1.5"
+  resolved "https://registry.npmjs.org/@angular-devkit/schematics/-/schematics-19.1.5.tgz"
+  integrity sha512-8QjOlO2CktcTT0TWcaABea2xSePxoPKaZu96+6gc8oZzj/y8DbdGiO9mRvIac9+m4hiZI41Cqm1W+yMsCzYMkA==
   dependencies:
-    "@angular-devkit/core" "19.0.6"
+    "@angular-devkit/core" "19.1.5"
     jsonc-parser "3.3.1"
-    magic-string "0.30.12"
+    magic-string "0.30.17"
     ora "5.4.1"
     rxjs "7.8.1"
 
@@ -241,25 +221,25 @@
   optionalDependencies:
     parse5 "^7.1.2"
 
-"@angular/cli@^19.0.6":
-  version "19.0.6"
-  resolved "https://registry.npmjs.org/@angular/cli/-/cli-19.0.6.tgz"
-  integrity sha512-ZEHhgRRVIdn10dbsAjB8TE9Co32hfuL9/im5Jcfa1yrn6KJefmigz6KN8Xu7FXMH5FkdqfQ11QpLBxJSPb9aww==
+"@angular/cli@^19.1.5":
+  version "19.1.5"
+  resolved "https://registry.npmjs.org/@angular/cli/-/cli-19.1.5.tgz"
+  integrity sha512-bedjH3jUcrLgN3GOTTuvjbPcY3Lm0YcYBVY35S1ugI88UK6nbtttiRdgK++Qk2Q8wbg6zuaBAr4ACbfPMsnRaA==
   dependencies:
-    "@angular-devkit/architect" "0.1900.6"
-    "@angular-devkit/core" "19.0.6"
-    "@angular-devkit/schematics" "19.0.6"
-    "@inquirer/prompts" "7.1.0"
+    "@angular-devkit/architect" "0.1901.5"
+    "@angular-devkit/core" "19.1.5"
+    "@angular-devkit/schematics" "19.1.5"
+    "@inquirer/prompts" "7.2.1"
     "@listr2/prompt-adapter-inquirer" "2.0.18"
-    "@schematics/angular" "19.0.6"
+    "@schematics/angular" "19.1.5"
     "@yarnpkg/lockfile" "1.1.0"
     ini "5.0.0"
     jsonc-parser "3.3.1"
     listr2 "8.2.5"
-    npm-package-arg "12.0.0"
+    npm-package-arg "12.0.1"
     npm-pick-manifest "10.0.0"
     pacote "20.0.0"
-    resolve "1.22.8"
+    resolve "1.22.10"
     semver "7.6.3"
     symbol-observable "4.0.0"
     yargs "17.7.2"
@@ -1232,7 +1212,7 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/retry/-/retry-0.4.1.tgz"
   integrity sha512-c7hNEllBlenFTHBky65mhq8WD2kbN9Q6gk0bTk8lSBvc554jpXSkST1iePudpt7+A/AQvuHs9EMqjHDXMY1lrA==
 
-"@inquirer/checkbox@^4.0.2":
+"@inquirer/checkbox@^4.0.4":
   version "4.0.4"
   resolved "https://registry.npmjs.org/@inquirer/checkbox/-/checkbox-4.0.4.tgz"
   integrity sha512-fYAKCAcGNMdfjL6hZTRUwkIByQ8EIZCXKrIQZH7XjADnN/xvRUhj8UdBbpC4zoUzvChhkSC/zRKaP/tDs3dZpg==
@@ -1243,7 +1223,7 @@
     ansi-escapes "^4.3.2"
     yoctocolors-cjs "^2.1.2"
 
-"@inquirer/confirm@^5.0.2", "@inquirer/confirm@5.1.1":
+"@inquirer/confirm@^5.1.1", "@inquirer/confirm@5.1.1":
   version "5.1.1"
   resolved "https://registry.npmjs.org/@inquirer/confirm/-/confirm-5.1.1.tgz"
   integrity sha512-vVLSbGci+IKQvDOtzpPTCOiEJCNidHcAq9JYVoWTW0svb5FiwSLotkM+JXNXejfjnzVYV9n0DTBythl9+XgTxg==
@@ -1266,7 +1246,7 @@
     wrap-ansi "^6.2.0"
     yoctocolors-cjs "^2.1.2"
 
-"@inquirer/editor@^4.1.0":
+"@inquirer/editor@^4.2.1":
   version "4.2.1"
   resolved "https://registry.npmjs.org/@inquirer/editor/-/editor-4.2.1.tgz"
   integrity sha512-xn9aDaiP6nFa432i68JCaL302FyL6y/6EG97nAtfIPnWZ+mWPgCMLGc4XZ2QQMsZtu9q3Jd5AzBPjXh10aX9kA==
@@ -1275,7 +1255,7 @@
     "@inquirer/type" "^3.0.2"
     external-editor "^3.1.0"
 
-"@inquirer/expand@^4.0.2":
+"@inquirer/expand@^4.0.4":
   version "4.0.4"
   resolved "https://registry.npmjs.org/@inquirer/expand/-/expand-4.0.4.tgz"
   integrity sha512-GYocr+BPyxKPxQ4UZyNMqZFSGKScSUc0Vk17II3J+0bDcgGsQm0KYQNooN1Q5iBfXsy3x/VWmHGh20QnzsaHwg==
@@ -1289,7 +1269,7 @@
   resolved "https://registry.npmjs.org/@inquirer/figures/-/figures-1.0.9.tgz"
   integrity sha512-BXvGj0ehzrngHTPTDqUoDT3NXL8U0RxUk2zJm2A66RhCEIWdtU1v6GuUqNAgArW4PQ9CinqIWyHdQgdwOj06zQ==
 
-"@inquirer/input@^4.0.2":
+"@inquirer/input@^4.1.1":
   version "4.1.1"
   resolved "https://registry.npmjs.org/@inquirer/input/-/input-4.1.1.tgz"
   integrity sha512-nAXAHQndZcXB+7CyjIW3XuQZZHbQQ0q8LX6miY6bqAWwDzNa9JUioDBYrFmOUNIsuF08o1WT/m2gbBXvBhYVxg==
@@ -1297,7 +1277,7 @@
     "@inquirer/core" "^10.1.2"
     "@inquirer/type" "^3.0.2"
 
-"@inquirer/number@^3.0.2":
+"@inquirer/number@^3.0.4":
   version "3.0.4"
   resolved "https://registry.npmjs.org/@inquirer/number/-/number-3.0.4.tgz"
   integrity sha512-DX7a6IXRPU0j8kr2ovf+QaaDiIf+zEKaZVzCWdLOTk7XigqSXvoh4cul7x68xp54WTQrgSnW7P1WBJDbyY3GhA==
@@ -1305,7 +1285,7 @@
     "@inquirer/core" "^10.1.2"
     "@inquirer/type" "^3.0.2"
 
-"@inquirer/password@^4.0.2":
+"@inquirer/password@^4.0.4":
   version "4.0.4"
   resolved "https://registry.npmjs.org/@inquirer/password/-/password-4.0.4.tgz"
   integrity sha512-wiliQOWdjM8FnBmdIHtQV2Ca3S1+tMBUerhyjkRCv1g+4jSvEweGu9GCcvVEgKDhTBT15nrxvk5/bVrGUqSs1w==
@@ -1314,23 +1294,23 @@
     "@inquirer/type" "^3.0.2"
     ansi-escapes "^4.3.2"
 
-"@inquirer/prompts@>= 3 < 8", "@inquirer/prompts@7.1.0":
-  version "7.1.0"
-  resolved "https://registry.npmjs.org/@inquirer/prompts/-/prompts-7.1.0.tgz"
-  integrity sha512-5U/XiVRH2pp1X6gpNAjWOglMf38/Ys522ncEHIKT1voRUvSj/DQnR22OVxHnwu5S+rCFaUiPQ57JOtMFQayqYA==
+"@inquirer/prompts@>= 3 < 8", "@inquirer/prompts@7.2.1":
+  version "7.2.1"
+  resolved "https://registry.npmjs.org/@inquirer/prompts/-/prompts-7.2.1.tgz"
+  integrity sha512-v2JSGri6/HXSfoGIwuKEn8sNCQK6nsB2BNpy2lSX6QH9bsECrMv93QHnj5+f+1ZWpF/VNioIV2B/PDox8EvGuQ==
   dependencies:
-    "@inquirer/checkbox" "^4.0.2"
-    "@inquirer/confirm" "^5.0.2"
-    "@inquirer/editor" "^4.1.0"
-    "@inquirer/expand" "^4.0.2"
-    "@inquirer/input" "^4.0.2"
-    "@inquirer/number" "^3.0.2"
-    "@inquirer/password" "^4.0.2"
-    "@inquirer/rawlist" "^4.0.2"
-    "@inquirer/search" "^3.0.2"
-    "@inquirer/select" "^4.0.2"
+    "@inquirer/checkbox" "^4.0.4"
+    "@inquirer/confirm" "^5.1.1"
+    "@inquirer/editor" "^4.2.1"
+    "@inquirer/expand" "^4.0.4"
+    "@inquirer/input" "^4.1.1"
+    "@inquirer/number" "^3.0.4"
+    "@inquirer/password" "^4.0.4"
+    "@inquirer/rawlist" "^4.0.4"
+    "@inquirer/search" "^3.0.4"
+    "@inquirer/select" "^4.0.4"
 
-"@inquirer/rawlist@^4.0.2":
+"@inquirer/rawlist@^4.0.4":
   version "4.0.4"
   resolved "https://registry.npmjs.org/@inquirer/rawlist/-/rawlist-4.0.4.tgz"
   integrity sha512-IsVN2EZdNHsmFdKWx9HaXb8T/s3FlR/U1QPt9dwbSyPtjFbMTlW9CRFvnn0bm/QIsrMRD2oMZqrQpSWPQVbXXg==
@@ -1339,7 +1319,7 @@
     "@inquirer/type" "^3.0.2"
     yoctocolors-cjs "^2.1.2"
 
-"@inquirer/search@^3.0.2":
+"@inquirer/search@^3.0.4":
   version "3.0.4"
   resolved "https://registry.npmjs.org/@inquirer/search/-/search-3.0.4.tgz"
   integrity sha512-tSkJk2SDmC2MEdTIjknXWmCnmPr5owTs9/xjfa14ol1Oh95n6xW7SYn5fiPk4/vrJPys0ggSWiISdPze4LTa7A==
@@ -1349,7 +1329,7 @@
     "@inquirer/type" "^3.0.2"
     yoctocolors-cjs "^2.1.2"
 
-"@inquirer/select@^4.0.2":
+"@inquirer/select@^4.0.4":
   version "4.0.4"
   resolved "https://registry.npmjs.org/@inquirer/select/-/select-4.0.4.tgz"
   integrity sha512-ZzYLuLoUzTIW9EJm++jBpRiTshGqS3Q1o5qOEQqgzaBlmdsjQr6pA4TUNkwu6OBYgM2mIRbCz6mUhFDfl/GF+w==
@@ -1670,13 +1650,13 @@
   resolved "https://registry.npmjs.org/@rollup/rollup-darwin-arm64/-/rollup-darwin-arm64-4.32.1.tgz"
   integrity sha512-zCpKHioQ9KgZToFp5Wvz6zaWbMzYQ2LJHQ+QixDKq52KKrF65ueu6Af4hLlLWHjX1Wf/0G5kSJM9PySW9IrvHA==
 
-"@schematics/angular@19.0.6":
-  version "19.0.6"
-  resolved "https://registry.npmjs.org/@schematics/angular/-/angular-19.0.6.tgz"
-  integrity sha512-HicclmbW/+mlljU7a4PzbyIWG+7tognoL5LsgMFJQUDzJXHNjRt1riL0vk57o8Pcprnz9FheeWZXO1KRhXkQuw==
+"@schematics/angular@19.1.5":
+  version "19.1.5"
+  resolved "https://registry.npmjs.org/@schematics/angular/-/angular-19.1.5.tgz"
+  integrity sha512-Yks2QD87z2qJhVLi6O0tQDBG4pyX5n5c8BYEyZ+yiThjzIXBRkHjWS1jIFvd/y1+yU/NQFHYG/sy8sVOxfQ9IA==
   dependencies:
-    "@angular-devkit/core" "19.0.6"
-    "@angular-devkit/schematics" "19.0.6"
+    "@angular-devkit/core" "19.1.5"
+    "@angular-devkit/schematics" "19.1.5"
     jsonc-parser "3.3.1"
 
 "@sigstore/bundle@^3.0.0":
@@ -4141,10 +4121,10 @@ is-binary-path@~2.1.0:
   dependencies:
     binary-extensions "^2.0.0"
 
-is-core-module@^2.13.0:
-  version "2.14.0"
-  resolved "https://registry.npmjs.org/is-core-module/-/is-core-module-2.14.0.tgz"
-  integrity sha512-a5dFJih5ZLYlRtDc0dZWP7RiKr6xIKzmn/oAYCDvdLThadVgyJwlaoQPmRtMSpz+rk0OGAgIu+TcM9HUF0fk1A==
+is-core-module@^2.16.0:
+  version "2.16.1"
+  resolved "https://registry.npmjs.org/is-core-module/-/is-core-module-2.16.1.tgz"
+  integrity sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==
   dependencies:
     hasown "^2.0.2"
 
@@ -4688,13 +4668,6 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-magic-string@0.30.12:
-  version "0.30.12"
-  resolved "https://registry.npmjs.org/magic-string/-/magic-string-0.30.12.tgz"
-  integrity sha512-Ea8I3sQMVXr8JhN4z+H/d8zwo+tYDgHE9+5G4Wnrwhs0gaK9fXTKx0Tw5Xwsd/bCPTTZNRAdpyzvoeORe9LYpw==
-  dependencies:
-    "@jridgewell/sourcemap-codec" "^1.5.0"
-
 magic-string@0.30.17:
   version "0.30.17"
   resolved "https://registry.npmjs.org/magic-string/-/magic-string-0.30.17.tgz"
@@ -5153,10 +5126,10 @@ npm-normalize-package-bin@^4.0.0:
   resolved "https://registry.npmjs.org/npm-normalize-package-bin/-/npm-normalize-package-bin-4.0.0.tgz"
   integrity sha512-TZKxPvItzai9kN9H/TkmCtx/ZN/hvr3vUycjlfmH0ootY9yFBzNOpiXAdIn1Iteqsvk4lQn6B5PTrt+n6h8k/w==
 
-npm-package-arg@^12.0.0, npm-package-arg@12.0.0:
-  version "12.0.0"
-  resolved "https://registry.npmjs.org/npm-package-arg/-/npm-package-arg-12.0.0.tgz"
-  integrity sha512-ZTE0hbwSdTNL+Stx2zxSqdu2KZfNDcrtrLdIk7XGnQFYBWYDho/ORvXtn5XEePcL3tFpGjHCV3X3xrtDh7eZ+A==
+npm-package-arg@^12.0.0, npm-package-arg@12.0.1:
+  version "12.0.1"
+  resolved "https://registry.npmjs.org/npm-package-arg/-/npm-package-arg-12.0.1.tgz"
+  integrity sha512-aDxjFfPV3Liw0WOBWlyZLMBqtbgbg03rmGvHDJa2Ttv7tIz+1oB5qWec4psCDFZcZi9b5XdGkPdQiJxOPzvQRQ==
   dependencies:
     hosted-git-info "^8.0.0"
     proc-log "^5.0.0"
@@ -5792,12 +5765,12 @@ resolve-url-loader@5.0.0:
     postcss "^8.2.14"
     source-map "0.6.1"
 
-resolve@^1.14.2, resolve@1.22.8:
-  version "1.22.8"
-  resolved "https://registry.npmjs.org/resolve/-/resolve-1.22.8.tgz"
-  integrity sha512-oKWePCxqpd6FlLvGV1VU0x7bkPmmCNolxzjMf4NczoDnQcIWrAF+cPtZn5i6n+RfD2d9i0tzpKnG6Yk168yIyw==
+resolve@^1.14.2, resolve@1.22.10:
+  version "1.22.10"
+  resolved "https://registry.npmjs.org/resolve/-/resolve-1.22.10.tgz"
+  integrity sha512-NPRy+/ncIMeDlTAsuqwKIiferiawhefFJtkNSW0qZJEqMEb+qBt/77B/jGeeek+F0uOeN05CDa6HXbbIgtVX4w==
   dependencies:
-    is-core-module "^2.13.0"
+    is-core-module "^2.16.0"
     path-parse "^1.0.7"
     supports-preserve-symlinks-flag "^1.0.0"
 
