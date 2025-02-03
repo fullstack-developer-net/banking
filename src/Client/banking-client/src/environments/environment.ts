@@ -10,7 +10,7 @@ import packageInfo from '../../package.json';
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:7101',
+  apiUrl: 'simple-banking.azurewebsites.net',
   appVersion: packageInfo.version
 };
 

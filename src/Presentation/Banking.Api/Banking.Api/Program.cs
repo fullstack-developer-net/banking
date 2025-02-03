@@ -31,7 +31,7 @@ builder.Services.AddApiVersioning(options =>
     options.ApiVersionReader = new UrlSegmentApiVersionReader();
 });
 builder.Services.AddControllers()
-    .AddOData(opt => opt.Select().Filter().OrderBy().Expand().SetMaxTop(100).Count());  // Add OData configuration
+    .AddOData(opt => opt.Select().Filter().OrderBy().Expand().SetMaxTop(100).Count()); // Add OData configuration
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<BankingDbContext>()
     .AddDefaultTokenProviders();
@@ -40,24 +40,24 @@ builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
 
 builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings?.Issuer,
-        ClockSkew = TimeSpan.Zero,
-        ValidAudience = jwtSettings?.Audience,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings?.SecretKey ?? string.Empty))
-    };
-});
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtSettings?.Issuer,
+            ClockSkew = TimeSpan.Zero,
+            ValidAudience = jwtSettings?.Audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings?.SecretKey ?? string.Empty))
+        };
+    });
 
 // Add RabbitMQ configuration
 
@@ -72,12 +72,25 @@ builder.Services.AddSignalRWebSocket();
 // Add CORS policy to allow requests from localhost
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("LocalhostPolicy", builder =>
+    if (builder.Environment.IsDevelopment())
     {
-        builder.WithOrigins("http://localhost:4200", "http://localhost:*")
-               .AllowAnyHeader()
-               .AllowAnyMethod();
-    });
+        options.AddPolicy("LocalhostPolicy", builder =>
+        {
+            builder.WithOrigins("http://localhost:4200", "http://localhost:*")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+    }
+    else if (builder.Environment.IsProduction())
+    {
+        options.AddPolicy("ProductionPolicy", corsPolicyBuilder =>
+        {
+            corsPolicyBuilder.WithOrigins("https://mysimplebanking.netlify.app", "http://mysimplebanking.netlify.app",
+                    "wss://mysimplebanking.netlify.app")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+    }
 });
 
 // Add the Swagger generator and the Swagger UI middlewares
@@ -136,7 +149,7 @@ app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();
 
-app.UseCors("LocalhostPolicy");
+app.UseCors(app.Environment.IsDevelopment() ? "LocalhostPolicy" : "ProductionPolicy");
 
 app.MapControllers();
 app.MapHub<BaseHub>("/eventhub");
