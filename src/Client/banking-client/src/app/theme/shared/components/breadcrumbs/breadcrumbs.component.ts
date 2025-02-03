@@ -48,7 +48,7 @@ export class BreadcrumbComponent {
         const breadcrumbList = this.filterNavigation(this.navigations, activeLink);
         this.navigationList = breadcrumbList.splice(-2);
         const title = breadcrumbList[breadcrumbList.length - 1]?.title || 'Welcome';
-        this.titleService.setTitle(title + ' | Berry Angular Admin Template');
+        this.titleService.setTitle(title + ' | Simple Banking');
       }
     });
   }
