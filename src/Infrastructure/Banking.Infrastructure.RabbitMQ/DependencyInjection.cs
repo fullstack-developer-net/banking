@@ -19,6 +19,7 @@ namespace Banking.Infrastructure.MessageQueue
                     Password = rabbitMQSettings.Password ?? string.Empty,
                     UserName = rabbitMQSettings.UserName ?? string.Empty,
                     Port = rabbitMQSettings.Port ?? 5672,
+                    VirtualHost = rabbitMQSettings.VirtualHost ?? string.Empty,
                 };
             });
             return services;
