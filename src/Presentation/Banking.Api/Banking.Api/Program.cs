@@ -144,7 +144,8 @@ app.UseMiddleware<JwtMiddleware>();
 
 app.UseAuthorization();
 
-app.UseCors(app.Environment.IsDevelopment() ? "LocalhostPolicy" : "ProductionPolicy");
+app.UseCors("LocalhostPolicy");
+//app.UseCors(app.Environment.IsDevelopment() ? "LocalhostPolicy" : "ProductionPolicy");
 
 app.MapControllers();
 app.MapHub<BaseHub>("/eventhub");

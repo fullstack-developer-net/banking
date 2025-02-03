@@ -13,7 +13,6 @@ namespace Banking.Application.Requests.Queries
             var account = await unitOfWork.AccountRepository.AsQueryable().FirstOrDefaultAsync(x => x.UserId == request.UserId, cancellationToken: cancellationToken);
 
             if (account == null) return null;
-
             var user =await unitOfWork.UserRepository.AsQueryable().FirstOrDefaultAsync(x => x.Id == account.UserId,cancellationToken);
             return new AccountDto
             {

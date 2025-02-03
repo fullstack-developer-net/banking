@@ -56,7 +56,7 @@ namespace Banking.Api.Controllers
 
             return result == null ? BadRequest("Login failure") : Ok(result);
         }
-        [HttpPost("create-admin-account")]
+        [HttpPost("create-admin")]
         [AllowAnonymous]
         public async Task<IActionResult> CreateAdminAccount([FromBody] CreateUserDto user)
         {
@@ -76,7 +76,7 @@ namespace Banking.Api.Controllers
             {
                 return BadRequest(result.Errors);
             }
-            await userManager.AddToRoleAsync(newUser, "User");
+            await userManager.AddToRoleAsync(newUser, "Admin");
             return Ok(result);
         }
         [HttpPost("validate-token")]

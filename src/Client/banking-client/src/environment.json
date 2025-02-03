@@ -5,7 +5,7 @@
     "debug": true
   },
   "production": {
-    "apiUrl": "https://api.yourbank.com",
+    "apiUrl": "https://simple-banking.azurewebsites.net",
     "websocket": "http://localhost:3000/api",
     "debug": false
   }
