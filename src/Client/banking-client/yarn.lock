@@ -1492,6 +1492,13 @@
   dependencies:
     tslib "^2.3.0"
 
+"@ngrx/store@^19.0.1":
+  version "19.0.1"
+  resolved "https://registry.npmjs.org/@ngrx/store/-/store-19.0.1.tgz"
+  integrity sha512-+6eBLb+0rdJ856JRuKnvSzFxv1ISbYuX/OM12dMPf4wm+ddxjhyvi6tF8lPiNnaYb717PGNxXQzBFIGfIs4zGQ==
+  dependencies:
+    tslib "^2.0.0"
+
 "@ngtools/webpack@19.1.5":
   version "19.1.5"
   resolved "https://registry.npmjs.org/@ngtools/webpack/-/webpack-19.1.5.tgz"
@@ -5892,7 +5899,7 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-"rxjs@^6.5.3 || ^7.4.0", "rxjs@^6.5.5 || ^7.4.0", rxjs@>=7.0.0, rxjs@~7.8.1, rxjs@7.8.1:
+"rxjs@^6.5.3 || ^7.4.0", "rxjs@^6.5.3 || ^7.5.0", "rxjs@^6.5.5 || ^7.4.0", rxjs@>=7.0.0, rxjs@~7.8.1, rxjs@7.8.1:
   version "7.8.1"
   resolved "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz"
   integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==

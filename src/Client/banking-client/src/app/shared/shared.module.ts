@@ -6,6 +6,6 @@ import { AppStateManager } from './app.state-manager';
 @NgModule({
   declarations: [],
   imports: [CommonModule, ServicesModule],
-  providers: [AppStateManager]
+  providers: []
 })
 export class SharedModule {}

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import { GuestComponent } from './theme/layout/guest/guest.component';
+import { AppStateManager } from './shared/app.state-manager';
 import { SharedModule } from './shared/shared.module';
 
 const routes: Routes = [
@@ -38,8 +39,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), SharedModule],
   exports: [RouterModule],
-  providers: []
+  providers: [AppStateManager]
 })
 export class AppRoutingModule {}
