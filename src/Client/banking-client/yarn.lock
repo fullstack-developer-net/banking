@@ -171,10 +171,10 @@
   dependencies:
     "@angular-eslint/bundled-angular-compiler" "19.0.2"
 
-"@angular/animations@19.0.5":
-  version "19.0.5"
-  resolved "https://registry.npmjs.org/@angular/animations/-/animations-19.0.5.tgz"
-  integrity sha512-HCOF2CrhUvjoZWusd4nh32VOxpUrg6bV+3Z8Q36Ix3aZdni8v0qoP2rl5wGbotaPtYg5RtyDH60Z2AOPKqlrZg==
+"@angular/animations@19.1.4":
+  version "19.1.4"
+  resolved "https://registry.npmjs.org/@angular/animations/-/animations-19.1.4.tgz"
+  integrity sha512-QGswsf/X+k7TijIgBzL6V8+KcArFAgebY6zM0L/Len8v5PNzPzdjJH99+P++5AOLiJctYKfISUwnlMbDb50NrA==
   dependencies:
     tslib "^2.3.0"
 
@@ -244,17 +244,17 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^18.0.1", "@angular/common@^19.0.0", "@angular/common@^19.0.0 || ^20.0.0", "@angular/common@>=17.3.0", "@angular/common@19.0.5":
-  version "19.0.5"
-  resolved "https://registry.npmjs.org/@angular/common/-/common-19.0.5.tgz"
-  integrity sha512-fFK+euCj1AjBHBCpj9VnduMSeqoMRhZZHbhPYiND7tucRRJ8vwGU0sYK2KI/Ko+fsrNIXL/0O4F36jVPl09Smg==
+"@angular/common@^18.0.1", "@angular/common@^19.0.0", "@angular/common@^19.0.0 || ^20.0.0", "@angular/common@>=17.3.0", "@angular/common@19.1.4":
+  version "19.1.4"
+  resolved "https://registry.npmjs.org/@angular/common/-/common-19.1.4.tgz"
+  integrity sha512-E4MCl13VIotOxmzKQ/UGciPeaRXQgH7ymesEjYVGcT8jmC+qz5dEcoN7L5Jvq9aUsmLBt9MFp/B5QqKCIXMqYA==
   dependencies:
     tslib "^2.3.0"
 
-"@angular/compiler-cli@^19.0.0", "@angular/compiler-cli@19.0.5", "@angular/compiler-cli@19.1.4":
-  version "19.0.5"
-  resolved "https://registry.npmjs.org/@angular/compiler-cli/-/compiler-cli-19.0.5.tgz"
-  integrity sha512-KSzuWCTZlvJsoAenxM9cjTOzNM8mrFxDBInj0KVPz7QU83amGS4rcv1pWO/QGYQcErfskcN84TAdMegaRWWCmA==
+"@angular/compiler-cli@^19.0.0", "@angular/compiler-cli@19.1.4":
+  version "19.1.4"
+  resolved "https://registry.npmjs.org/@angular/compiler-cli/-/compiler-cli-19.1.4.tgz"
+  integrity sha512-ozJvTUzPOgFqlz69YnV14Ncod+iH0cXZvUKerjw8o+JsixLG2LmJpwQ79Gh4a/ZQmAkAxMAYYK5izCiio8MmTg==
   dependencies:
     "@babel/core" "7.26.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
@@ -265,24 +265,24 @@
     tslib "^2.3.0"
     yargs "^17.2.1"
 
-"@angular/compiler@^19.0.0", "@angular/compiler@19.0.5", "@angular/compiler@19.1.4":
-  version "19.0.5"
-  resolved "https://registry.npmjs.org/@angular/compiler/-/compiler-19.0.5.tgz"
-  integrity sha512-S8ku5Ljp0kqX3shfmE9DVo09629jeYJSlBRGbj2Glb92dd+VQZPOz7KxqKRTwmAl7lQIV/+4Lr6G/GVTsoC4vg==
+"@angular/compiler@^19.0.0", "@angular/compiler@19.1.4":
+  version "19.1.4"
+  resolved "https://registry.npmjs.org/@angular/compiler/-/compiler-19.1.4.tgz"
+  integrity sha512-9vGUZ+QhGWvf5dfeILybrh5rvZQtNqS8WumMeX2/vCb0JTA0N4DsL1Sy47HuWcgKBxbmHVUdF5/iufcFaqk2FA==
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^18.0.1", "@angular/core@^19.0.0", "@angular/core@^19.0.0 || ^20.0.0", "@angular/core@>=17.3.0", "@angular/core@19.0.5":
-  version "19.0.5"
-  resolved "https://registry.npmjs.org/@angular/core/-/core-19.0.5.tgz"
-  integrity sha512-Ywc6sPO6G/Y1stfk3y/MallV/h0yzQ0vdOHRWueLrk5kD1DTdbolV4X03Cs3PuVvravgcSVE3nnuuHFuH32emQ==
+"@angular/core@^18.0.1", "@angular/core@^19.0.0", "@angular/core@^19.0.0 || ^20.0.0", "@angular/core@>=17.3.0", "@angular/core@19.1.4":
+  version "19.1.4"
+  resolved "https://registry.npmjs.org/@angular/core/-/core-19.1.4.tgz"
+  integrity sha512-r3T81lM9evmuW36HA3VAxIJ61M8kirGR8yHoln9fXSnYG8UeJ7JlWEbVRHmVHKOB48VK0bS/VxqN+w9TOq3bZg==
   dependencies:
     tslib "^2.3.0"
 
-"@angular/forms@^19.0.0", "@angular/forms@19.0.5":
-  version "19.0.5"
-  resolved "https://registry.npmjs.org/@angular/forms/-/forms-19.0.5.tgz"
-  integrity sha512-OhNFkfOoguqCDq07vNBV28FFrmTM8S11Z3Cd6PQZJJF9TgAtpV5KtF7A3eXBCN92W4pmqluomPjfK7YyImzIYQ==
+"@angular/forms@^19.0.0", "@angular/forms@19.1.4":
+  version "19.1.4"
+  resolved "https://registry.npmjs.org/@angular/forms/-/forms-19.1.4.tgz"
+  integrity sha512-dcf4G+vXrfvy5NAP+C4A2rBeaZuwKs/TeWjZDpkRUPQMwTvDJcSNH+pqOeVsYUGNY2BkY1uPjzmgZh4F5NMQ9A==
   dependencies:
     tslib "^2.3.0"
 
@@ -296,24 +296,24 @@
     fast-glob "3.3.3"
     yargs "^17.2.1"
 
-"@angular/platform-browser-dynamic@19.0.5":
-  version "19.0.5"
-  resolved "https://registry.npmjs.org/@angular/platform-browser-dynamic/-/platform-browser-dynamic-19.0.5.tgz"
-  integrity sha512-KKFdue/uJVxkWdrntRAXkz+ycp4nD3SuGOH5pPf2svCBxieuHuFlWDi+DYVuFSEpC/ICCmlhrtzIAm44A4qzzQ==
+"@angular/platform-browser-dynamic@19.1.4":
+  version "19.1.4"
+  resolved "https://registry.npmjs.org/@angular/platform-browser-dynamic/-/platform-browser-dynamic-19.1.4.tgz"
+  integrity sha512-r1AM8qkjl63cg46tgOHsVV4URHDctcVpt98DU/d/yN8JAugrx6GA1qOM/HMDspMjEIU4aYcSkUUY6h6uIkYmOQ==
   dependencies:
     tslib "^2.3.0"
 
-"@angular/platform-browser@19.0.5":
-  version "19.0.5"
-  resolved "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-19.0.5.tgz"
-  integrity sha512-41+Jo5DEil4Ifvv+UE/p1l9YJtYN+xfhx+/C9cahVgvV5D2q+givyK73d0Mnb6XOfe1q+hoV5lZ+XhQYp21//g==
+"@angular/platform-browser@19.1.4":
+  version "19.1.4"
+  resolved "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-19.1.4.tgz"
+  integrity sha512-IoVIvemj7ni6GLDCvwtZhTgMQjPyG+xPW7rASN2RVl9T3uS1fJUpXrh5JzBcCikIj20O2KV9mqt7p4iIXy9jbQ==
   dependencies:
     tslib "^2.3.0"
 
-"@angular/router@19.0.5":
-  version "19.0.5"
-  resolved "https://registry.npmjs.org/@angular/router/-/router-19.0.5.tgz"
-  integrity sha512-6tNubVVj/rRyTg+OXjQxACfufvCLHAwDQtv9wqt6q/3OYSnysHTik3ho3FaFPwu7fXJ+6p9Rjzkh2VY9QMk4bw==
+"@angular/router@19.1.4":
+  version "19.1.4"
+  resolved "https://registry.npmjs.org/@angular/router/-/router-19.1.4.tgz"
+  integrity sha512-0gEhGGqcCS7adKuv/XeQjRbhEqRXPhIH4ygjwfonV+uvmK+C1sf+bnAt4o01hxwf12w4FcnNPkgBKt+rJJ+LpA==
   dependencies:
     tslib "^2.3.0"
 
@@ -6668,7 +6668,7 @@ typescript-eslint@^8.0.0, typescript-eslint@8.18.0:
     "@typescript-eslint/parser" "8.18.0"
     "@typescript-eslint/utils" "8.18.0"
 
-typescript@*, typescript@>=4.2.0, "typescript@>=4.8.4 <5.8.0", typescript@>=4.9.5, "typescript@>=5.5 <5.7", "typescript@>=5.5 <5.8", typescript@5.6.3:
+typescript@*, typescript@>=4.2.0, "typescript@>=4.8.4 <5.8.0", typescript@>=4.9.5, "typescript@>=5.5 <5.8", typescript@5.6.3:
   version "5.6.3"
   resolved "https://registry.npmjs.org/typescript/-/typescript-5.6.3.tgz"
   integrity sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==
