@@ -16,9 +16,14 @@ const routes: Routes = [
       {
         path: 'user',
         loadComponent: () => import('./pages/dashboard/default/default.component').then((m) => m.DefaultComponent)
+      } ,
+      {
+        path: 'admin',
+        loadComponent: () => import('./pages/dashboard/admin-dashboard/admin-dashboard.component').then((m) => m.AdminDashboardComponent)
       },
     ]
   },
+ 
   {
     path: '',
     component: GuestComponent,
