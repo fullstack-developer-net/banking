@@ -72,25 +72,20 @@ builder.Services.AddSignalRWebSocket();
 // Add CORS policy to allow requests from localhost
 builder.Services.AddCors(options =>
 {
-    if (builder.Environment.IsDevelopment())
+    options.AddPolicy("LocalhostPolicy", builder =>
     {
-        options.AddPolicy("LocalhostPolicy", builder =>
-        {
-            builder.WithOrigins("http://localhost:4200", "http://localhost:*")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-    }
-    else if (builder.Environment.IsProduction())
+        builder.WithOrigins("http://localhost:4200", "http://localhost:*")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+
+    options.AddPolicy("ProductionPolicy", corsPolicyBuilder =>
     {
-        options.AddPolicy("ProductionPolicy", corsPolicyBuilder =>
-        {
-            corsPolicyBuilder.WithOrigins("https://mysimplebanking.netlify.app", "http://mysimplebanking.netlify.app",
-                    "wss://mysimplebanking.netlify.app")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-    }
+        corsPolicyBuilder.WithOrigins("https://mysimplebanking.netlify.app", "http://mysimplebanking.netlify.app",
+                "wss://mysimplebanking.netlify.app")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
 
 // Add the Swagger generator and the Swagger UI middlewares
