@@ -1,19 +1,15 @@
 // Angular Import
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 // project import
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { BankAccountCardComponent } from '../../bank-account-card/bank-account-card.component';
-import { AccountBalanceCardComponent } from '../../account-balance-card/account-balance-card.component';
-import { LatestTransactionsCardComponent } from '../../latest-transactions-card/latest-transactions-card.component';
-import { SummaryChartComponent } from '../../summary-chart/summary-chart.component';
-import { MoneyTransferComponent } from '../../money-transfer/money-transfer.component';
 import { AppStateManager } from 'src/app/shared/app.state-manager';
-import { AccountsService } from '../../../shared/services/accounts/accounts.service';
-import { AuthModel } from 'src/app/shared/models/auth.model';
-import { switchMap } from 'rxjs';
 import { AccountModel } from 'src/app/shared/models/account.model';
+import { AccountBalanceCardComponent } from 'src/app/components/account-balance-card/account-balance-card.component';
+import { BankAccountCardComponent } from 'src/app/components/bank-account-card/bank-account-card.component';
+import { LatestTransactionsCardComponent } from 'src/app/components/latest-transactions-card/latest-transactions-card.component';
+import { MoneyTransferComponent } from 'src/app/components/money-transfer/money-transfer.component';
+import { SummaryChartComponent } from 'src/app/components/summary-chart/summary-chart.component';
 
 @Component({
   selector: 'app-default',

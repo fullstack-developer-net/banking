@@ -10,25 +10,13 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/default',
+        redirectTo: '/user',
         pathMatch: 'full'
       },
       {
-        path: 'default',
-        loadComponent: () => import('./components/dashboard/default/default.component').then((c) => c.DefaultComponent)
+        path: 'user',
+        loadComponent: () => import('./pages/dashboard/default/default.component').then((m) => m.DefaultComponent)
       },
-      {
-        path: 'typography',
-        loadComponent: () => import('./components/elements/typography/typography.component')
-      },
-      {
-        path: 'color',
-        loadComponent: () => import('./components/elements/element-color/element-color.component')
-      },
-      {
-        path: 'sample-page',
-        loadComponent: () => import('./components/other/sample-page/sample-page.component')
-      }
     ]
   },
   {
@@ -37,7 +25,7 @@ const routes: Routes = [
     children: [
       {
         path: 'guest',
-        loadChildren: () => import('./components/pages/authentication/authentication.module').then((m) => m.AuthenticationModule)
+        loadChildren: () => import('./pages/authentication/authentication.module').then((m) => m.AuthenticationModule)
       }
     ]
   }
