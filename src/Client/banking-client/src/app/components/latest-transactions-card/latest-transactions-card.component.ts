@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { TransactionItemComponent } from '../transaction-item/transaction-item.component';
+import { TransactionsService } from 'src/app/shared/services/transactions/transactions.service';
+import { TransactionModel } from 'src/app/shared/models/transaction.model';
 
 @Component({
   selector: 'app-latest-transactions-card',
@@ -8,13 +10,32 @@ import { TransactionItemComponent } from '../transaction-item/transaction-item.c
   styleUrl: './latest-transactions-card.component.scss'
 })
 export class LatestTransactionsCardComponent {
-  ListGroup = [
-    {
-      fullName: 'Phuong Tran',
-      accountNumber: '12345678901234',
-      amount: 1000,
-      type: 'outcome',
-      createdAt: new Date()
-    }
-  ];
+  ListGroup : TransactionModel[] = [];
+  isLoading: boolean = false;
+  error: string | null = null;
+
+  constructor(private transactionService: TransactionsService) {}
+
+  ngOnInit(): void {
+    this.loadTransactions();
+  }
+
+  loadTransactions(): void {
+    this.isLoading = true;
+    this.error = null;
+
+    this.transactionService.getTransactions()
+      .subscribe({
+        next: (data: any) => {
+          this.ListGroup = data.items;
+          this.isLoading = false;
+          console.info('Loading data transactions:', data);
+        },
+        error: (error) => {
+          console.error('Error fetching transactions:', error);
+          this.error = 'Failed to load transactions. Please try again later.';
+          this.isLoading = false;
+        }
+      });
+  }
 }

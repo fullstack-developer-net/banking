@@ -1,15 +1,30 @@
-<div class="row align-items-start">
-  <div class="col">
-    <h5 class="mb-0">{{ fullName }}</h5>
-    <small class="{{ color }}">{{ accountNumber | creditCardNumber }}</small>
+<li class="list-group-item border-2 mt-1 rounded-2">
+  <div class="d-flex justify-content-between align-items-start">
+    <div class="flex-grow-1">
+      <div class="d-flex justify-content-between mb-2">
+        <small class="text-muted">#{{ transactionId }}</small>
+        <span class="transaction-status" [class]="status.toLowerCase()">
+          {{ status }}
+        </span>
+      </div>
+      <div class="mb-1">
+        <strong>From Account ID:</strong> {{ fromAccountId }}
+        <br>
+        <strong>To Account ID:</strong> {{ toAccountId }}
+      </div>
+      <div class="text-muted small">
+        {{ transactionTime}}
+      </div>
+      @if (note) {
+        <div class="text-muted small mt-1">
+          <em>Note: {{ note }}</em>
+        </div>
+      }
+    </div>
+    <div class="ms-3">
+      <strong class="fs-5" [class]="{'text-success': amount > 0, 'text-danger': amount < 0}">
+        {{ amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}
+      </strong>
+    </div>
   </div>
-  <div class="col-auto">
-    <h4 class="mb-0">
-      {{ formattedAmount }}
-      <span class="ms-2 align-top avatar avatar-xxs {{ bgColor }} text-white p-2">
-        <i class="{{ icon }} {{ color }}"></i>
-      </span>
-    </h4>
-    <p class="">{{ formattedDate }}</p>
-  </div>
-</div>
+</li>

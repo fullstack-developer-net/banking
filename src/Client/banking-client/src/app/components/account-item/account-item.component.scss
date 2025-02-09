@@ -1,0 +1,33 @@
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+.actions {
+  .btn-view {
+    min-width: 80px; // Set minimum width for consistency
+    padding: 8px 16px;
+    background-color: #0d6efd; // Primary blue color
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500; // Slightly bolder text
+    transition: background-color 0.2s ease; // Smooth hover transition
+
+    &:hover {
+      background-color: #0b5ed7; // Slightly darker on hover
+    }
+
+    &:active {
+      background-color: #0a58ca; // Even darker when clicked
+      transform: translateY(1px); // Slight push down effect
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25); // Focus ring
+    }
+  }
+}

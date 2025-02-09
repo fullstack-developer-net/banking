@@ -7,6 +7,7 @@ import { AccountModel } from 'src/app/shared/models/account.model';
 import { AccountBalanceCardComponent } from 'src/app/components/account-balance-card/account-balance-card.component';
 import { BankAccountCardComponent } from 'src/app/components/bank-account-card/bank-account-card.component';
 import { LatestTransactionsCardComponent } from 'src/app/components/latest-transactions-card/latest-transactions-card.component';
+import { ListAccountCardComponent } from 'src/app/components/list-account-card/list-account-card.component';
 import { MoneyTransferComponent } from 'src/app/components/money-transfer/money-transfer.component';
 import { SummaryChartComponent } from 'src/app/components/summary-chart/summary-chart.component';
 

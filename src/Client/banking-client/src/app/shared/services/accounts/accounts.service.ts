@@ -15,6 +15,10 @@ export class AccountsService {
     return this.api.get<any[]>(`${this.baseApiUrl}/accounts`);
   }
 
+  public getListAccounts() {
+    return this.api.get<any[]>(`${this.baseApiUrl}/accounts/list`);
+  }
+
   public getAccountByUserId(id: string) {
     return this.api.get<any>(`${this.baseApiUrl}/accounts/details?userId=${id}`).pipe(
       map((account: AccountModel) => {

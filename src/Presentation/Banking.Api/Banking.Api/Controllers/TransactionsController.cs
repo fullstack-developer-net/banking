@@ -7,6 +7,15 @@ namespace Banking.Api.Controllers
 {
     public class TransactionsController(IMediator mediator) : BaseApiController
     {
+        [HttpGet("list")]
+        public async Task<IActionResult> GetTransactions(
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? searchTerm = null)
+        {
+            var transactions = await mediator.Send(new GetTransactions(pageNumber, pageSize, searchTerm));
+            return Ok(transactions);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateTransaction([FromBody] ProcessTransactionCommand command)

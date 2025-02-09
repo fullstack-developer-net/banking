@@ -1,4 +1,11 @@
 .card {
-  height: 200px;
   padding: 20px;
+}
+.transaction-item{
+  border: solid 1px black !important;
+  border-radius: 5px;
+}
+
+.completed {
+  color: green;
 }

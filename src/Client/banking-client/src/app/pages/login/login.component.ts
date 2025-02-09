@@ -19,7 +19,7 @@ import { SignalRService } from 'src/app/shared/services/signalr/signalr.service'
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export default class LoginComponent {
+export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,

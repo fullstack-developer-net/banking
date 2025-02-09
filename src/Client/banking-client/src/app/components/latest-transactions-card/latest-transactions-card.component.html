@@ -4,22 +4,36 @@
       <div class="col">
         <h4>Transaction history</h4>
       </div>
-      <div class="col-auto"></div>
     </div>
 
     <ul class="list-group list-group-flush">
-      @for (item of ListGroup; track item) {
-        <li class="list-group-item border-0 mt-2">
+      @if (isLoading) {
+        <div class="loading-state">
+          Loading transactions...
+        </div>
+      }
+    
+      @if (error) {
+        <div class="error-state">
+          {{ error }}
+        </div>
+      }
+    
+      @if (!isLoading && !error && ListGroup.length > 0) {
+        @for (item of ListGroup; track item.transactionId) {
           <app-transaction-item
-            [fullName]="item.fullName"
-            [accountNumber]="item.accountNumber"
+            [transactionId]="item.transactionId"
+            [fromAccountId]="item.fromAccountId"
+            [toAccountId]="item.toAccountId"
+            [status]="item.status"
+            [note]="item.note"
             [amount]="item.amount"
-            [createdAt]="item.createdAt"
-          ></app-transaction-item>
-        </li>
+            [transactionTime]="item.transactionTime">
+          </app-transaction-item>
+        }
       }
     </ul>
-    <div class="text-center">
+    <div class="text-center mt-3">
       <a href="javascript:" class="b-b-primary text-primary f-w-500">
         View all
         <i class="ti ti-chevron-right"></i>

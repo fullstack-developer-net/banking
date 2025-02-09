@@ -1,0 +1,85 @@
+<div class="account-list-container">
+  <div class="header">
+    <h2>Account List</h2>
+    <button class="btn-add" routerLink="/accounts/new">
+      Add Account
+    </button>
+  </div>
+
+  <div class="search-container">
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Search by name or account number..."
+      [(ngModel)]="searchTerm"
+      (input)="onSearch($event)">
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-state">
+      Loading accounts...
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (error) {
+    <div class="error-state">
+      {{ error }}
+    </div>
+  }
+
+  <!-- Data State -->
+  @if (!isLoading && !error) {
+    @if (filteredAccounts.length === 0) {
+      <div class="no-results">
+        No accounts found matching your search.
+      </div>
+    } @else {
+      <table class="account-table">
+        <colgroup>
+          <col span="1" style="width: 35%;">
+          <col span="1" style="width: 30%;">
+          <col span="1" style="width: 25%;">
+          <col span="1" style="width: 10%;">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Balance</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of paginatedAccounts; track item) {
+            <tr app-account-item
+              [fullName]="item.fullName"
+              [accountNumber]="item.accountNumber"
+              [balance]="item.balance">
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        <button 
+          class="pagination-btn" 
+          [disabled]="currentPage === 1"
+          (click)="changePage(currentPage - 1)">
+          Previous
+        </button>
+        
+        <span class="pagination-info">
+          Page {{ currentPage }} of {{ totalPages }}
+        </span>
+        
+        <button 
+          class="pagination-btn" 
+          [disabled]="currentPage === totalPages"
+          (click)="changePage(currentPage + 1)">
+          Next
+        </button>
+      </div>
+    }
+  }
+</div>

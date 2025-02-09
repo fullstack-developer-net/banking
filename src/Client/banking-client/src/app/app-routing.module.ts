@@ -5,7 +5,8 @@ import { GuestComponent } from './theme/layout/guest/guest.component';
 import { AppStateManager } from './shared/app.state-manager';
 import { SharedModule } from './shared/shared.module';
 import { SignalRService } from './shared/services/signalr/signalr.service';
-
+import { HotToastService } from '@ngxpert/hot-toast';
+ 
 const routes: Routes = [
   {
     path: '',
@@ -26,15 +27,15 @@ const routes: Routes = [
       },
     ]
   },
- 
+
   {
     path: '',
     component: GuestComponent,
     children: [
       {
-        path: 'guest',
-        loadChildren: () => import('./pages/authentication/authentication.module').then((m) => m.AuthenticationModule)
-      }
+        path: 'login',
+        loadComponent: () => import('./pages/login/login.component').then((m) => m.LoginComponent)
+      },
     ]
   }
 ];
@@ -42,6 +43,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes), SharedModule],
   exports: [RouterModule],
-  providers: [AppStateManager,SignalRService]
+  providers: [AppStateManager,SignalRService,HotToastService]
 })
 export class AppRoutingModule {}

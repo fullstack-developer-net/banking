@@ -22,6 +22,17 @@ namespace Banking.Api.Controllers
             return Ok(new { AccountId = accountId });
         }
 
+        [HttpGet("list")]
+        public async Task<IActionResult> GetAccounts(
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? searchTerm = null,
+            [FromQuery] bool? isActive = null)
+        {
+            var accounts = await mediator.Send(new GetAccounts(pageNumber, pageSize, searchTerm, isActive));
+            return Ok(accounts);
+        }
+
         [HttpGet("/{accountId}/transactions")]
         public async Task<IActionResult> GetTransactionsByAccountId(int accountId)
         {

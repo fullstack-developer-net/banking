@@ -5,12 +5,12 @@ import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { AppRoutingModule } from './app/app-routing.module';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { AppComponent } from './app/app.component';
-import { AppStateManager } from './app/shared/app.state-manager';
-
+import { provideHotToastConfig } from '@ngxpert/hot-toast';
+ 
 if (environment.production) {
   enableProdMode();
 }
 
 bootstrapApplication(AppComponent, {
-  providers: [ importProvidersFrom(BrowserModule, AppRoutingModule), provideAnimations()]
+  providers: [importProvidersFrom(BrowserModule, AppRoutingModule), provideAnimations(), provideHotToastConfig()]
 }).catch((err) => console.error(err));
