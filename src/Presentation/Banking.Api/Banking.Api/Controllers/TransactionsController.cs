@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Banking.Api.Controllers
 {
-    public class TransactionsController(IMediator mediator, CurrentUserLogin userLogin) : BaseApiController
+    public class TransactionsController(IMediator mediator, CurrentLoginUser userLogin) : BaseApiController
     {
-        [HttpGet("list")]
+        [HttpGet("")]
         public async Task<IActionResult> GetTransactions(
             [FromQuery] int pageNumber = 1,
             [FromQuery] int pageSize = 10,

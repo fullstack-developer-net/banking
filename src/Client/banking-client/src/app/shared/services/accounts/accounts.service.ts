@@ -16,7 +16,7 @@ export class AccountsService {
   }
 
   public getListAccounts() {
-    return this.api.get<any[]>(`${this.baseApiUrl}/accounts/list`);
+    return this.api.get<any[]>(`${this.baseApiUrl}/accounts`);
   }
 
   public getAccountByUserId(id: string) {

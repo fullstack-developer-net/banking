@@ -9,6 +9,7 @@ namespace Banking.Api.Controllers
     [ApiController]
     [Route("api/v1/[controller]")]
     [ApiVersion("1.0")]
+    [Authorize]
     public class BaseApiController : ODataController
     {
     }

@@ -1,5 +1,4 @@
-﻿using Banking.Api.Filters;
-using Banking.Application.Dtos;
+﻿using Banking.Application.Dtos;
 using Banking.Application.Requests.Commands;
 using Banking.Application.Requests.Queries;
 using Banking.Core.Interfaces;
@@ -9,26 +8,35 @@ using Microsoft.AspNetCore.OData.Query;
 
 namespace Banking.Api.Controllers
 {
-
-    public class AccountsController(IMediator mediator, IUnitOfWork unitOfWork) : BaseApiController
+    public class AccountsController(IMediator mediator, IUnitOfWork unitOfWork, CurrentLoginUser loginUser)
+        : BaseApiController
     {
-
         [HttpPost()]
-        [AllowRoles(["ADMIN"])]
         public async Task<IActionResult> CreateAccount([FromBody] CreateAccountRequest command)
         {
+            if (!loginUser.Roles?.Contains("Admin") ?? false)
+            {
+                return Forbid();
+            }
 
             var accountId = await mediator.Send(new CreateAccountCommand(command));
             return Ok(new { AccountId = accountId });
         }
 
-        [HttpGet("list")]
+        [HttpGet]
         public async Task<IActionResult> GetAccounts(
             [FromQuery] int pageNumber = 1,
             [FromQuery] int pageSize = 10,
             [FromQuery] string? searchTerm = null,
             [FromQuery] bool? isActive = null)
         {
+            // Should be cover by role method attribute
+            var isAdmin = loginUser.Roles?.Contains("Admin") ?? false;
+            if (!isAdmin)
+            {
+                return Forbid();
+            }
+
             var accounts = await mediator.Send(new GetAccounts(pageNumber, pageSize, searchTerm, isActive));
             return Ok(accounts);
         }
@@ -45,7 +53,6 @@ namespace Banking.Api.Controllers
         [Route("odata")]
         public IActionResult Get()
         {
-
             var accounts = unitOfWork.AccountRepository.AsQueryable().Select(a => new AccountDto
             {
                 Email = a.User.Email ?? string.Empty,
@@ -79,8 +86,8 @@ namespace Banking.Api.Controllers
             {
                 account = await mediator.Send(new GetAccountById(accountId.Value));
             }
+
             return Ok(account);
         }
-
     }
 }

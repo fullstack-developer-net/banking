@@ -50,5 +50,8 @@ export class AppStateManager {
     return '';
   }
 
+  public get token(): string {
+    return this.authSubject.getValue()?.token || '';
+  }
 
 }

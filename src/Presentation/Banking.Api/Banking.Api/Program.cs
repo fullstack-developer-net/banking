@@ -93,7 +93,7 @@ builder.Services.AddCors(options =>
 });
 
 // Add the Swagger generator and the Swagger UI middlewares
-builder.Services.AddTransient<CurrentUserLogin>();
+builder.Services.AddScoped<CurrentLoginUser>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();

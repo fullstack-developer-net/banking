@@ -4,7 +4,9 @@
     {
         public string TransactionId { get; set; }
         public long FromAccountId { get; set; }
+        public AccountDto? FromAccount { get; set; }
         public long ToAccountId { get; set; }
+        public AccountDto? ToAccount { get; set; }
         public decimal Amount { get; set; }
         public string Status { get; set; }
         public string Note { get; set; }

@@ -7,6 +7,8 @@ import { SharedModule } from './shared/shared.module';
 import { SignalRService } from './shared/services/signalr/signalr.service';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { RoleGuard } from './shared/guard/role.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/interceptors/auth/auth.interceptor';
  
 const routes: Routes = [
   {
@@ -41,6 +43,16 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes), SharedModule],
   exports: [RouterModule],
-  providers: [AppStateManager,SignalRService,HotToastService,RoleGuard]
+  providers: [
+    AppStateManager,
+    SignalRService,
+    HotToastService,
+    RoleGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ]
 })
 export class AppRoutingModule {}

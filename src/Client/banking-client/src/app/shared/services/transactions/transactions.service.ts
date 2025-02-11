@@ -12,7 +12,7 @@ export class TransactionsService {
   baseApiUrl = environment.apiUrl + '/api/v1';
 
   public getTransactions() {
-    return this.api.get<any[]>(`${this.baseApiUrl}/transactions/list`);
+    return this.api.get<any[]>(`${this.baseApiUrl}/transactions`);
   }
   public createTransaction(transaction: TransferModel) {
     return this.api.post<TransferModel>(`${this.baseApiUrl}/transactions`, transaction);

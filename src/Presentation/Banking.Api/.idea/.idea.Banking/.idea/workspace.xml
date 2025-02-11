@@ -11,7 +11,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="" />
+    <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CurrentLoginUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/app.state-manager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/app.state-manager.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/transactions/transactions.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/transactions/transactions.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/AccountDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/AccountDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CurrentUserLogin.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/TransactionMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/TransactionMessage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/UserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/UserDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Program.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,6 +44,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CurrentLoginUser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/4046e930474e48f7a69bae3fc9fc824412200/ce/4750a72f/02000011pdb33.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/473d97221b573ab97e6e745d8adae8b9e95a666539d6ed3cc8566b245d93a/ArgumentNullException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/821eadf8c89b36691b3def72d04889d8d4cd791563a97558876f873a81a1a085/StackFrameIterator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ee76fb4aded5e9da6e66cc2dcb127fac08d3ec5ac84fc6db9d4ee1d2e38/Monitor.CoreCLR.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bf9021a960b74107a7e141aa06bc9d8a0a53c929178c2fb95b1597be8af8dc/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -125,5 +145,76 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs</url>
+          <line>24</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
+            <startOffsets>
+              <option value="961" />
+            </startOffsets>
+            <endOffsets>
+              <option value="962" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs</url>
+          <line>16</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" containingFunctionPresentation="Method 'GetTransactions'">
+            <startOffsets>
+              <option value="559" />
+            </startOffsets>
+            <endOffsets>
+              <option value="653" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs</url>
+          <line>22</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
+            <startOffsets>
+              <option value="857" />
+            </startOffsets>
+            <endOffsets>
+              <option value="910" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs</url>
+          <line>17</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
+            <startOffsets>
+              <option value="626" />
+            </startOffsets>
+            <endOffsets>
+              <option value="712" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs</url>
+          <line>34</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" containingFunctionPresentation="Method 'GetAccounts'">
+            <startOffsets>
+              <option value="1180" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1229" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
