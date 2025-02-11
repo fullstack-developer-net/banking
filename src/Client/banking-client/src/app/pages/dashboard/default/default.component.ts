@@ -9,6 +9,7 @@ import { BankAccountCardComponent } from 'src/app/components/bank-account-card/b
 import { LatestTransactionsCardComponent } from 'src/app/components/latest-transactions-card/latest-transactions-card.component';
 import { SummaryChartComponent } from 'src/app/components/summary-chart/summary-chart.component';
 import { MoneyTransferComponent } from 'src/app/components/money-transfer/money-transfer.component';
+import { Router } from '@angular/router';
  
 
 
@@ -48,13 +49,12 @@ export class DefaultComponent implements OnInit {
   account: AccountModel | null = null;
   showMoneyTransfer: boolean = false;
 
-  constructor(private appState: AppStateManager) {}
+  constructor(private appState: AppStateManager, private router: Router) {}
 
   ngOnInit(): void {
-    this.appState.account$.subscribe((account: any) => {
-      this.account = account;
-      console.log('Account : ', account);
-    });
+    if(this.appState.currentAuth === null) {
+      this.router.navigateByUrl('/login');
+    }
   }
 
   showMoneyTransferPopup(): void {

@@ -11,23 +11,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CurrentUserLogin.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/TransferDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Banking.Common/Services/TokenService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Banking.Common/Services/TokenService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/money-transfer/money-transfer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/money-transfer/money-transfer.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/pages/authentication/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/pages/authentication/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/pages/dashboard/default/default.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/pages/dashboard/default/default.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/transaction.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/transaction.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/accounts/accounts.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/accounts/accounts.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/transactions/transactions.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/transactions/transactions.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Program.cs" afterDir="false" />
-    </list>
+    <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,24 +39,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-   <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.Banking.Api: Production.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Banking.Api: https.executor&quot;: &quot;Run&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
-  }
-}</component>
-  
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Debug",
     ".NET Launch Settings Profile.Banking.Api: Production.executor": "Run",
     ".NET Launch Settings Profile.Banking.Api: https.executor": "Run",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "hiepdd12",
+    "git-widget-placeholder": "develop",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -82,7 +55,6 @@
   }
 }]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Banking.Api: Develop">
->>>>>>> 2e1ea5a (update)
     <configuration name="Banking.Api: Develop" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Banking.Api/Banking.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net9.0" />

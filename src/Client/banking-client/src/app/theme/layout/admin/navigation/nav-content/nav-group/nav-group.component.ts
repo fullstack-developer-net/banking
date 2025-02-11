@@ -7,6 +7,7 @@ import { NavigationItem } from '../../navigation';
 
 import { NavCollapseComponent } from '../nav-collapse/nav-collapse.component';
 import { NavItemComponent } from '../nav-item/nav-item.component';
+import { AppStateManager } from 'src/app/shared/app.state-manager';
 
 @Component({
   selector: 'app-nav-group',
@@ -22,9 +23,17 @@ export class NavGroupComponent implements OnInit {
   @Input() item!: NavigationItem;
 
   current_url!: string;
-
+  constructor(private appState: AppStateManager) {}
   // Life cycle events
   ngOnInit() {
+    this.item.children = this.item.children?.filter((x) => x.role?.includes(this.appState.currentRole));
+
+    this.appState.user$.subscribe((auth) => {
+      if (auth) {
+        this.item.children = this.item.children?.filter((x) => x.role?.includes(this.appState.currentRole));
+      }
+    });
+
     this.current_url = this.location.path();
     //eslint-disable-next-line
     //@ts-ignore

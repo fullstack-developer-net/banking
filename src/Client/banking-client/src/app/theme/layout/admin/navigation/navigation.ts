@@ -14,31 +14,43 @@ export interface NavigationItem {
   role?: string[];
   isMainParent?: boolean;
 }
+export const LOGOUT_ITEM: NavigationItem = {
+  id: 'logout',
+  title: 'Logout',
+  type: 'item',
+  role: ['*'],
+  icon: 'feather icon-log-out',
+  url: '/auth/logout'
+};
 
 export const NavigationItems: NavigationItem[] = [
   {
     id: 'dashboard',
+    classes: 'nav-item',
     title: 'Dashboard',
     type: 'group',
-    icon: 'icon-navigation',
+    icon: 'ti ti-dashboard',
+    role: ['User', 'Admin'],
     children: [
       {
         id: 'user',
-        title: 'User',
+        title: 'User dashboard',
         type: 'item',
         classes: 'nav-item',
         url: '/user',
         icon: 'ti ti-dashboard',
-        breadcrumbs: false
+        breadcrumbs: false,
+        role: ['User']
       },
       {
         id: 'admin-dashboard',
-        title: 'Admin',
+        title: 'Admin dashboard',
         type: 'item',
         classes: 'nav-item',
         url: '/admin',
         icon: 'ti ti-dashboard',
-        breadcrumbs: false
+        breadcrumbs: false,
+        role: ['Admin']
       }
     ]
   },
@@ -57,5 +69,5 @@ export const NavigationItems: NavigationItem[] = [
         breadcrumbs: false
       }
     ]
-   }
+  }
 ];

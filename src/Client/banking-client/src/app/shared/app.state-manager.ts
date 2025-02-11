@@ -12,7 +12,7 @@ export class AppStateManager {
   public readonly user$: Observable<User | null>;
   public readonly auth$: Observable<AuthModel | null>;
   public readonly account$: Observable<AccountModel | null>;
-
+ 
   constructor() {
     this.user$ = this.userSubject.asObservable();
     this.auth$ = this.authSubject.asObservable();
@@ -27,4 +27,28 @@ export class AppStateManager {
   public setAccount(account: AccountModel | null) {
     this.accountSubject.next(account);
   }
+ 
+  public get currentAuth(): AuthModel | null {
+    return this.authSubject.getValue();
+  }
+
+  public get currentUser(): AuthModel | null {
+    return this.authSubject.getValue();
+  }
+
+  public get currentAccount(): AccountModel | null {
+    return this.accountSubject.getValue();
+  }
+
+  public get currentRole(): string {
+    if(this.authSubject.getValue()?.roles?.includes('Admin')) {
+      return 'Admin';
+    } 
+    if(this.authSubject.getValue()?.roles?.includes('User')) {
+      return 'User';
+    }
+    return '';
+  }
+
+
 }

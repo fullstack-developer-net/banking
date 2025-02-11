@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
 import { ListAccountCardComponent } from 'src/app/components/list-account-card/list-account-card.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -35,14 +36,18 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(
     private appState: AppStateManager,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private router: Router
   ) {}
 
+
+ 
   ngOnInit(): void {
-    this.appState.account$.subscribe((account: any) => {
-      this.account = account;
-      console.log('Account : ', account);
-    });
+    if(this.appState.currentAuth === null) {
+      this.router.navigateByUrl('/login');
+    }
+    this.account = this.appState.currentAccount;
+    console.log('Account:', this.account);
   }
 
   showModal() {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthModel } from '../../models';
-import { map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { BaseApi } from '../base-api.service';
 import { isValidEmail } from '../../utils/validation.util';
@@ -34,6 +34,10 @@ export class AuthService {
         localStorage.setItem('auth', JSON.stringify(auth));
         this.appState.setAuth(auth);
         return auth;
+      }),
+      catchError((error) => {
+        console.error('Login error:', error);
+        return of(null);
       })
     );
   }

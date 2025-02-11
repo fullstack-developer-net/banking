@@ -17,34 +17,45 @@ export class AppComponent {
   title = 'Simple Banking App';
   public messages: string[] = [];
 
-  constructor(private appState: AppStateManager, private router: Router, private accountService: AccountsService,private signalRService: SignalRService) {
-    console.log('App State : ', appState);
-  }
+  constructor(
+    private appState: AppStateManager,
+    private router: Router,
+    private accountService: AccountsService,
+    private signalRService: SignalRService
+  ) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(){
     const auth = localStorage.getItem('auth');
     this.signalRService.startConnection();
-
-    this.signalRService.messageReceived$.subscribe(message => {
+    this.signalRService.messageReceived$.subscribe((message) => {
       this.messages.push(message);
     });
     if (auth) {
       const parsedAuth = JSON.parse(auth) as AuthModel;
- 
-      try {
-      this.appState.setAuth(parsedAuth);
- 
-      if (parsedAuth.roles.includes('User')) {
 
-        this.accountService.getAccountByUserId(parsedAuth.userId).subscribe({
-        next: (account) => this.appState.setAccount(account),
-        error: (err) => console.error('Failed to fetch account:', err)
-        });
-      }
-      } catch (error) {
-        console.error('Failed to parse auth:', error);
+      let validUser = true; // Should validate token and refresh token if needs
+      console.log('Parsed Auth : ', parsedAuth);
+      if (!parsedAuth || !validUser) {
+        this.appState.setAuth(null);
+        localStorage.removeItem('auth');
+        this.router.navigateByUrl('/login');
+      } else {
+        try {
+          this.appState.setAuth(parsedAuth);
+
+          if (parsedAuth.roles.includes('Admin')) {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/user']);
+            this.accountService.getAccountByUserId(parsedAuth.userId).subscribe({
+              next: (account) => this.appState.setAccount(account),
+              error: (err) => console.error('Failed to fetch account:', err)
+            });
+          }
+        } catch (error) {
+          console.error('Failed to parse auth:', error);
+        }
       }
     }
   }
-  
 }

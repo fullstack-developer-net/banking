@@ -7,12 +7,13 @@ import { RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 // project import
-import { NavigationItem, NavigationItems } from '../navigation';
+import { LOGOUT_ITEM, NavigationItem, NavigationItems } from '../navigation';
 
 import { NavCollapseComponent } from './nav-collapse/nav-collapse.component';
 import { NavGroupComponent } from './nav-group/nav-group.component';
 import { NavItemComponent } from './nav-item/nav-item.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { AppStateManager } from 'src/app/shared/app.state-manager';
 
 @Component({
   selector: 'app-nav-content',
@@ -22,6 +23,11 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
   styleUrl: './nav-content.component.scss'
 })
 export class NavContentComponent implements OnInit {
+  currentRole: string;
+  constructor(private appState: AppStateManager) {
+    this.windowWidth = window.innerWidth;
+  }
+ 
   private location = inject(Location);
 
   // public props
@@ -35,14 +41,14 @@ export class NavContentComponent implements OnInit {
   navigations!: NavigationItem[];
   windowWidth: number;
 
-  // Constructor
-  constructor() {
-    this.navigations = NavigationItems;
-    this.windowWidth = window.innerWidth;
-  }
+ 
+  logoutItem = LOGOUT_ITEM;
 
   // Life cycle events
   ngOnInit() {
+    this.appState.user$.subscribe((user) => {
+      this.navigations = NavigationItems.filter((x) => x.role?.includes(this.appState.currentRole));
+    });    
     if (this.windowWidth < 1025) {
       setTimeout(() => {
         (document.querySelector('.coded-navbar') as HTMLDivElement).classList.add('menupos-static');
