@@ -7,9 +7,10 @@ import { AccountModel } from 'src/app/shared/models/account.model';
 import { AccountBalanceCardComponent } from 'src/app/components/account-balance-card/account-balance-card.component';
 import { BankAccountCardComponent } from 'src/app/components/bank-account-card/bank-account-card.component';
 import { LatestTransactionsCardComponent } from 'src/app/components/latest-transactions-card/latest-transactions-card.component';
-import { ListAccountCardComponent } from 'src/app/components/list-account-card/list-account-card.component';
-import { MoneyTransferComponent } from 'src/app/components/money-transfer/money-transfer.component';
 import { SummaryChartComponent } from 'src/app/components/summary-chart/summary-chart.component';
+import { MoneyTransferComponent } from 'src/app/components/money-transfer/money-transfer.component';
+ 
+
 
 @Component({
   selector: 'app-default',
@@ -45,6 +46,8 @@ export class DefaultComponent implements OnInit {
     }
   ];
   account: AccountModel | null = null;
+  showMoneyTransfer: boolean = false;
+
   constructor(private appState: AppStateManager) {}
 
   ngOnInit(): void {
@@ -52,5 +55,9 @@ export class DefaultComponent implements OnInit {
       this.account = account;
       console.log('Account : ', account);
     });
+  }
+
+  showMoneyTransferPopup(): void {
+    this.showMoneyTransfer = true;
   }
 }

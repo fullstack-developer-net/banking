@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
 using System.Text;
+using Banking.Application.Dtos;
 
 var builder = WebApplication.CreateBuilder(args);
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
@@ -92,6 +93,7 @@ builder.Services.AddCors(options =>
 });
 
 // Add the Swagger generator and the Swagger UI middlewares
+builder.Services.AddTransient<CurrentUserLogin>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddEndpointsApiExplorer();

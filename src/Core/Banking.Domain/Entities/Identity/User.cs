@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Text.Json.Serialization;
 
 namespace Banking.Core.Entities.Identity
 {
@@ -6,9 +7,12 @@ namespace Banking.Core.Entities.Identity
     {
         public string FullName { get; set; }
         public bool IsActive { get; set; }
+        
+        [JsonIgnore]
         public Account Account { get; set; }
+        
         public string TemporaryPassword { get; set; }
-        public string? RefreshToken{ get; set; }
+        public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
         public IEnumerable<Role> Roles { get; set; }
     }

@@ -6,6 +6,10 @@ import { BaseApi } from '../base-api.service';
 import { isValidEmail } from '../../utils/validation.util';
 import { AppStateManager } from '../../app.state-manager';
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { GetUser } from '../../models/GetUser.model';
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +17,8 @@ export class AuthService {
   constructor(
     private api: BaseApi,
     private appState: AppStateManager,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
   baseApiUrl = environment.apiUrl + '/api/v1';
 
@@ -38,5 +43,13 @@ export class AuthService {
     localStorage.removeItem('user');
     this.appState.setAuth(null);
     this.router.navigate(['/login']);
+  }
+
+  getUserByAccountId(accountId: number): Observable<GetUser> {
+    return this.http.get<GetUser>(`${this.baseApiUrl}/users/by-account/${accountId}`).pipe(
+      map((user: GetUser) => {
+        return user;
+      })
+    );
   }
 }

@@ -1,17 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { CoreModule } from 'src/app/core/core.module';
-import { AuthService } from 'src/app/shared/services/auth/auth.service';
-import { map } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
+import { switchMap, map } from 'rxjs';
 import { TextInputComponent } from 'src/app/core/components/text-input/text-input.component';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { CoreModule } from 'src/app/core/core.module';
 import { AppStateManager } from 'src/app/shared/app.state-manager';
-import { switchMap } from 'rxjs';
-import { AccountsService } from 'src/app/shared/services/accounts/accounts.service';
 import { AuthModel } from 'src/app/shared/models';
+import { AccountsService } from 'src/app/shared/services/accounts/accounts.service';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+ 
 import { SignalRService } from 'src/app/shared/services/signalr/signalr.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'app-login',
@@ -26,12 +26,13 @@ export class LoginComponent {
     private router: Router,
     private appState: AppStateManager,
     private accountService: AccountsService,
-    private signalrService: SignalRService
+    private signalrService: SignalRService,
   ) {
     this.appState.auth$.pipe(switchMap((auth?: AuthModel) => this.accountService.getAccountByUserId(auth?.userId))).subscribe(
       (account) => {
         this.appState.setAccount(account);
         console.log('Account : ', account);
+
       },
       (error) => {
         console.error('Error fetching account', error);
@@ -52,6 +53,7 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       return;
     }
+
     this.auth.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((result) => {
       this.router.navigate(['/']);
     });

@@ -42,4 +42,12 @@ export class AccountsService {
       })
     );
   }
+
+  public getUserIdByAccountId(accountId: number) {
+    return this.api.get<any>(`${this.baseApiUrl}/accounts/${accountId}`).pipe(
+      map((account) => {
+        return account.UserId;
+      })
+    );
+  }
 }

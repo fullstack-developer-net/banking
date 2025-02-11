@@ -1,15 +1,18 @@
-﻿using Banking.Common.Helpers;
+﻿using Banking.Application.Dtos;
+using Banking.Common.Helpers;
 using Banking.Common.Models;
 using Banking.Common.Services;
 using Banking.Core.Entities.Identity;
+using Banking.Core.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace Banking.Api.Middlewares
 {
     public class JwtMiddleware(RequestDelegate next)
     {
-        public async Task Invoke(HttpContext context, UserManager<User> userManager, TokenService tokenService, IOptions<JwtSettings> options)
+        public async Task Invoke(HttpContext context, UserManager<User> userManager, IUnitOfWork unitOfWork, TokenService tokenService, CurrentUserLogin userLogin, IOptions<JwtSettings> options)
         {
             var token = context.Request.Headers.Authorization.FirstOrDefault()?.Split(" ").Last();
             string? userId = null;
@@ -18,7 +21,13 @@ namespace Banking.Api.Middlewares
                 var principal = tokenService.GetPrincipalFromExpiredToken(token);
 
                 var user = await userManager.GetUserAsync(principal);
-
+                userLogin.Account = user?.Account;
+                userLogin.UserId = user?.Id;
+                var roles = await userManager.GetRolesAsync(user);
+                userLogin.Roles = roles.ToList();
+                userLogin.Account = await unitOfWork.AccountRepository.AsQueryable().FirstOrDefaultAsync(x => x.UserId == user.Id);
+                userId = user?.Id;
+                
                 if (user != null)
                 {
                     // attach user to context on successful jwt validation

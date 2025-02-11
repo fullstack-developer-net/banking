@@ -1,6 +1,7 @@
 ﻿using Banking.Api.Filters;
 using Banking.Application.Dtos;
 using Banking.Application.Requests.Commands;
+using Banking.Application.Requests.Queries;
 using Banking.Common.Helpers;
 using Banking.Common.Models;
 using Banking.Core.Entities.Identity;
@@ -8,6 +9,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
 
 namespace Banking.Api.Controllers
 {
@@ -101,6 +103,25 @@ namespace Banking.Api.Controllers
         public async Task<IActionResult> Exists(string email)
         {
             return Ok(await userManager.FindByEmailAsync(email) != null);
+        }
+
+        [HttpGet("by-account/{accountId}")]
+        public async Task<IActionResult> GetUserByAccountId(long accountId)
+        {
+            var user = await mediator.Send(new GetUserByAccountIdQuery(accountId));
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userDto = new GetUserDto
+            {
+                FullName = user.FullName,
+                Email = user.Email,
+                IsActive = user.IsActive
+            };
+
+            return Ok(userDto);
         }
     }
 }

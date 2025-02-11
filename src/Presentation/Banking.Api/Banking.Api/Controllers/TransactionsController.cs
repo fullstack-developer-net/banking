@@ -1,11 +1,12 @@
-﻿using Banking.Application.Requests.Commands;
+﻿using Banking.Application.Dtos;
+using Banking.Application.Requests.Commands;
 using Banking.Application.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Banking.Api.Controllers
 {
-    public class TransactionsController(IMediator mediator) : BaseApiController
+    public class TransactionsController(IMediator mediator, CurrentUserLogin userLogin) : BaseApiController
     {
         [HttpGet("list")]
         public async Task<IActionResult> GetTransactions(
@@ -18,9 +19,13 @@ namespace Banking.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTransaction([FromBody] ProcessTransactionCommand command)
+        public async Task<IActionResult> CreateTransaction([FromBody] TransferDto request)
         {
-            var result = await mediator.Send(command);
+            var currentAccountId = userLogin.Account?.AccountId??0;
+            if (currentAccountId <= 0) throw new Exception("Invalid account");
+            var result =
+                await mediator.Send(
+                    new ProcessTransactionCommand(currentAccountId, request.ToAccountId, request.Amount));
             return Ok(result);
         }
 
@@ -32,6 +37,7 @@ namespace Banking.Api.Controllers
             {
                 return NotFound();
             }
+
             return Ok(transaction);
         }
     }

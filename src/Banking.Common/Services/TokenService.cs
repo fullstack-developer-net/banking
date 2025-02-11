@@ -11,11 +11,11 @@ using System.Text;
 namespace Banking.Common.Services;
 public class TokenService(IOptions<JwtSettings> options)
 {
-    private readonly JwtSettings jwtSettings = options.Value;
+    private readonly JwtSettings _jwtSettings = options.Value;
 
     public string GenerateJwtToken(User user)
     {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var claims = new[]
@@ -25,10 +25,10 @@ public class TokenService(IOptions<JwtSettings> options)
         };
 
         var token = new JwtSecurityToken(
-           jwtSettings.Issuer,
-           jwtSettings.Audience,
+           _jwtSettings.Issuer,
+           _jwtSettings.Audience,
             claims,
-            expires: DateTime.Now.AddMinutes(jwtSettings.TokenExpiryInMinutes),
+            expires: DateTime.Now.AddMinutes(_jwtSettings.TokenExpiryInMinutes),
             signingCredentials: creds);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
@@ -49,10 +49,10 @@ public class TokenService(IOptions<JwtSettings> options)
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey)),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey)),
             ValidateLifetime = false, // We don't care about token expiration
-            ValidIssuer = jwtSettings.Issuer,
-            ValidAudience = jwtSettings.Audience,
+            ValidIssuer = _jwtSettings.Issuer,
+            ValidAudience = _jwtSettings.Audience,
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();

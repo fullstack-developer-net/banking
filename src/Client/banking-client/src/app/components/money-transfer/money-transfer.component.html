@@ -1,14 +1,41 @@
-<div class="col-md-6 col-xl-12">
-  <div class="mb-3">
-    <label class="form-label">Static</label>
-    <div class="form-control-plaintext">Input value</div>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Text</label>
-    <input type="text" class="form-control" name="example-text-input" placeholder="Input placeholder" />
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Password</label>
-    <input type="text" class="form-control" name="example-password-input" placeholder="Input placeholder" />
+<div class="modal" tabindex="-1" role="dialog" [hidden]="!show">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Transfer Money</h5>
+        <button type="button" class="close" (click)="close()" aria-label="Close" style="float: right; margin-left: auto;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="createTransaction()">
+          <div class="mb-3">
+            <label class="form-label">Recipient's ID</label>
+            <input type="text" class="form-control" name="recipient-id" [(ngModel)]="recipientId" 
+                   (ngModelChange)="getUserInfoByAccountId()" 
+                   placeholder="Enter recipient's ID" required />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Recipient's Username</label>
+            <input type="text" class="form-control" name="recipient-username" [(ngModel)]="recipientUsername" 
+                   placeholder="Enter recipient's username" required readonly />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Amount</label>
+            <input type="number" class="form-control" name="amount" [(ngModel)]="amount" placeholder="Enter amount" required />
+          </div>
+
+          <button type="submit" class="btn btn-primary" (click)="createTransaction()">Transfer</button>
+        </form>
+        <div *ngIf="transactionSuccess" class="alert alert-success">Giao dịch thành công!</div>
+        <div *ngIf="transactionError" class="alert alert-danger">Có lỗi xảy ra trong quá trình tạo giao dịch.</div>
+        <!-- Sửa lỗi và thêm vào cuối file money-transfer.component.html -->
+        <app-confirm-modal 
+        [show]="showConfirmModal" 
+        (confirm)="confirmTransaction()" 
+        (cancel)="showConfirmModal = false">
+      </app-confirm-modal>
+      </div>
+    </div>
   </div>
 </div>
