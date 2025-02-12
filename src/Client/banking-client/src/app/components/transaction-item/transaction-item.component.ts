@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { TransactionModel } from 'src/app/shared/models/transaction.model';
 
 @Component({
   selector: 'app-transaction-item',
@@ -6,23 +7,16 @@ import { Component, Input } from '@angular/core';
   styleUrl: './transaction-item.component.scss'
 })
 export class TransactionItemComponent {
-  @Input() transactionId: string = '';
-  @Input() fromAccountId: string = '';
-  @Input() toAccountId: string = '';
-  @Input() note: string = '';
-  @Input() status: string = '';
-  @Input() amount: number = 0;
-  @Input() transactionTime: Date;
-
+  @Input() value: TransactionModel;
   get formattedAmount(): string {
-    return this.amount.toLocaleString('en-US', {
+    return this.value.amount.toLocaleString('en-US', {
       style: 'currency',
       currency: 'USD'
     });
   }
 
   get formattedDate(): string {
-    return this.transactionTime.toLocaleDateString('en-US', {
+    return this.value.transactionTime.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
       year: 'numeric'

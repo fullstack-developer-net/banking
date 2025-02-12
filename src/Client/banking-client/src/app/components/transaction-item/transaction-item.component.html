@@ -2,28 +2,28 @@
   <div class="d-flex justify-content-between align-items-start">
     <div class="flex-grow-1">
       <div class="d-flex justify-content-between mb-2">
-        <small class="text-muted">#{{ transactionId }}</small>
-        <span class="transaction-status" [class]="status.toLowerCase()">
-          {{ status }}
+        <small class="text-muted">#{{ value.transactionId }}</small>
+        <span class="transaction-status" [class]="value.status.toLowerCase()">
+          {{ value.status }}
         </span>
       </div>
       <div class="mb-1">
-        <strong>From Account ID:</strong> {{ fromAccountId }}
+        <strong>From Account:</strong> {{ value.fromAccount?.fullName }}
         <br>
-        <strong>To Account ID:</strong> {{ toAccountId }}
+        <strong>To Account:</strong> {{ value.toAccount?.fullName }}
       </div>
       <div class="text-muted small">
-        {{ transactionTime}}
+        {{ value.transactionTime}}
       </div>
-      @if (note) {
+      @if (value.note) {
         <div class="text-muted small mt-1">
-          <em>Note: {{ note }}</em>
+          <em>Note: {{ value.note }}</em>
         </div>
       }
     </div>
     <div class="ms-3">
-      <strong class="fs-5" [class]="{'text-success': amount > 0, 'text-danger': amount < 0}">
-        {{ amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}
+      <strong class="fs-5" [class]="{'text-success': value.amount > 0, 'text-danger': value.amount < 0}">
+        {{ value.amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) }}
       </strong>
     </div>
   </div>

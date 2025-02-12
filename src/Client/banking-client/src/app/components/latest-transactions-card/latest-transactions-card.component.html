@@ -22,13 +22,7 @@
       @if (!isLoading && !error && ListGroup.length > 0) {
         @for (item of ListGroup; track item.transactionId) {
           <app-transaction-item
-            [transactionId]="item.transactionId"
-            [fromAccountId]="item.fromAccountId"
-            [toAccountId]="item.toAccountId"
-            [status]="item.status"
-            [note]="item.note"
-            [amount]="item.amount"
-            [transactionTime]="item.transactionTime">
+            [value]="item">
           </app-transaction-item>
         }
       }

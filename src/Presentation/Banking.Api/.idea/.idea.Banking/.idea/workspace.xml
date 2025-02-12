@@ -12,20 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CurrentLoginUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/app.state-manager.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/app.state-manager.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/transactions/transactions.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/transactions/transactions.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/latest-transactions-card/latest-transactions-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/latest-transactions-card/latest-transactions-card.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/transaction.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/transaction.model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/AccountDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/AccountDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CurrentUserLogin.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/TransactionMessage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/TransactionMessage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/UserDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/UserDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/TestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/TestController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,6 +127,7 @@
       <option name="presentableId" value="Default" />
       <updated>1739287160710</updated>
       <workItem from="1739287161858" duration="2093000" />
+      <workItem from="1739346754047" duration="1145000" />
     </task>
     <servers />
   </component>
@@ -150,19 +142,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs</url>
-          <line>24</line>
-          <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
-            <startOffsets>
-              <option value="961" />
-            </startOffsets>
-            <endOffsets>
-              <option value="962" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs</url>
           <line>16</line>
           <properties documentPath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" containingFunctionPresentation="Method 'GetTransactions'">
@@ -176,40 +155,14 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs</url>
-          <line>22</line>
-          <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
-            <startOffsets>
-              <option value="857" />
-            </startOffsets>
-            <endOffsets>
-              <option value="910" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs</url>
-          <line>17</line>
-          <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
-            <startOffsets>
-              <option value="626" />
-            </startOffsets>
-            <endOffsets>
-              <option value="712" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs</url>
           <line>34</line>
           <properties documentPath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" containingFunctionPresentation="Method 'GetAccounts'">
             <startOffsets>
-              <option value="1180" />
+              <option value="1224" />
             </startOffsets>
             <endOffsets>
-              <option value="1229" />
+              <option value="1237" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="9" />
