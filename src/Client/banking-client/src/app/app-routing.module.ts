@@ -9,7 +9,10 @@ import { HotToastService } from '@ngxpert/hot-toast';
 import { RoleGuard } from './shared/guard/role.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth/auth.interceptor';
- 
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgToastModule, NgToastService } from 'ng-angular-popup';
+
 const routes: Routes = [
   {
     path: '',
@@ -17,7 +20,7 @@ const routes: Routes = [
     children: [
       {
         path: 'user',
-        loadComponent: () => import('./pages/dashboard/default/default.component').then((m) => m.DefaultComponent),
+        loadComponent: () => import('./pages/dashboard/user-dashboard/user-dashboard.component').then((m) => m.UserDashboardComponent),
         data: { roles: ['User'] }
       },
       {
@@ -41,18 +44,19 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), SharedModule],
+  declarations: [],
+  imports: [RouterModule.forRoot(routes), SharedModule, MatDialogModule, BrowserAnimationsModule, NgToastModule],
   exports: [RouterModule],
   providers: [
     AppStateManager,
     SignalRService,
-    HotToastService,
+    MatDialog,
     RoleGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
   ]
 })
 export class AppRoutingModule {}

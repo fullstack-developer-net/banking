@@ -12,11 +12,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/latest-transactions-card/latest-transactions-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/latest-transactions-card/latest-transactions-card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/transaction.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/transaction.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/AccountDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/AccountDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/TestController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/TestController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/money-transfer/money-transfer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/money-transfer/money-transfer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/pages/dashboard/default/default.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/pages/dashboard/default/default.component.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/pages/dashboard/default/default.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +57,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Debug",
+    ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Run",
     ".NET Launch Settings Profile.Banking.Api: Production.executor": "Run",
     ".NET Launch Settings Profile.Banking.Api: https.executor": "Run",
     "RunOnceActivity.git.unshallow": "true",
@@ -127,7 +132,7 @@
       <option name="presentableId" value="Default" />
       <updated>1739287160710</updated>
       <workItem from="1739287161858" duration="2093000" />
-      <workItem from="1739346754047" duration="1145000" />
+      <workItem from="1739346754047" duration="1866000" />
     </task>
     <servers />
   </component>

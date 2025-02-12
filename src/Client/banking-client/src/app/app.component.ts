@@ -5,18 +5,20 @@ import { AppStateManager } from './shared/app.state-manager';
 import { AccountsService } from './shared/services/accounts/accounts.service';
 import { AuthModel } from './shared/models';
 import { SignalRService } from './shared/services/signalr/signalr.service';
+import { NgToastModule } from 'ng-angular-popup';
+import { NgToastService, ToasterPosition, ToastType } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [RouterOutlet, SpinnerComponent],
+  imports: [RouterOutlet, SpinnerComponent, NgToastModule],
   providers: []
 })
 export class AppComponent {
   title = 'Simple Banking App';
   public messages: string[] = [];
-
+  ToasterPosition = ToasterPosition;
   constructor(
     private appState: AppStateManager,
     private router: Router,

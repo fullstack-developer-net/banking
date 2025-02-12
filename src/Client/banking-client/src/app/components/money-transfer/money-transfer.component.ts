@@ -7,12 +7,13 @@ import { AuthService } from '../../shared/services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { AppStateManager } from 'src/app/shared/app.state-manager';
+import { NgToastModule, NgToastService } from 'ng-angular-popup';
 
 
 @Component({
   selector: 'app-money-transfer',
   standalone: true,
-  imports: [CommonModule, FormsModule, ConfirmModalComponent],
+  imports: [CommonModule, FormsModule, ConfirmModalComponent, NgToastModule],
   templateUrl: './money-transfer.component.html',
   styleUrl: './money-transfer.component.scss'
 })
@@ -31,7 +32,8 @@ export class MoneyTransferComponent implements OnInit {
     private transactionsService: TransactionsService,
     private accountsService: AccountsService,
     private authService: AuthService,
-    private appState: AppStateManager
+    private appState: AppStateManager,
+    private toast: NgToastService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +42,8 @@ export class MoneyTransferComponent implements OnInit {
 
   close() {
     this.closeModal.emit();
+    this.show = false;
+
   }
 
   createTransaction() {
@@ -49,7 +53,9 @@ export class MoneyTransferComponent implements OnInit {
 
   confirmTransaction() {
     if (this.amount <= 0) {
-      this.transactionError = true;
+      this.toast.danger('Amount must be greater than 0');
+      this.showConfirmModal = false;
+
       return;
     }
 
@@ -61,13 +67,13 @@ export class MoneyTransferComponent implements OnInit {
     this.transactionsService.createTransaction(transaction).subscribe({
       next: (response) => {
         console.log('Transaction created successfully:', response);
-        this.transactionSuccess = true;
+         this.toast.success('Transaction created successfully');
         this.close();
       },
       error: (error) => {
         console.error('Error creating transaction', error);
-        this.transactionError = true;
-      }
+        this.toast.danger('Failed to create transaction');
+       }
     });
   }
 

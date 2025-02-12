@@ -10,8 +10,9 @@ import { LatestTransactionsCardComponent } from 'src/app/components/latest-trans
 import { SummaryChartComponent } from 'src/app/components/summary-chart/summary-chart.component';
 import { MoneyTransferComponent } from 'src/app/components/money-transfer/money-transfer.component';
 import { Router } from '@angular/router';
- 
-
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogService } from '@ngneat/dialog';
+import { NgToastModule, NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-default',
@@ -21,12 +22,16 @@ import { Router } from '@angular/router';
     LatestTransactionsCardComponent,
     AccountBalanceCardComponent,
     SummaryChartComponent,
-    MoneyTransferComponent
+    MoneyTransferComponent,
+    NgToastModule,
+    MatDialogModule
   ],
-  templateUrl: './default.component.html',
-  styleUrls: ['./default.component.scss']
+
+  templateUrl: './user-dashboard.component.html',
+  styleUrls: ['./user-dashboard.component.scss']
 })
-export class DefaultComponent implements OnInit {
+export class UserDashboardComponent implements OnInit {
+
   // public method
 
   profileCard = [
@@ -49,15 +54,24 @@ export class DefaultComponent implements OnInit {
   account: AccountModel | null = null;
   showMoneyTransfer: boolean = false;
 
-  constructor(private appState: AppStateManager, private router: Router) {}
+  constructor(
+    private appState: AppStateManager,
+    private router: Router,
+    private toast: NgToastService,
+  ) {}
 
   ngOnInit(): void {
-    if(this.appState.currentAuth === null) {
+    if (this.appState.currentAuth === null) {
       this.router.navigateByUrl('/login');
     }
   }
 
   showMoneyTransferPopup(): void {
-    this.showMoneyTransfer = true;
+     this.showMoneyTransfer = true;
+ 
   }
+  onShowMoneyTransferingClosed() {
+    this.showMoneyTransfer = false;
+  }
+  onButtonCliked() {}
 }
