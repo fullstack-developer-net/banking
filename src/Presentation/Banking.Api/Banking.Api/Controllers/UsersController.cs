@@ -9,7 +9,6 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System.Text.Json.Serialization;
 
 namespace Banking.Api.Controllers
 {
@@ -20,6 +19,7 @@ namespace Banking.Api.Controllers
         UserManager<User> userManager
          ) : BaseApiController
     {
+        [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
