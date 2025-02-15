@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Persistence
 {
-    public class BankingDbContext(DbContextOptions<BankingDbContext> options) : IdentityDbContext<User, Role, string>(options)
+    public class BankingDbContext(DbContextOptions<BankingDbContext> options)
+        : IdentityDbContext<User, Role, string>(options)
     {
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
@@ -17,7 +18,6 @@ namespace Banking.Persistence
             base.OnModelCreating(builder);
             SetupEntityRelationships(builder);
             SeedData(builder);
-
         }
 
         private static void SeedData(ModelBuilder builder)
@@ -30,7 +30,7 @@ namespace Banking.Persistence
 
         private static void SetupEntityRelationships(ModelBuilder builder)
         {
-            builder.Entity<User>().ToTable("Users").Property(x=>x.Id).ValueGeneratedOnAdd();
+            builder.Entity<User>().ToTable("Users").Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Entity<Role>().ToTable("Roles");
             builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
             builder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
@@ -56,12 +56,11 @@ namespace Banking.Persistence
             builder.Entity<Account>()
                 .Property(t => t.LockedBalance)
                 .HasPrecision(18, 2);
-            
+
             builder.Entity<Transaction>()
                 .Property(t => t.Amount)
                 .HasPrecision(18, 2);
-
-
+            builder.Entity<Transaction>().Property(x => x.TransactionId).ValueGeneratedOnAdd();
             builder.Entity<Transaction>()
                 .HasOne(t => t.FromAccount)
                 .WithMany()
@@ -83,12 +82,8 @@ namespace Banking.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-
             var result = await base.SaveChangesAsync(cancellationToken);
             return result;
         }
-
-
-
     }
 }

@@ -12,9 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +52,8 @@
     ".NET Launch Settings Profile.Banking.Api: Production.executor": "Run",
     ".NET Launch Settings Profile.Banking.Api: https.executor": "Run",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "develop-7",
+    "XThreadsFramesViewSplitterKey": "0.3170103",
+    "git-widget-placeholder": "develop",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -153,30 +152,69 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs</url>
-          <line>34</line>
-          <properties documentPath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" containingFunctionPresentation="Method 'GetAccounts'">
+          <url>file://$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessTransactionCommand.cs</url>
+          <line>13</line>
+          <properties documentPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessTransactionCommand.cs" containingFunctionPresentation="Method 'Handle'">
             <startOffsets>
-              <option value="1224" />
+              <option value="661" />
             </startOffsets>
             <endOffsets>
-              <option value="1237" />
+              <option value="662" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="9" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs</url>
-          <line>35</line>
-          <properties documentPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" containingFunctionPresentation="Method 'Handle'">
+          <url>file://$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs</url>
+          <line>22</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" containingFunctionPresentation="Method 'CreateTransaction'">
             <startOffsets>
-              <option value="1637" />
+              <option value="820" />
             </startOffsets>
             <endOffsets>
-              <option value="1686" />
+              <option value="821" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="10" />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/ExceptionHandlerMiddleware.cs</url>
+          <line>25</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/ExceptionHandlerMiddleware.cs" containingFunctionPresentation="Method 'HandleExceptionAsync'">
+            <startOffsets>
+              <option value="875" />
+            </startOffsets>
+            <endOffsets>
+              <option value="876" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs</url>
+          <line>22</line>
+          <properties documentPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" containingFunctionPresentation="Method 'Handle'">
+            <startOffsets>
+              <option value="841" />
+            </startOffsets>
+            <endOffsets>
+              <option value="897" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs</url>
+          <line>24</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
+            <startOffsets>
+              <option value="961" />
+            </startOffsets>
+            <endOffsets>
+              <option value="962" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
