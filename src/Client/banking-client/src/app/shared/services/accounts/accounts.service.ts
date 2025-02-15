@@ -3,7 +3,6 @@ import { BaseApi } from '../base-api.service';
 import { map, Observable } from 'rxjs';
 import { AccountModel } from '../../models/account.model';
 import { environment } from 'src/environments/environment';
-import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +10,6 @@ import { HttpHeaders } from '@angular/common/http';
 export class AccountsService {
   constructor(private api: BaseApi) {}
   baseApiUrl = environment.apiUrl + '/api/v1';
-  private apiKey = environment.apiKey;
-
-  private getHeaders(): HttpHeaders {
-    return new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.apiKey}`,
-      'X-API-Key': this.apiKey
-    });
-  }
 
   public getAccounts() {
     return this.api.get<any[]>(`${this.baseApiUrl}/accounts`);
@@ -31,11 +21,9 @@ export class AccountsService {
 
   public createAccount(account: any): Observable<AccountModel> {
     return this.api.post<AccountModel>(`${this.baseApiUrl}/accounts`, {
-      fullName: account.fullName, 
-      email: account.email,     
+      fullName: account.fullName,
+      email: account.email,
       initialBalance: account.initialBalance
-    }, {
-      headers: this.getHeaders()
     });
   }
 
