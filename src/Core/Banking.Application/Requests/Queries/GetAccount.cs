@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Banking.Application.Requests.Queries
 {
     public record GetAccounts(int PageNumber = 1, int PageSize = 10, string? SearchTerm = null, bool? IsActive = null)
-    : IRequest<PaginatedResult<AccountDto>>;
+        : IRequest<PaginatedResult<AccountDto>>;
 
     public class GetAccountsQueryHandler(IUnitOfWork unitOfWork)
         : IRequestHandler<GetAccounts, PaginatedResult<AccountDto>>

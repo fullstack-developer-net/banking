@@ -47,6 +47,7 @@ namespace Banking.Application.Requests.Queries
             var totalCount = await query.CountAsync(cancellationToken);
 
             var transactions = await query
+                .OrderByDescending(x => x.TransactionTime)
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(a => new TransactionMessage

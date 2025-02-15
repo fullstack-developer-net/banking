@@ -4,7 +4,9 @@ using Banking.Common.Constants;
 using Banking.Common.Helpers;
 using Banking.Core.Interfaces;
 using Banking.Core.Interfaces.Services;
+using Banking.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
@@ -25,7 +27,12 @@ namespace Banking.Application.Requests.Commands
             using var scope = serviceProvider.CreateScope();
             var webSocketService = scope.ServiceProvider.GetRequiredService<IWebSocketService>();
             var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-            var transaction = await unitOfWork.TransactionRepository.GetByIdAsync(request.TransactionId);
+            var context = scope.ServiceProvider.GetRequiredService<BankingDbContext>();
+            var transaction = context.Transactions
+                .Include(x => x.FromAccount).ThenInclude(x => x.User)
+                .Include(x => x.ToAccount).ThenInclude(x => x.User)
+                .FirstOrDefault(x => x.TransactionId == request.TransactionId);
+
             var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.FromAccountId);
             var toAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.ToAccountId);
 
@@ -41,7 +48,7 @@ namespace Banking.Application.Requests.Commands
                 toAccount.Balance = toAccountBalance + transactionAmount;
                 await unitOfWork.AccountRepository.UpdateAsync(toAccount);
                 await unitOfWork.AccountRepository.UpdateAsync(fromAccount);
-                await unitOfWork.TransactionRepository.UpdateAsync(transaction);
+                context.Update(transaction);
                 await unitOfWork.CompleteAsync();
                 eventData.Type = EventTypes.TransactionCompleted;
                 eventData.Message = "Transaction completed successfully.";
@@ -61,9 +68,32 @@ namespace Banking.Application.Requests.Commands
                 eventData.Type = EventTypes.TransactionFailed;
                 eventData.Message = "Transaction failed.";
             }
-
-            eventData.Data = transaction;
-            await webSocketService.SendToAllAsync("event", JsonConvert.SerializeObject(eventData));
+            
+            eventData.Data = new TransactionMessage
+            {
+                TransactionId = transaction.TransactionId,
+                FromAccountId = transaction.FromAccountId,
+                ToAccountId = transaction.ToAccountId,
+                Amount = transaction.Amount,
+                FromAccount = new AccountDto
+                {
+                    AccountId = transaction.FromAccount!.AccountId,
+                    AccountNumber = transaction.FromAccount.AccountNumber,
+                    FullName = transaction.FromAccount.User.FullName,
+                    Email = transaction.FromAccount.User.Email ?? string.Empty
+                },
+                ToAccount = new AccountDto
+                {
+                    AccountId = transaction.ToAccount!.AccountId,
+                    AccountNumber = transaction.ToAccount.AccountNumber,
+                    FullName = transaction.ToAccount.User.FullName,
+                    Email = transaction.ToAccount.User.Email ?? string.Empty
+                },
+                Status = transaction.Status,
+                Note = transaction.Note,
+                TransactionTime = transaction.TransactionTime,
+            };
+            await webSocketService.SendToAllAsync("event", eventData);
 
             Console.WriteLine($"Transaction completed: {transaction.TransactionId}");
             return eventData.Type == EventTypes.TransactionCompleted;

@@ -108,9 +108,10 @@ export class SignalRService {
     }
   }
   onTransactionCompleted(eventData: EventData) {
+    console.log('Transaction completed:', eventData);
     const data = eventData.data as TransactionModel;
     if (data.toAccountId === this.appState.currentAccount?.accountId) {
-      this.toast.info('Money transfering', `${data.fromAccount?.fullName} transfered to your account: $${data.amount}`,5000);
+      this.toast.info('Transaction', `${data.fromAccount?.fullName} transfered to you: $${data.amount}`,5000);
     }
   }
 
@@ -132,8 +133,7 @@ export class SignalRService {
   onTransactionCreated(eventData: EventData) {
     const data = eventData.data as TransactionModel;
     if (data.fromAccountId === this.appState.currentAccount?.accountId) {
-      this.refreshAccount();
-      this.toast.info('Money transfering', `You transfered to ${data.toAccount?.fullName}: $${data.amount}`,5000);
+      this.toast.info('Transaction', `You transfered to ${data.toAccount?.fullName}: $${data.amount}`,5000);
     }
   }
 }

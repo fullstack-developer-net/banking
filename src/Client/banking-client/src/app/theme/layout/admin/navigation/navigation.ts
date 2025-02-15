@@ -51,7 +51,28 @@ export const NavigationItems: NavigationItem[] = [
         icon: 'ti ti-dashboard',
         breadcrumbs: false,
         role: ['Admin']
+      },
+      {
+        id: 'user-detail',
+        title: 'User details',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/user-detail',
+        icon: 'ti ti-dashboard',
+        breadcrumbs: false,
+        role: ['Admin','User']
+      },
+      {
+        id: 'transactions',
+        title: 'Transactions',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/transactions',
+        icon: 'ti ti-dashboard',
+        breadcrumbs: false,
+        role: ['Admin','User']
       }
+ 
     ]
   },
   {
