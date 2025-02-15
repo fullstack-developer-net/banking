@@ -11,6 +11,7 @@ import { SummaryChartComponent } from 'src/app/components/summary-chart/summary-
 import { MoneyTransferComponent } from 'src/app/components/money-transfer/money-transfer.component';
 import { Router } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AccountsService } from 'src/app/shared/services/accounts/accounts.service';
 
 @Component({
   selector: 'app-default',
@@ -28,9 +29,9 @@ import { MatDialogModule } from '@angular/material/dialog';
   styleUrls: ['./user-dashboard.component.scss']
 })
 export class UserDashboardComponent implements OnInit {
-
+  income: number = 0;
+  expenditure: number = 0;
   // public method
-
   profileCard = [
     {
       style: 'bg-primary-dark text-white',
@@ -54,12 +55,14 @@ export class UserDashboardComponent implements OnInit {
   constructor(
     private appState: AppStateManager,
     private router: Router,
+    private accountsService: AccountsService
   ) {}
 
   ngOnInit(): void {
     if (this.appState.currentAuth === null) {
       this.router.navigateByUrl('/login');
     }
+    this.loadStatistical();
   }
 
   showMoneyTransferPopup(): void {
@@ -70,4 +73,18 @@ export class UserDashboardComponent implements OnInit {
     this.showMoneyTransfer = false;
   }
   onButtonCliked() {}
+
+  loadStatistical(): void {
+    this.accountsService.getStatistical()
+      .subscribe({
+        next: (data: any) => {
+          this.income = data.SpendingThisMonth;
+          this.expenditure = data.ReceivingThisMonth;
+          console.info('Loading statistical data:', data);
+        },
+        error: (error) => {
+          console.error('Error fetching statistical data:', error);
+        }
+      });
+  }
 }

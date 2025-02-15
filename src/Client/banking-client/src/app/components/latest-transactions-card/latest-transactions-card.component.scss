@@ -1,22 +1,18 @@
-.card {
-  padding: 20px;
-  
-  .search-container {
-    .search-input {
-      border-radius: 4px;
-      border: 1px solid #dee2e6;
-      
-      &:focus {
-        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-        border-color: #80bdff;
-      }
+.card-container {
+  height: auto;
+  min-height: 200px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    
+    h2 {
+      margin: 0;
+      color: #333;
     }
   }
-}
-
-.transaction-item {
-  border: solid 1px #dee2e6 !important;
-  border-radius: 5px;
 }
 
 .loading-state, .error-state, .no-results {
@@ -29,18 +25,13 @@
   color: #dc3545;
 }
 
-.pagination-container {
-  .pagination-info {
-    color: #6c757d;
-    font-size: 0.875rem;
-  }
-  
-  .btn {
-    min-width: 100px;
-    
-    &:disabled {
-      cursor: not-allowed;
-    }
+.list-group-item {
+  border: solid 1px #dee2e6;
+  border-radius: 5px;
+  margin-bottom: 8px;
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
@@ -48,3 +39,9 @@
 .completed { color: #28a745; }
 .pending { color: #ffc107; }
 .failed { color: #dc3545; }
+
+.card-footer {
+  background-color: transparent;
+  border-top: none;
+  padding-top: 0;
+}

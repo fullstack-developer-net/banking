@@ -44,9 +44,15 @@
         </colgroup>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Balance</th>
+            <th (click)="sortData('accountNumber')" class="sortable">
+              ID {{ getSortIcon('accountNumber') }}
+            </th>
+            <th (click)="sortData('fullName')" class="sortable">
+              Name {{ getSortIcon('fullName') }}
+            </th>
+            <th (click)="sortData('balance')" class="sortable">
+              Balance {{ getSortIcon('balance') }}
+            </th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -55,7 +61,9 @@
             <tr app-account-item
               [fullName]="item.fullName"
               [accountNumber]="item.accountNumber"
-              [balance]="item.balance">
+              [balance]="item.balance"
+              [accountId]="item.accountId"
+              (viewDetails)="navigateToAccountDetail($event)">
             </tr>
           }
         </tbody>

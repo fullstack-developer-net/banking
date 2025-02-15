@@ -4,6 +4,7 @@ import { LatestTransactionsCardComponent } from './latest-transactions-card.comp
 import { TransactionsService } from 'src/app/shared/services/transactions/transactions.service';
 import { of } from 'rxjs';
 import { TransactionItemComponent } from '../transaction-item/transaction-item.component';
+import { Router } from '@angular/router';
 
 describe('LatestTransactionsCardComponent', () => {
   let component: LatestTransactionsCardComponent;
@@ -27,7 +28,8 @@ describe('LatestTransactionsCardComponent', () => {
         FormsModule
       ],
       providers: [
-        { provide: TransactionsService, useValue: mockTransactionsService }
+        { provide: TransactionsService, useValue: mockTransactionsService },
+        { provide: Router, useValue: { navigate: jasmine.createSpy('navigate') } }
       ]
     }).compileComponents();
 
@@ -63,5 +65,23 @@ describe('LatestTransactionsCardComponent', () => {
 
     expect(component.currentPage).toBe(1);
     expect(mockTransactionsService.getTransactions).toHaveBeenCalled();
+  });
+
+  it('should load only 2 latest transactions', () => {
+    component.loadLatestTransactions();
+
+    expect(mockTransactionsService.getTransactions).toHaveBeenCalledWith({
+      pageNumber: 1,
+      pageSize: 2,
+      searchTerm: '',
+      sortBy: 'transactionTime',
+      sortDirection: 'desc'
+    });
+  });
+
+  it('should navigate to transactions page when view all clicked', () => {
+    const routerSpy = spyOn(TestBed.inject(Router), 'navigate');
+    component.viewAllTransactions();
+    expect(routerSpy).toHaveBeenCalledWith(['/transactions']);
   });
 });

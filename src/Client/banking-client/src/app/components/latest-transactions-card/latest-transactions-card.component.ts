@@ -4,6 +4,7 @@ import { TransactionsService } from 'src/app/shared/services/transactions/transa
 import { TransactionModel } from 'src/app/shared/models/transaction.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 interface PaginatedResponse<T> {
   items: T[];
@@ -28,49 +29,41 @@ export class LatestTransactionsCardComponent {
 
   // Pagination
   currentPage: number = 1;
-  pageSize: number = 5;
+  pageSize: number = 3;
   totalItems: number = 0;
   totalPages: number = 0;
 
-  constructor(private transactionService: TransactionsService) {}
+  constructor(
+    private transactionService: TransactionsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.loadTransactions();
+    this.loadLatestTransactions();
   }
 
-  loadTransactions(): void {
+  loadLatestTransactions(): void {
     this.isLoading = true;
     this.error = null;
 
     this.transactionService.getTransactions({
-      pageNumber: this.currentPage,
+      pageNumber: 1,  // Always get first page
       pageSize: this.pageSize,
-      searchTerm: this.searchTerm
-    }).subscribe(
-      (response) => {
+      searchTerm: '',
+    }).subscribe({
+      next: (response) => {
         this.ListGroup = response.items;
-        this.totalItems = response.totalCount;
-        this.totalPages = response.totalPages;
         this.isLoading = false;
       },
-      (error) => {
-        console.error('Error fetching transactions:', error);
-        this.error = 'Failed to load transactions. Please try again later.';
+      error: (error) => {
+        console.error('Error fetching latest transactions:', error);
+        this.error = 'Failed to load transactions';
         this.isLoading = false;
       }
-    );
+    });
   }
 
-  onSearch(event: Event): void {
-    this.searchTerm = (event.target as HTMLInputElement).value;
-    this.currentPage = 1; // Reset to first page when searching
-    this.loadTransactions();
-  }
-
-  changePage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.loadTransactions();
-    }
+  viewAllTransactions(): void {
+    this.router.navigate(['/transactions']);
   }
 }

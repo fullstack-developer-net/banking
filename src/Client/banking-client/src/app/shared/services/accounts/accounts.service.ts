@@ -58,4 +58,8 @@ export class AccountsService {
       })
     );
   }
+
+  public getStatistical() {
+    return this.api.get<any[]>(`${this.baseApiUrl}/statistical`);
+  }
 }

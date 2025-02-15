@@ -1,0 +1,98 @@
+<div class="transaction-list-container">
+  <div class="header">
+    <h1>Transaction List</h1>
+    <div class="search-container">
+      <input 
+        type="text" 
+        class="search-input" 
+        placeholder="Search transactions..."
+        [(ngModel)]="searchTerm"
+        (input)="onSearch($event)">
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <div class="loading-state">Loading transactions...</div>
+  }
+
+  @if (error) {
+    <div class="error-state">{{ error }}</div>
+  }
+
+  @if (!isLoading && !error) {
+    <div class="table-responsive">
+      <table class="transaction-table">
+        <colgroup>
+          <col style="width: 25%"> <!-- ID -->
+          <col style="width: 15%"> <!-- Date -->
+          <col style="width: 20%"> <!-- From -->
+          <col style="width: 20%"> <!-- To -->
+          <col style="width: 10%"> <!-- Amount -->
+          <col style="width: 10%"> <!-- Status -->
+        </colgroup>
+        <thead>
+          <tr>
+            <th (click)="sortData('transactionId')" class="sortable">
+              ID <span class="sort-icon">{{ getSortIcon('transactionId') }}</span>
+            </th>
+            <th (click)="sortData('transactionTime')" class="sortable">
+              Date <span class="sort-icon">{{ getSortIcon('transactionTime') }}</span>
+            </th>
+            <th (click)="sortData('fromAccount')" class="sortable">
+              From Account <span class="sort-icon">{{ getSortIcon('fromAccount') }}</span>
+            </th>
+            <th (click)="sortData('toAccount')" class="sortable">
+              To Account <span class="sort-icon">{{ getSortIcon('toAccount') }}</span>
+            </th>
+            <th (click)="sortData('amount')" class="sortable">
+              Amount <span class="sort-icon">{{ getSortIcon('amount') }}</span>
+            </th>
+            <th (click)="sortData('status')" class="sortable">
+              Status <span class="sort-icon">{{ getSortIcon('status') }}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (transaction of transactions; track transaction.transactionId) {
+            <tr>
+              <td>{{ transaction.transactionId }}</td>
+              <td>{{ transaction.transactionTime | date:'medium' }}</td>
+              <td>{{ transaction.fromAccount?.fullName }}</td>
+              <td>{{ transaction.toAccount?.fullName }}</td>
+              <td [class.text-success]="transaction.amount > 0" 
+                  [class.text-danger]="transaction.amount < 0">
+                {{ transaction.amount | currency:'USD' }}
+              </td>
+              <td>
+                <span class="status-badge" [class]="transaction.status.toLowerCase()">
+                  {{ transaction.status }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pagination">
+      <button 
+        class="btn-pagination" 
+        [disabled]="currentPage === 1"
+        (click)="changePage(currentPage - 1)">
+        Previous
+      </button>
+      
+      <span class="pagination-info">
+        Page {{ currentPage }} of {{ totalPages }}
+        (Total: {{ totalItems }})
+      </span>
+      
+      <button 
+        class="btn-pagination" 
+        [disabled]="currentPage === totalPages"
+        (click)="changePage(currentPage + 1)">
+        Next
+      </button>
+    </div>
+  }
+</div> 

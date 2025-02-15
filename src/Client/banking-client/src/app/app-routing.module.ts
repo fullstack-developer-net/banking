@@ -5,7 +5,6 @@ import { GuestComponent } from './theme/layout/guest/guest.component';
 import { AppStateManager } from './shared/app.state-manager';
 import { SharedModule } from './shared/shared.module';
 import { SignalRService } from './shared/services/signalr/signalr.service';
-import { HotToastService } from '@ngxpert/hot-toast';
 import { RoleGuard } from './shared/guard/role.guard';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/interceptors/auth/auth.interceptor';
@@ -13,6 +12,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgToastModule, NgToastService } from 'ng-angular-popup';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
+import { AccountDetailComponent } from './components/account-detail/account-detail.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,13 @@ const routes: Routes = [
       {
         path: 'user-detail',
         component: UserDetailComponent
-      }
+      },
+      {
+        path: 'transactions',
+        component: TransactionListComponent
+      },
+      { path: 'account-detail/:accountId', component: AccountDetailComponent },
+      
     ]
   },
 

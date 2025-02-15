@@ -19,7 +19,7 @@
                 <i class="text-white ti ti-layout-board-split f-24"></i>
               </div>
               <div class="ms-2">
-                  <h4 class="text-white f-w-600 mb-1">$203k</h4>
+                  <h4 class="text-white f-w-600 mb-1">${{ income }}</h4>
                 <p class="mb-0 opacity-50 text-sm">Total Income</p>
               </div>
             </div>
@@ -34,8 +34,8 @@
                 <i class="text-warning ti ti-layout-board-split f-24"></i>
               </div>
               <div class="ms-2">
-                <h4 class="f-w-600 mb-1">$203k</h4>
-                <p class="mb-0 opacity-50 text-sm">Total Income</p>
+                <h4 class="f-w-600 mb-1">${{ expenditure }}</h4>
+                <p class="mb-0 opacity-50 text-sm">Total Expenditure</p>
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@
     <div class="col-xl-6 col-md-12">
       <app-money-transfer [show]="showMoneyTransfer" (closeModal)="onShowMoneyTransferingClosed()"></app-money-transfer>
     </div>
-    <div class="col-xl-6 col-md-12">
+    <div class="card col-xl-6 col-md-12">
       <app-latest-transactions-card></app-latest-transactions-card>
     </div>
   </div>

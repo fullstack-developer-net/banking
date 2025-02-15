@@ -52,4 +52,32 @@ describe('ListAccountCardComponent', () => {
     form.controls['initialBalance'].setValue(100);
     expect(form.valid).toBeTruthy();
   });
+
+  it('should sort accounts by name', () => {
+    component.ListGroup = [
+      { fullName: 'John', accountNumber: '1', balance: 100 },
+      { fullName: 'Alice', accountNumber: '2', balance: 200 }
+    ];
+    component.filterAccounts();
+    
+    component.sortData('fullName');
+    expect(component.filteredAccounts[0].fullName).toBe('Alice');
+    
+    component.sortData('fullName'); // second click reverses order
+    expect(component.filteredAccounts[0].fullName).toBe('John');
+  });
+
+  it('should sort accounts by balance', () => {
+    component.ListGroup = [
+      { fullName: 'John', accountNumber: '1', balance: 100 },
+      { fullName: 'Alice', accountNumber: '2', balance: 200 }
+    ];
+    component.filterAccounts();
+    
+    component.sortData('balance');
+    expect(component.filteredAccounts[0].balance).toBe(100);
+    
+    component.sortData('balance');
+    expect(component.filteredAccounts[0].balance).toBe(200);
+  });
 });
