@@ -1,6 +1,7 @@
 ﻿using Banking.Application.Constants;
 using Banking.Application.Dtos;
 using Banking.Common.Constants;
+using Banking.Common.Helpers;
 using Banking.Core.Interfaces;
 using Banking.Core.Interfaces.Services;
 using MediatR;
@@ -12,7 +13,7 @@ namespace Banking.Application.Requests.Commands
     public record ProcessBatchTransactionCommand(string TransactionId) : IRequest<bool>;
 
     public class ProcessBatchTransactionCommandHandler(
-        IServiceProvider serviceProvider ) : IRequestHandler<ProcessBatchTransactionCommand, bool>
+        IServiceProvider serviceProvider) : IRequestHandler<ProcessBatchTransactionCommand, bool>
     {
         public async Task<bool> Handle(ProcessBatchTransactionCommand request, CancellationToken cancellationToken)
         {
@@ -27,6 +28,7 @@ namespace Banking.Application.Requests.Commands
             var transaction = await unitOfWork.TransactionRepository.GetByIdAsync(request.TransactionId);
             var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.FromAccountId);
             var toAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.ToAccountId);
+
             var fromAccountBalance = fromAccount.Balance;
             var toAccountBalance = toAccount.Balance;
             var transactionAmount = transaction.Amount;
@@ -43,7 +45,6 @@ namespace Banking.Application.Requests.Commands
                 await unitOfWork.CompleteAsync();
                 eventData.Type = EventTypes.TransactionCompleted;
                 eventData.Message = "Transaction completed successfully.";
-                eventData.Data = transaction;
             }
             catch (Exception ex)
             {
@@ -52,18 +53,18 @@ namespace Banking.Application.Requests.Commands
                 fromAccount.Balance = fromAccountBalance + transactionAmount;
                 fromAccount.LockedBalance = fromAccountLockedBalance - transactionAmount;
                 toAccount.Balance = toAccountBalance;
-        
+
                 await unitOfWork.AccountRepository.UpdateAsync(toAccount);
                 await unitOfWork.AccountRepository.UpdateAsync(fromAccount);
                 await unitOfWork.TransactionRepository.UpdateAsync(transaction);
                 await unitOfWork.CompleteAsync();
                 eventData.Type = EventTypes.TransactionFailed;
                 eventData.Message = "Transaction failed.";
-                eventData.Data = transaction;
             }
 
+            eventData.Data = transaction;
             await webSocketService.SendToAllAsync("event", JsonConvert.SerializeObject(eventData));
-            
+
             Console.WriteLine($"Transaction completed: {transaction.TransactionId}");
             return eventData.Type == EventTypes.TransactionCompleted;
         }

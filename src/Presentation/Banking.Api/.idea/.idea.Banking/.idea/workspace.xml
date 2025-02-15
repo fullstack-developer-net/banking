@@ -12,13 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Banking.Common/Helpers/CommonHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Banking.Common/Helpers/CommonHelper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/RabbitMQSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/RabbitMQSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessTransactionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessTransactionCommand.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/appsettings.Production.json" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/appsettings.Production.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +54,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Debug",
+    ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Run",
     ".NET Launch Settings Profile.Banking.Api: Production.executor": "Debug",
     ".NET Launch Settings Profile.Banking.Api: https.executor": "Run",
     "RunOnceActivity.git.unshallow": "true",
@@ -159,45 +156,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs</url>
-          <line>17</line>
-          <properties documentPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" containingFunctionPresentation="Method 'Handle'">
-            <startOffsets>
-              <option value="684" />
-            </startOffsets>
-            <endOffsets>
-              <option value="685" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Banking.Api/BackgroundServices/TransactionBackgroundService.cs</url>
-          <line>26</line>
-          <properties documentPath="$PROJECT_DIR$/Banking.Api/BackgroundServices/TransactionBackgroundService.cs" containingFunctionPresentation="Method 'HandleMessageAsync'">
-            <startOffsets>
-              <option value="707" />
-            </startOffsets>
-            <endOffsets>
-              <option value="708" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Banking.Api/BackgroundServices/TransactionBackgroundService.cs</url>
-          <line>33</line>
-          <properties documentPath="$PROJECT_DIR$/Banking.Api/BackgroundServices/TransactionBackgroundService.cs" containingFunctionPresentation="Method 'HandleMessageAsync'">
-            <startOffsets>
-              <option value="953" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1030" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

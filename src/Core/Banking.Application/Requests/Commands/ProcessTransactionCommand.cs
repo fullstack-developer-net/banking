@@ -2,9 +2,12 @@
 using Banking.Application.Dtos;
 using Banking.Common.Constants;
 using Banking.Core.Entities;
+using Banking.Core.Entities.Identity;
 using Banking.Core.Interfaces;
 using Banking.Core.Interfaces.Services;
+using Banking.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Application.Requests.Commands
 {
@@ -12,16 +15,17 @@ namespace Banking.Application.Requests.Commands
         : IRequest<TransactionMessage>;
 
     public class ProcessTransactionCommandHandler(
-        IUnitOfWork unitOfWork,
+        BankingDbContext context,
         ISenderService sender,
         IWebSocketService webSocketService) : IRequestHandler<ProcessTransactionCommand, TransactionMessage>
     {
         public async Task<TransactionMessage> Handle(ProcessTransactionCommand request,
             CancellationToken cancellationToken)
         {
-            var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(request.FromAccountId);
-            var toAccount = await unitOfWork.AccountRepository.GetByIdAsync(request.ToAccountId);
-
+            var fromAccount = await context.Accounts.Include(x => x.User).AsNoTracking()
+                .FirstOrDefaultAsync(x => x.AccountId == request.FromAccountId, cancellationToken);
+            var toAccount = await context.Accounts.Include(x => x.User).AsNoTracking()
+                .FirstOrDefaultAsync(x => x.AccountId == request.ToAccountId, cancellationToken);
             if (fromAccount == null || toAccount == null)
             {
                 throw new Exception("Invalid account(s) supplied.");
@@ -46,14 +50,26 @@ namespace Banking.Application.Requests.Commands
             };
 
             // Initialize the transaction and store into the database
-            await unitOfWork.TransactionRepository.AddAsync(transaction);
-            await unitOfWork.AccountRepository.UpdateAsync(fromAccount);
-            await unitOfWork.CompleteAsync();
+            await context.Transactions.AddAsync(transaction, cancellationToken);
+            context.Accounts.Update(fromAccount);
+            await context.SaveChangesAsync(cancellationToken);
 
             var message = new TransactionMessage
             {
                 TransactionId = transaction.TransactionId,
                 FromAccountId = transaction.FromAccountId,
+                FromAccount = new AccountDto
+                {
+                    AccountId = transaction.FromAccountId,
+                    AccountNumber = fromAccount.AccountNumber,
+                    FullName = fromAccount.User.FullName,
+                },
+                ToAccount = new AccountDto
+                {
+                    AccountId = transaction.ToAccountId,
+                    AccountNumber = toAccount.AccountNumber,
+                    FullName = toAccount.User.FullName,
+                },
                 ToAccountId = transaction.ToAccountId,
                 Amount = transaction.Amount,
                 Status = transaction.Status,
