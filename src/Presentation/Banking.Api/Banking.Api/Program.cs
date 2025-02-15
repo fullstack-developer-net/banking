@@ -1,7 +1,7 @@
 using Asp.Versioning;
 using Banking.Api.BackgroundServices;
 using Banking.Api.Middlewares;
-using Banking.Application;
+using Banking.Application.Dtos;
 using Banking.Common.Models;
 using Banking.Common.Services;
 using Banking.Core.Entities.Identity;
@@ -12,19 +12,21 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.OData;
 using Microsoft.IdentityModel.Tokens;
-using NSwag;
 using NSwag.Generation.Processors.Security;
+using NSwag;
 using System.Text;
-using Banking.Application.Dtos;
-using Microsoft.EntityFrameworkCore;
+using Banking.Application;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure JWT settings
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddControllers()
+    .AddOData(opt => opt.Select().Filter().OrderBy().Expand().SetMaxTop(100).Count()); // Add OData configuration
+
+// Configure API Versioning
 builder.Services.AddApiVersioning(options =>
 {
     options.ReportApiVersions = true;
@@ -32,20 +34,21 @@ builder.Services.AddApiVersioning(options =>
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.ApiVersionReader = new UrlSegmentApiVersionReader();
 });
-builder.Services.AddControllers()
-    .AddOData(opt => opt.Select().Filter().OrderBy().Expand().SetMaxTop(100).Count()); // Add OData configuration
+
 builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<BankingDbContext>()
     .AddDefaultTokenProviders();
 
+// Register persistence and application layers
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
 
+// JWT Authentication
 builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
@@ -61,47 +64,39 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-// Add RabbitMQ configuration
-
+// RabbitMQ configuration
 builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("RabbitMQ"));
 builder.Services.AddHostedService<TransactionBackgroundService>();
 builder.Services.AddRabbitMQ();
 
-
-// Add connection mapping 
+// WebSocket configuration
 builder.Services.AddSignalRWebSocket();
 
-// Add CORS policy to allow requests from localhost
+// CORS policies
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("LocalhostPolicy", builder =>
     {
-       
-       builder
-                .WithOrigins("http://localhost:4200","https://localhost:7101")
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
+        builder
+            .WithOrigins("http://localhost:4200", "https://localhost:7101")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
     });
 
     options.AddPolicy("ProductionPolicy", corsPolicyBuilder =>
     {
-        corsPolicyBuilder.WithOrigins("https://mysimplebanking.netlify.app", "http://mysimplebanking.netlify.app",
-                "ws://mysimplebanking.netlify.app")
+        corsPolicyBuilder.WithOrigins("https://mysimplebanking.netlify.app", "http://mysimplebanking.netlify.app", "ws://mysimplebanking.netlify.app")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials();
     });
 });
 
-// Add the Swagger generator and the Swagger UI middlewares
-builder.Services.AddScoped<CurrentLoginUser>();
-builder.Services.AddScoped<TokenService>();
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddEndpointsApiExplorer();
+// Swagger/OpenAPI configuration
 builder.Services.AddOpenApiDocument(document =>
 {
-    document.AddSecurity("JWT", [], new OpenApiSecurityScheme
+    document.AddSecurity("JWT", new OpenApiSecurityScheme
     {
         Type = OpenApiSecuritySchemeType.ApiKey,
         Name = "Authorization",
@@ -109,23 +104,21 @@ builder.Services.AddOpenApiDocument(document =>
         Description = "Type into the textbox: Bearer {your JWT token}."
     });
 
-    document.OperationProcessors.Add(
-        new AspNetCoreOperationSecurityScopeProcessor("JWT"));
+    document.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
 });
+
+// Additional services
+builder.Services.AddScoped<CurrentLoginUser>();
+builder.Services.AddScoped<TokenService>();
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Configure the HTTP request pipeline
+//if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
-    // Add OpenAPI 3.0 document serving middleware
-    // Available at: http://localhost:<port>/swagger/v1/swagger.json
     app.UseOpenApi();
-
-    // Add web UIs to interact with the document
-    // Available at: http://localhost:<port>/swagger
-
-    app.UseSwaggerUi(); // UseSwaggerUI Protected by if (env.IsDevelopment())
+    app.UseSwaggerUi();
     app.MapGet("/index.html", context =>
     {
         context.Response.Redirect("/swagger/index.html", permanent: false);
@@ -152,7 +145,7 @@ app.UseMiddleware<JwtMiddleware>();
 app.UseAuthorization();
 
 app.UseCors("LocalhostPolicy");
-//app.UseCors(app.Environment.IsDevelopment() ? "LocalhostPolicy" : "ProductionPolicy");
+app.UseCors("ProductionPolicy");
 
 app.MapControllers();
 app.MapHub<BaseHub>("/eventhub");
