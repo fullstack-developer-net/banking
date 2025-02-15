@@ -12,13 +12,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/signalr/signalr.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/signalr/signalr.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/theme/layout/admin/navigation/navigation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/theme/layout/admin/navigation/navigation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetAccount.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetAccount.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure/Banking.Infrastructure.Email/Banking.Infrastructure.Email.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure/Banking.Infrastructure.Email/EmailService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure/Banking.Infrastructure.Email/EmailSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/money-transfer/money-transfer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/money-transfer/money-transfer.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/money-transfer/money-transfer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/money-transfer/money-transfer.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/appsettings.Production.json" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/appsettings.Production.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +46,9 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/abc225064a9a464e0c9b4616f17df1926c43f348ab4979545d3971f2adef75d/ConnectionFactory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bf9021a960b74107a7e141aa06bc9d8a0a53c929178c2fb95b1597be8af8dc/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4bc324a395d24ed12db75b0a81536b642509aa14825bf114d9b7c934e2b/Mediator.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Toolset" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4

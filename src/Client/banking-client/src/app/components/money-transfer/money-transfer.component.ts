@@ -36,13 +36,9 @@ export class MoneyTransferComponent implements OnInit {
     private toast: NgToastService
   ) {}
 
-  ngOnInit(): void {
- 
-  }
-
-  close() {
-    this.closeModal.emit();
-    this.show = false;
+  ngOnInit(): void {}
+  cancelTransaction() {
+    this.showConfirmModal = false;
 
   }
 
@@ -67,13 +63,16 @@ export class MoneyTransferComponent implements OnInit {
     this.transactionsService.createTransaction(transaction).subscribe({
       next: (response) => {
         console.log('Transaction created successfully:', response);
-         this.toast.success('Transaction created successfully');
-        this.close();
+        this.toast.success('Transaction created successfully');
+        this.showConfirmModal = false;
+        this.recipientId = null;
+        this.amount = 0;
+        this.recipientUsername = null;
       },
       error: (error) => {
         console.error('Error creating transaction', error);
         this.toast.danger('Failed to create transaction');
-       }
+      }
     });
   }
 

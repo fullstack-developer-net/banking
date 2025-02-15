@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking.Common", "..\..\Ban
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking.Infrastructure.WebSocket", "..\..\Infrastructure\Banking.Infrastructure.Notification\Banking.Infrastructure.WebSocket.csproj", "{E30254D9-6134-4509-B531-1EC16F9F7160}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Banking.Infrastructure.Email", "..\..\Infrastructure\Banking.Infrastructure\Banking.Infrastructure.Email\Banking.Infrastructure.Email.csproj", "{D713D4BA-9E14-45C4-A5F5-CB0CF61AE352}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{E30254D9-6134-4509-B531-1EC16F9F7160}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E30254D9-6134-4509-B531-1EC16F9F7160}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E30254D9-6134-4509-B531-1EC16F9F7160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D713D4BA-9E14-45C4-A5F5-CB0CF61AE352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D713D4BA-9E14-45C4-A5F5-CB0CF61AE352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D713D4BA-9E14-45C4-A5F5-CB0CF61AE352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D713D4BA-9E14-45C4-A5F5-CB0CF61AE352}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
