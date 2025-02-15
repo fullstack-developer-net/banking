@@ -27,7 +27,7 @@ namespace Banking.Application.Requests.Commands
             }
 
             fromAccount.Balance -= request.Amount;
-            toAccount.LockedBalance += request.Amount;
+            fromAccount.LockedBalance += request.Amount;
             // Create the transaction
             var transaction = new Transaction
             {
