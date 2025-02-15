@@ -41,7 +41,7 @@ namespace Banking.Application.Requests.Commands
 
             // Initialize the transaction and store into the database
             await unitOfWork.TransactionRepository.AddAsync(transaction);
-            await unitOfWork.AccountRepository.AddAsync(fromAccount);
+            await unitOfWork.AccountRepository.UpdateAsync(fromAccount);
             await unitOfWork.CompleteAsync();
 
             var message = new TransactionMessage
