@@ -1,7 +1,6 @@
 using Asp.Versioning;
 using Banking.Api.BackgroundServices;
 using Banking.Api.Middlewares;
-using Banking.Application.Dtos;
 using Banking.Common.Models;
 using Banking.Common.Services;
 using Banking.Core.Entities.Identity;
@@ -16,6 +15,7 @@ using NSwag.Generation.Processors.Security;
 using NSwag;
 using System.Text;
 using Banking.Application;
+using Banking.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +23,7 @@ var builder = WebApplication.CreateBuilder(args);
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
-builder.Services.AddControllers()
-    .AddOData(opt => opt.Select().Filter().OrderBy().Expand().SetMaxTop(100).Count()); // Add OData configuration
+builder.Services.AddControllers();
 
 // Configure API Versioning
 builder.Services.AddApiVersioning(options =>
@@ -67,7 +66,8 @@ builder.Services.AddAuthentication(options =>
 // RabbitMQ configuration
 builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("RabbitMQ"));
 builder.Services.AddHostedService<TransactionBackgroundService>();
-builder.Services.AddRabbitMQ();
+builder.Services.AddScoped<TransactionBackgroundService>();
+builder.Services.AddRabbitMq();
 
 // WebSocket configuration
 builder.Services.AddSignalRWebSocket();
@@ -96,11 +96,12 @@ builder.Services.AddCors(options =>
 // Swagger/OpenAPI configuration
 builder.Services.AddOpenApiDocument(document =>
 {
-    document.AddSecurity("JWT", new OpenApiSecurityScheme
+    document.AddSecurity("JWT", [],new OpenApiSecurityScheme
     {
         Type = OpenApiSecuritySchemeType.ApiKey,
         Name = "Authorization",
         In = OpenApiSecurityApiKeyLocation.Header,
+        
         Description = "Type into the textbox: Bearer {your JWT token}."
     });
 
@@ -111,6 +112,7 @@ builder.Services.AddOpenApiDocument(document =>
 builder.Services.AddScoped<CurrentLoginUser>();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 

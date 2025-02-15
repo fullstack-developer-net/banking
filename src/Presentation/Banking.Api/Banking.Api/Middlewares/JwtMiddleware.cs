@@ -2,6 +2,7 @@
 using Banking.Common.Helpers;
 using Banking.Common.Models;
 using Banking.Common.Services;
+using Banking.Core;
 using Banking.Core.Entities.Identity;
 using Banking.Core.Interfaces;
 using Microsoft.AspNetCore.Identity;

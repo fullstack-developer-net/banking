@@ -1,7 +1,5 @@
-﻿using Banking.Application.Constants;
-using Banking.Application.Dtos;
+﻿using Banking.Application.Dtos;
 using Banking.Application.Requests.Commands;
-using Banking.Application.Requests.Queries;
 using Banking.Common.Constants;
 using Banking.Infrastructure.MessageQueue;
 using MediatR;
@@ -10,15 +8,15 @@ using RabbitMQ.Client;
 
 namespace Banking.Api.BackgroundServices
 {
-    public class TransactionBackgroundService : RabbitMQListenerService
+    public class TransactionBackgroundService : RabbitMqListenerService
     {
-        private readonly IMediator mediator;
+        private readonly IMediator _mediator;
 
         public TransactionBackgroundService(IMediator mediator, IConnectionFactory factory) : base(factory)
         {
 
-            queueName = QueueNames.Transaction;
-            this.mediator = mediator;
+            QueueName = QueueNames.Transaction;
+            _mediator = mediator;
         }
 
 
@@ -33,28 +31,11 @@ namespace Banking.Api.BackgroundServices
                     return;
                 }
                 // Skip validation for now
-                var result = await mediator.Send(new ProcessBatchTransactionCommand(data.TransactionId));
-                var fromUser = await mediator.Send(new GetUserByAccountIdQuery(data.FromAccountId));
-                var toUser = await mediator.Send(new GetUserByAccountIdQuery(data.ToAccountId));
-
-                var eventData = new EventData
-                {
-                    Type = EventTypes.TransactionCompleted,
-                    Id = fromUser.Id,
-                    Message = "Transaction processed successfully",
-                    CreatedAt = DateTime.UtcNow,
-                };
-
-                // Send notification to the sender
-                await mediator.Send(new SendEventCommand(eventData));
-
-                // Send notification to the receiver
-                eventData.Id = toUser.Id;
-                await mediator.Send(new SendEventCommand(eventData));
-
+                await _mediator.Send(new ProcessBatchTransactionCommand(data.TransactionId));
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 // Log the exception
                 // Todo: Add another logic for processing the message
                 return;

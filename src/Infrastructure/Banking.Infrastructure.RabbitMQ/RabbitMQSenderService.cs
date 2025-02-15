@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Banking.Infrastructure.MessageQueue
 {
-    public class RabbitMQSenderService(ILogger<RabbitMQSenderService> logger, IConnectionFactory factory) : ISenderService
+    public class RabbitMqSenderService(ILogger<RabbitMqSenderService> logger, IConnectionFactory factory) : ISenderService
     {
 
         public async Task SendMessageAsync(string queueName, object message)

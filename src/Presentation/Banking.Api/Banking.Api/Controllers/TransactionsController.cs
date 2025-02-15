@@ -1,6 +1,7 @@
 ﻿using Banking.Application.Dtos;
 using Banking.Application.Requests.Commands;
 using Banking.Application.Requests.Queries;
+using Banking.Core;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

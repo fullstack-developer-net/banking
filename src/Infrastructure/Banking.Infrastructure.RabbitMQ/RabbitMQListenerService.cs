@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Banking.Infrastructure.MessageQueue
 {
-    public abstract class RabbitMQListenerService(IConnectionFactory factory) : BackgroundService
+    public abstract class RabbitMqListenerService(IConnectionFactory factory) : BackgroundService
     {
 
-        protected string queueName = "";
+        protected string QueueName = "";
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
 
@@ -20,7 +20,7 @@ namespace Banking.Infrastructure.MessageQueue
         {
             var connection = await factory.CreateConnectionAsync(stoppingToken);
             var channel = await connection.CreateChannelAsync(cancellationToken: stoppingToken);
-            await channel.QueueDeclareAsync(queue: queueName, durable: false, exclusive: false, autoDelete: false, arguments: null, cancellationToken: stoppingToken);
+            await channel.QueueDeclareAsync(queue: QueueName, durable: false, exclusive: false, autoDelete: false, arguments: null, cancellationToken: stoppingToken);
             var consumer = new AsyncEventingBasicConsumer(channel);
 
             consumer.ReceivedAsync += async (ch, ea) =>
@@ -30,10 +30,10 @@ namespace Banking.Infrastructure.MessageQueue
                 // Handle the received message
                 if (messageHandler != null) await messageHandler(content);
 
-                await channel.BasicAckAsync(ea.DeliveryTag, false);
+                await channel.BasicAckAsync(ea.DeliveryTag, false, stoppingToken);
             };
 
-            await channel.BasicConsumeAsync(queueName, false, consumer, cancellationToken: stoppingToken);
+            await channel.BasicConsumeAsync(QueueName, false, consumer, cancellationToken: stoppingToken);
         }
 
         protected virtual Task HandleMessageAsync(string content)

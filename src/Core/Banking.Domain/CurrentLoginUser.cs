@@ -1,7 +1,7 @@
 using Banking.Core.Entities;
 using Banking.Core.Entities.Identity;
 
-namespace Banking.Application.Dtos;
+namespace Banking.Core;
 
 public class CurrentLoginUser 
 {

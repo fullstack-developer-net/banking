@@ -35,7 +35,7 @@ export class SignalRService {
       .then(() => console.log('Hub connection started'))
       .catch((err) => {
         console.error('Error while starting connection: ' + err);
-        setTimeout(() => this.startConnection(), 5000); // Thử kết nối lại sau 5 giây
+        setTimeout(() => this.startConnection(), 3000);  
       });
   }
   
@@ -45,13 +45,14 @@ export class SignalRService {
         skipNegotiation: true,
         transport: signalR.HttpTransportType.WebSockets,
       })
+      .withKeepAliveInterval(3000)
       .withAutomaticReconnect()
       .configureLogging(signalR.LogLevel.Information)
       .build();
   
     this.hubConnection.onclose(() => {
       console.error('SignalR connection closed');
-      setTimeout(() => this.startConnection(), 5000); // Thử kết nối lại sau 5 giây
+      setTimeout(() => this.startConnection(), 3000);  
     });
   
     this.hubConnection.onreconnecting((error) => {
@@ -71,6 +72,7 @@ export class SignalRService {
 
     this.startConnection();
   }
+
   public sendMessage(message: string): void {
     this.hubConnection.send('sendMessage', message).catch((err) => console.log('Error while sending message: ' + err));
   }
@@ -102,13 +104,13 @@ export class SignalRService {
   onTransactionFailed(eventData: EventData) {
     const data = eventData.data as TransactionModel;
     if (data.fromAccountId === this.appState.currentAccount?.accountId) {
-      this.toast.danger('Money transfer failed', `Transfer failed: $${data.amount}`);
+      this.toast.danger('Money transfer failed', `Transfer failed: $${data.amount}`,5000);
     }
   }
   onTransactionCompleted(eventData: EventData) {
     const data = eventData.data as TransactionModel;
     if (data.toAccountId === this.appState.currentAccount?.accountId) {
-      this.toast.info('Money transfering', `${data.fromAccount?.fullName} transfered to your account: $${data.amount}`);
+      this.toast.info('Money transfering', `${data.fromAccount?.fullName} transfered to your account: $${data.amount}`,5000);
     }
   }
 
@@ -131,7 +133,7 @@ export class SignalRService {
     const data = eventData.data as TransactionModel;
     if (data.fromAccountId === this.appState.currentAccount?.accountId) {
       this.refreshAccount();
-      this.toast.info('Money transfering', `You transfered to ${data.toAccount?.fullName}: $${data.amount}`);
+      this.toast.info('Money transfering', `You transfered to ${data.toAccount?.fullName}: $${data.amount}`,5000);
     }
   }
 }

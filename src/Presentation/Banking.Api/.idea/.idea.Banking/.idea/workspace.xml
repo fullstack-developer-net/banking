@@ -12,17 +12,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/account.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/account.model.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/signalr/signalr.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/signalr/signalr.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Constants/EventTypes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Constants/EventTypes.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessTransactionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessTransactionCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetAccountById.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetAccountById.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CurrentLoginUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Domain/CurrentLoginUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetStatisticalDataQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetStatisticalDataQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.Notification/BaseHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.Notification/BaseHub.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.Notification/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.Notification/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/RabbitMQListenerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/RabbitMQListenerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/RabbitMQSenderService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/RabbitMQSenderService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/BackgroundServices/TransactionBackgroundService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/BackgroundServices/TransactionBackgroundService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +45,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CurrentLoginUser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../Core/Banking.Domain/CurrentLoginUser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/4046e930474e48f7a69bae3fc9fc824412200/ce/4750a72f/02000011pdb33.il" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/473d97221b573ab97e6e745d8adae8b9e95a666539d6ed3cc8566b245d93a/ArgumentNullException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6728f66657329080f0f419df519283a455cdca7d2617a05b18553b02da52fa/Nullable.cs" root0="FORCE_HIGHLIGHTING" />
@@ -60,8 +64,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Run",
-    ".NET Launch Settings Profile.Banking.Api: Production.executor": "Run",
+    ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Debug",
+    ".NET Launch Settings Profile.Banking.Api: Production.executor": "Debug",
     ".NET Launch Settings Profile.Banking.Api: https.executor": "Run",
     "RunOnceActivity.git.unshallow": "true",
     "XThreadsFramesViewSplitterKey": "0.3170103",
@@ -74,7 +78,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Banking.Api: Production">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Banking.Api: Develop">
     <configuration name="Banking.Api: Develop" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Banking.Api/Banking.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net9.0" />
@@ -164,19 +168,76 @@
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs</url>
-          <line>74</line>
-          <properties documentPath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" containingFunctionPresentation="Method 'GetAccount'">
+          <url>file://$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs</url>
+          <line>18</line>
+          <properties documentPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" containingFunctionPresentation="Method 'Handle'">
             <startOffsets>
-              <option value="2566" />
+              <option value="727" />
             </startOffsets>
             <endOffsets>
-              <option value="2567" />
+              <option value="728" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="20" />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Banking.Api/BackgroundServices/TransactionBackgroundService.cs</url>
+          <line>26</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/BackgroundServices/TransactionBackgroundService.cs" containingFunctionPresentation="Method 'HandleMessageAsync'">
+            <startOffsets>
+              <option value="707" />
+            </startOffsets>
+            <endOffsets>
+              <option value="708" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/RabbitMQListenerService.cs</url>
+          <line>20</line>
+          <properties documentPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/RabbitMQListenerService.cs" containingFunctionPresentation="Method 'HandleQueueMessagesAsync'">
+            <startOffsets>
+              <option value="689" />
+            </startOffsets>
+            <endOffsets>
+              <option value="757" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/RabbitMQListenerService.cs</url>
+          <line>26</line>
+          <properties documentPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.RabbitMQ/RabbitMQListenerService.cs" containingFunctionPresentation="Lambda expression inside Method 'HandleQueueMessagesAsync'">
+            <startOffsets>
+              <option value="1159" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1160" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs</url>
+          <line>20</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
+            <startOffsets>
+              <option value="776" />
+            </startOffsets>
+            <endOffsets>
+              <option value="777" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#Microsoft.AspNetCore.Http.HttpContext+HttpContextDebugView" memberName="User" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

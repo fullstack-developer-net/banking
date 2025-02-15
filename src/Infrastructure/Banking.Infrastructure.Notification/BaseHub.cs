@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Banking.Core;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Banking.Infrastructure.WebSocket
 {
-    public class BaseHub(IConnectionMapper connectionMapper) : Hub
+    public class BaseHub(IConnectionMapper connectionMapper, CurrentLoginUser loginUser) : Hub
     {
         public override Task OnConnectedAsync()
         {
             var httpContext = Context.GetHttpContext();
             if (httpContext == null) return base.OnConnectedAsync();
-            var userId = httpContext.Items["userId"]?.ToString();
-            if (!string.IsNullOrEmpty(userId))
+             if (!string.IsNullOrEmpty(loginUser.User?.Id))
             {
-                connectionMapper.Add(userId, httpContext.Connection.Id);
+                connectionMapper.Add(loginUser.User?.Id, httpContext.Connection.Id);
             }
             return base.OnConnectedAsync();
         }
