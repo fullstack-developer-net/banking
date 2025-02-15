@@ -1,7 +1,7 @@
 export interface TransactionModel {
   transactionId: string;
-  fromAccountId?: string;
-  toAccountId: string;
+  fromAccountId?: number;
+  toAccountId: number;
   fromAccount?: AccountDto;
   toAccount?: AccountDto;
   amount: number;

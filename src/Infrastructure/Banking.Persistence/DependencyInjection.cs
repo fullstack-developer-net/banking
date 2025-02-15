@@ -13,7 +13,7 @@ namespace Banking.Persistence
 
             var connectionString = configuration.GetConnectionString("BankingDb");
             services.AddDbContext<BankingDbContext>(options =>
-                 options.UseSqlServer(connectionString));
+                 options.UseSqlServer(connectionString, b=>b.MigrationsAssembly("Banking.Persistence")), ServiceLifetime.Transient);
             services.AddScoped<DbContext, BankingDbContext>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();

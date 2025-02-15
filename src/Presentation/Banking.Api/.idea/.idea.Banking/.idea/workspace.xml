@@ -14,13 +14,6 @@
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../Client/banking-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Client/banking-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/money-transfer/money-transfer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/money-transfer/money-transfer.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/pages/dashboard/default/default.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/pages/dashboard/default/default.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/pages/dashboard/default/default.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/main.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Client/banking-client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,11 +50,11 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Run",
+    ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Debug",
     ".NET Launch Settings Profile.Banking.Api: Production.executor": "Run",
     ".NET Launch Settings Profile.Banking.Api: https.executor": "Run",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "develop-7",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -132,7 +125,7 @@
       <option name="presentableId" value="Default" />
       <updated>1739287160710</updated>
       <workItem from="1739287161858" duration="2093000" />
-      <workItem from="1739346754047" duration="1866000" />
+      <workItem from="1739346754047" duration="9807000" />
     </task>
     <servers />
   </component>
@@ -171,6 +164,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs</url>
+          <line>35</line>
+          <properties documentPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" containingFunctionPresentation="Method 'Handle'">
+            <startOffsets>
+              <option value="1637" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1686" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -16,6 +16,7 @@ using NSwag;
 using NSwag.Generation.Processors.Security;
 using System.Text;
 using Banking.Application.Dtos;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();

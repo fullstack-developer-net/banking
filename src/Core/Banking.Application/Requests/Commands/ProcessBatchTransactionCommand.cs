@@ -1,69 +1,69 @@
-﻿using Banking.Common.Constants;
-using Banking.Core.Entities;
+﻿using Banking.Application.Constants;
+using Banking.Application.Dtos;
+using Banking.Common.Constants;
 using Banking.Core.Interfaces;
+using Banking.Core.Interfaces.Services;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace Banking.Application.Requests.Commands
 {
     public record ProcessBatchTransactionCommand(string TransactionId) : IRequest<bool>;
-    public class ProcessBatchTransactionCommandHandler(IServiceProvider serviceProvider) : IRequestHandler<ProcessBatchTransactionCommand, bool>
+
+    public class ProcessBatchTransactionCommandHandler(
+        IServiceProvider serviceProvider,
+        IWebSocketService webSocketService) : IRequestHandler<ProcessBatchTransactionCommand, bool>
     {
         public async Task<bool> Handle(ProcessBatchTransactionCommand request, CancellationToken cancellationToken)
         {
+            var eventData = new EventData
+            {
+                Id = Guid.NewGuid().ToString(),
+                CreatedAt = DateTime.UtcNow
+            };
             using var scope = serviceProvider.CreateScope();
             var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
-            Transaction transaction = await unitOfWork.TransactionRepository.GetByIdAsync(request.TransactionId);
-
-            if (transaction == null)
-            {
-                return false;
-            }
-
+            var transaction = await unitOfWork.TransactionRepository.GetByIdAsync(request.TransactionId);
+            var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.FromAccountId);
+            var toAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.ToAccountId);
+            var fromAccountBalance = fromAccount.Balance;
+            var toAccountBalance = toAccount.Balance;
+            var transactionAmount = transaction.Amount;
+            var fromAccountLockedBalance = fromAccount.LockedBalance;
             try
             {
-                var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.FromAccountId);
-                var toAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.ToAccountId);
-
-                if (fromAccount == null)
-                {
-                    transaction.Status = TransactionStatus.Failed;
-                    transaction.Note = "Invalid sender account";
-                    return false;
-                }
-                if (toAccount == null)
-                {
-                    transaction.Status = TransactionStatus.Failed;
-                    transaction.Note = "Invalid receiver account";
-                    return false;
-                }
-                if (fromAccount.Balance < transaction.Amount)
-                {
-                    transaction.Status = TransactionStatus.Failed;
-                    transaction.Note = "Insufficient funds.";
-                }
-
-                fromAccount.Balance -= transaction.Amount;
-                toAccount.Balance += transaction.Amount;
                 transaction.Status = TransactionStatus.Completed;
                 transaction.Note = "Transaction completed successfully.";
-
-
-                // Initialize the transaction and store into the database
-                await unitOfWork.TransactionRepository.UpdateAsync(transaction);
+                fromAccount.LockedBalance = fromAccountLockedBalance - transactionAmount;
+                toAccount.Balance = toAccountBalance + transactionAmount;
                 await unitOfWork.AccountRepository.UpdateAsync(toAccount);
                 await unitOfWork.AccountRepository.UpdateAsync(fromAccount);
+                await unitOfWork.TransactionRepository.UpdateAsync(transaction);
                 await unitOfWork.CompleteAsync();
+                eventData.Type = EventTypes.TransactionCompleted;
+                eventData.Message = "Transaction completed successfully.";
+                eventData.Data = transaction;
             }
             catch (Exception ex)
             {
                 transaction.Status = TransactionStatus.Failed;
                 transaction.Note = "Internal server error: " + ex.Message;
-                return false;
+                fromAccount.Balance = fromAccountBalance + transactionAmount;
+                fromAccount.LockedBalance = fromAccountLockedBalance - transactionAmount;
+                toAccount.Balance = toAccountBalance;
+        
+                await unitOfWork.AccountRepository.UpdateAsync(toAccount);
+                await unitOfWork.AccountRepository.UpdateAsync(fromAccount);
+                await unitOfWork.TransactionRepository.UpdateAsync(transaction);
+                await unitOfWork.CompleteAsync();
+                eventData.Type = EventTypes.TransactionFailed;
+                eventData.Message = "Transaction failed.";
+                eventData.Data = transaction;
             }
 
-            return true;
-
+            await webSocketService.SendToAllAsync("event", JsonConvert.SerializeObject(eventData));
+            return eventData.Type == EventTypes.TransactionCompleted;
         }
     }
 }

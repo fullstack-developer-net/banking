@@ -49,7 +49,7 @@ namespace Banking.Api.Controllers
         {
             var data = new EventData
             {
-                UserId = "1",
+                Id = "1",
                 Type = "Test",
                 CreatedAt = DateTime.Now,
                 Message = "Test message"

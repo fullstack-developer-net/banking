@@ -12,7 +12,7 @@ namespace Banking.Application.Requests.Commands
         public async Task Handle(SendEventCommand request, CancellationToken cancellationToken)
         {
             //   var connections = connectionMapper.GetConnections(request.Data.UserId);
-            await webSocket.SendToUserAsync(request.Data.UserId, "notification", request.Data);
+            await webSocket.SendToUserAsync(request.Data.Id, "notification", request.Data);
             //       await webSocket.SendAsync($"{QueueNames.Notification}_{request.Data.Type}_{request.Data.UserId}", request.Data);
         }
     }

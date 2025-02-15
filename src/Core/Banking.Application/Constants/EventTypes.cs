@@ -6,8 +6,7 @@
         public const string AccountUpdated = "AccountUpdated";
         public const string AccountDeleted = "AccountDeleted";
         public const string TransactionCreated = "TransactionCreated";
-        public const string TransactionUpdated = "TransactionUpdated";
-        public const string TransactionDeleted = "TransactionDeleted";
-
+        public const string TransactionCompleted = "TransactionUpdated";
+        public const string TransactionFailed = "TransactionFailed";
     }
 }

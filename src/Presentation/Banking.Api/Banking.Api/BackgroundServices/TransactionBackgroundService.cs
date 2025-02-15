@@ -39,8 +39,8 @@ namespace Banking.Api.BackgroundServices
 
                 var eventData = new EventData
                 {
-                    Type = EventTypes.TransactionUpdated,
-                    UserId = fromUser.Id,
+                    Type = EventTypes.TransactionCompleted,
+                    Id = fromUser.Id,
                     Message = "Transaction processed successfully",
                     CreatedAt = DateTime.UtcNow,
                 };
@@ -49,7 +49,7 @@ namespace Banking.Api.BackgroundServices
                 await mediator.Send(new SendEventCommand(eventData));
 
                 // Send notification to the receiver
-                eventData.UserId = toUser.Id;
+                eventData.Id = toUser.Id;
                 await mediator.Send(new SendEventCommand(eventData));
 
             }

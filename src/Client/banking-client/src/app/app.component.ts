@@ -17,7 +17,6 @@ import { NgToastService, ToasterPosition, ToastType } from 'ng-angular-popup';
 })
 export class AppComponent {
   title = 'Simple Banking App';
-  public messages: string[] = [];
   ToasterPosition = ToasterPosition;
   constructor(
     private appState: AppStateManager,
@@ -26,17 +25,14 @@ export class AppComponent {
     private signalRService: SignalRService
   ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     const auth = localStorage.getItem('auth');
     this.signalRService.startConnection();
-    this.signalRService.messageReceived$.subscribe((message) => {
-      this.messages.push(message);
-    });
+
     if (auth) {
       const parsedAuth = JSON.parse(auth) as AuthModel;
 
       let validUser = true; // Should validate token and refresh token if needs
-      console.log('Parsed Auth : ', parsedAuth);
       if (!parsedAuth || !validUser) {
         this.appState.setAuth(null);
         localStorage.removeItem('auth');

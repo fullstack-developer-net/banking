@@ -26,7 +26,8 @@ namespace Banking.Application.Requests.Commands
                 throw new Exception("Insufficient funds.");
             }
 
-
+            fromAccount.Balance -= request.Amount;
+            toAccount.LockedBalance += request.Amount;
             // Create the transaction
             var transaction = new Transaction
             {
@@ -40,6 +41,7 @@ namespace Banking.Application.Requests.Commands
 
             // Initialize the transaction and store into the database
             await unitOfWork.TransactionRepository.AddAsync(transaction);
+            await unitOfWork.AccountRepository.AddAsync(fromAccount);
             await unitOfWork.CompleteAsync();
 
             var message = new TransactionMessage

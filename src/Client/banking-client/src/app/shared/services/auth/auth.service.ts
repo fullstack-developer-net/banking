@@ -7,7 +7,7 @@ import { isValidEmail } from '../../utils/validation.util';
 import { AppStateManager } from '../../app.state-manager';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { GetUser } from '../../models/GetUser.model';
+import { GetUser } from '../../models/get-user.model';
 
 
 @Injectable({

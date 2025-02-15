@@ -40,7 +40,8 @@ namespace Banking.Persistence
 
 
             // Relationship configurations
-            builder.Entity<Account>().ToTable("Accounts").HasKey(a => a.AccountId);
+            builder.Entity<Account>().ToTable("Accounts")
+                .HasKey(a => a.AccountId);
             builder.Entity<Account>()
                 .HasOne(a => a.User)
                 .WithOne(x => x.Account)
@@ -52,9 +53,14 @@ namespace Banking.Persistence
                 .Property(a => a.Balance)
                 .HasPrecision(18, 2);
 
+            builder.Entity<Account>()
+                .Property(t => t.LockedBalance)
+                .HasPrecision(18, 2);
+            
             builder.Entity<Transaction>()
                 .Property(t => t.Amount)
                 .HasPrecision(18, 2);
+
 
             builder.Entity<Transaction>()
                 .HasOne(t => t.FromAccount)

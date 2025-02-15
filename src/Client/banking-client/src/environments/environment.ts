@@ -11,6 +11,7 @@ import packageInfo from '../../package.json';
 export const environment = {
   production: false,
   apiUrl: 'https://localhost:7101',
+  webSocketUrl: 'https://localhost:7101/eventhub',
   appVersion: packageInfo.version
 };
 

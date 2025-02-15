@@ -10,9 +10,7 @@ import { LatestTransactionsCardComponent } from 'src/app/components/latest-trans
 import { SummaryChartComponent } from 'src/app/components/summary-chart/summary-chart.component';
 import { MoneyTransferComponent } from 'src/app/components/money-transfer/money-transfer.component';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DialogService } from '@ngneat/dialog';
-import { NgToastModule, NgToastService } from 'ng-angular-popup';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-default',
@@ -23,7 +21,6 @@ import { NgToastModule, NgToastService } from 'ng-angular-popup';
     AccountBalanceCardComponent,
     SummaryChartComponent,
     MoneyTransferComponent,
-    NgToastModule,
     MatDialogModule
   ],
 
@@ -57,7 +54,6 @@ export class UserDashboardComponent implements OnInit {
   constructor(
     private appState: AppStateManager,
     private router: Router,
-    private toast: NgToastService,
   ) {}
 
   ngOnInit(): void {
