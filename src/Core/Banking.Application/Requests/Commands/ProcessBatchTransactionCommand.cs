@@ -12,8 +12,7 @@ namespace Banking.Application.Requests.Commands
     public record ProcessBatchTransactionCommand(string TransactionId) : IRequest<bool>;
 
     public class ProcessBatchTransactionCommandHandler(
-        IServiceProvider serviceProvider,
-        IWebSocketService webSocketService) : IRequestHandler<ProcessBatchTransactionCommand, bool>
+        IServiceProvider serviceProvider ) : IRequestHandler<ProcessBatchTransactionCommand, bool>
     {
         public async Task<bool> Handle(ProcessBatchTransactionCommand request, CancellationToken cancellationToken)
         {
@@ -23,6 +22,7 @@ namespace Banking.Application.Requests.Commands
                 CreatedAt = DateTime.UtcNow
             };
             using var scope = serviceProvider.CreateScope();
+            var webSocketService = scope.ServiceProvider.GetRequiredService<IWebSocketService>();
             var unitOfWork = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
             var transaction = await unitOfWork.TransactionRepository.GetByIdAsync(request.TransactionId);
             var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.FromAccountId);

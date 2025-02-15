@@ -12,14 +12,14 @@ namespace Banking.Infrastructure.MessageQueue
             services.AddScoped<ISenderService, RabbitMqSenderService>();
             services.AddSingleton<IConnectionFactory>(sp =>
             {
-                var rabbitMqSettings = sp.GetRequiredService<IOptions<RabbitMQSettings>>().Value;
+                var rabbitMqSettings = sp.GetRequiredService<IOptions<RabbitMqSettings>>().Value;
                 return new ConnectionFactory
                 {
                     HostName = rabbitMqSettings.HostName ?? string.Empty,
                     Password = rabbitMqSettings.Password ?? string.Empty,
                     UserName = rabbitMqSettings.UserName ?? string.Empty,
                     Port = rabbitMqSettings.Port ?? 5672,
-                    VirtualHost = rabbitMqSettings.VirtualHost
+                     VirtualHost = rabbitMqSettings.VirtualHost ?? "/"
                 };
             });
             return services;
