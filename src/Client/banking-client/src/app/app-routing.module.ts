@@ -62,6 +62,7 @@ const routes: Routes = [
       useClass: AuthInterceptor,
       multi: true
     },
+    NgToastService,
   ]
 })
 export class AppRoutingModule {}

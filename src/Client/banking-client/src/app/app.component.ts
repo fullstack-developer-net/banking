@@ -6,7 +6,7 @@ import { AccountsService } from './shared/services/accounts/accounts.service';
 import { AuthModel } from './shared/models';
 import { SignalRService } from './shared/services/signalr/signalr.service';
 import { NgToastModule } from 'ng-angular-popup';
-import { NgToastService, ToasterPosition, ToastType } from 'ng-angular-popup';
+import { ToasterPosition, ToastType } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +27,7 @@ export class AppComponent {
 
   ngOnInit() {
     const auth = localStorage.getItem('auth');
-    this.signalRService.startConnection();
+    // this.signalRService.initializeSignalR();
 
     if (auth) {
       const parsedAuth = JSON.parse(auth) as AuthModel;

@@ -1,4 +1,5 @@
-﻿using Banking.Application.Dtos;
+﻿using Banking.Application.Constants;
+using Banking.Application.Dtos;
 using Banking.Common.Constants;
 using Banking.Core.Entities;
 using Banking.Core.Interfaces;
@@ -7,12 +8,17 @@ using MediatR;
 
 namespace Banking.Application.Requests.Commands
 {
-    public record ProcessTransactionCommand(long FromAccountId, long ToAccountId, decimal Amount) : IRequest<TransactionMessage>;
-    public class ProcessTransactionCommandHandler(IUnitOfWork unitOfWork, ISenderService sender) : IRequestHandler<ProcessTransactionCommand, TransactionMessage>
-    {
-        public async Task<TransactionMessage> Handle(ProcessTransactionCommand request, CancellationToken cancellationToken)
-        {
+    public record ProcessTransactionCommand(long FromAccountId, long ToAccountId, decimal Amount)
+        : IRequest<TransactionMessage>;
 
+    public class ProcessTransactionCommandHandler(
+        IUnitOfWork unitOfWork,
+        ISenderService sender,
+        IWebSocketService webSocketService) : IRequestHandler<ProcessTransactionCommand, TransactionMessage>
+    {
+        public async Task<TransactionMessage> Handle(ProcessTransactionCommand request,
+            CancellationToken cancellationToken)
+        {
             var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(request.FromAccountId);
             var toAccount = await unitOfWork.AccountRepository.GetByIdAsync(request.ToAccountId);
 
@@ -57,8 +63,15 @@ namespace Banking.Application.Requests.Commands
 
             // Send the transaction request to the queue
             await sender.SendMessageAsync(QueueNames.Transaction, message);
+            await webSocketService.SendToAllAsync("event", new EventData
+            {
+                Id = Guid.NewGuid().ToString(),
+                CreatedAt = DateTime.UtcNow,
+                Type = EventTypes.TransactionCreated,
+                Message = "Initialize transaction",
+                Data = message
+            });
             return message;
-
         }
     }
 }

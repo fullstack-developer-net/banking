@@ -11,7 +11,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="" />
+    <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/account.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/account.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/signalr/signalr.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/signalr/signalr.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Constants/EventTypes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Constants/EventTypes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessBatchTransactionCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessTransactionCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessTransactionCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetAccountById.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetAccountById.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.Notification/BaseHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.Notification/BaseHub.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.Notification/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Infrastructure.Notification/DependencyInjection.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,9 +44,11 @@
     <setting file="file://$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CurrentLoginUser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/4046e930474e48f7a69bae3fc9fc824412200/ce/4750a72f/02000011pdb33.il" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/473d97221b573ab97e6e745d8adae8b9e95a666539d6ed3cc8566b245d93a/ArgumentNullException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6728f66657329080f0f419df519283a455cdca7d2617a05b18553b02da52fa/Nullable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/821eadf8c89b36691b3def72d04889d8d4cd791563a97558876f873a81a1a085/StackFrameIterator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ee76fb4aded5e9da6e66cc2dcb127fac08d3ec5ac84fc6db9d4ee1d2e38/Monitor.CoreCLR.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bf9021a960b74107a7e141aa06bc9d8a0a53c929178c2fb95b1597be8af8dc/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f4bc324a395d24ed12db75b0a81536b642509aa14825bf114d9b7c934e2b/Mediator.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -60,7 +74,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Banking.Api: Develop">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Banking.Api: Production">
     <configuration name="Banking.Api: Develop" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Banking.Api/Banking.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net9.0" />
@@ -137,45 +151,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs</url>
-          <line>16</line>
-          <properties documentPath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" containingFunctionPresentation="Method 'GetTransactions'">
-            <startOffsets>
-              <option value="559" />
-            </startOffsets>
-            <endOffsets>
-              <option value="653" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessTransactionCommand.cs</url>
-          <line>13</line>
-          <properties documentPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/ProcessTransactionCommand.cs" containingFunctionPresentation="Method 'Handle'">
-            <startOffsets>
-              <option value="661" />
-            </startOffsets>
-            <endOffsets>
-              <option value="662" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs</url>
-          <line>22</line>
-          <properties documentPath="$PROJECT_DIR$/Banking.Api/Controllers/TransactionsController.cs" containingFunctionPresentation="Method 'CreateTransaction'">
-            <startOffsets>
-              <option value="820" />
-            </startOffsets>
-            <endOffsets>
-              <option value="821" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/ExceptionHandlerMiddleware.cs</url>
           <line>25</line>
           <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/ExceptionHandlerMiddleware.cs" containingFunctionPresentation="Method 'HandleExceptionAsync'">
@@ -189,30 +164,17 @@
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs</url>
-          <line>22</line>
-          <properties documentPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" containingFunctionPresentation="Method 'Handle'">
+          <url>file://$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs</url>
+          <line>74</line>
+          <properties documentPath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" containingFunctionPresentation="Method 'GetAccount'">
             <startOffsets>
-              <option value="841" />
+              <option value="2566" />
             </startOffsets>
             <endOffsets>
-              <option value="897" />
+              <option value="2567" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs</url>
-          <line>24</line>
-          <properties documentPath="$PROJECT_DIR$/Banking.Api/Middlewares/JwtMiddleware.cs" containingFunctionPresentation="Method 'Invoke'">
-            <startOffsets>
-              <option value="961" />
-            </startOffsets>
-            <endOffsets>
-              <option value="962" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="19" />
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

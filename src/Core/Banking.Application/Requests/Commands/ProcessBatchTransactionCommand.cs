@@ -63,6 +63,8 @@ namespace Banking.Application.Requests.Commands
             }
 
             await webSocketService.SendToAllAsync("event", JsonConvert.SerializeObject(eventData));
+            
+            Console.WriteLine($"Transaction completed: {transaction.TransactionId}");
             return eventData.Type == EventTypes.TransactionCompleted;
         }
     }

@@ -4,6 +4,6 @@ export enum SignalREventType {
     AccountUpdated = "AccountUpdated",
     AccountDeleted = "AccountDeleted",
     TransactionCreated = "TransactionCreated",
-    TransactionCompleted = "TransactionUpdated",
+    TransactionCompleted = "TransactionCompleted",
     TransactionFailed = "TransactionFailed"
 }

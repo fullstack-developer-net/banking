@@ -1,5 +1,5 @@
 export interface AccountModel {
-  id: number;
+  accountId: number;
   accountNumber: string;
   balance: number;
   userId: number;
