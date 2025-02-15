@@ -12,6 +12,7 @@ import { AuthInterceptor } from './shared/interceptors/auth/auth.interceptor';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgToastModule, NgToastService } from 'ng-angular-popup';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
         path: 'admin',
         loadComponent: () => import('./pages/dashboard/admin-dashboard/admin-dashboard.component').then((m) => m.AdminDashboardComponent),
         data: { roles: ['Admin'] }
+      },
+      {
+        path: 'user-detail',
+        component: UserDetailComponent
       }
     ]
   },
