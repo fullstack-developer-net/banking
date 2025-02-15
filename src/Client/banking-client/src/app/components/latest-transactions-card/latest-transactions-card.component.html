@@ -6,6 +6,15 @@
       </div>
     </div>
 
+    <div class="search-container mb-3">
+      <input 
+        type="text" 
+        class="form-control search-input" 
+        placeholder="Search transactions..."
+        [(ngModel)]="searchTerm"
+        (input)="onSearch($event)">
+    </div>
+
     <ul class="list-group list-group-flush">
       @if (isLoading) {
         <div class="loading-state">
@@ -19,19 +28,44 @@
         </div>
       }
     
-      @if (!isLoading && !error && ListGroup.length > 0) {
-        @for (item of ListGroup; track item.transactionId) {
-          <app-transaction-item
+      @if (!isLoading && !error) {
+        @if (ListGroup.length === 0) {
+          <div class="no-results">
+            No transactions found.
+          </div>
+        } @else {
+          @for (item of ListGroup; track item.transactionId) {
+            <app-transaction-item
             [value]="item">
           </app-transaction-item>
+          }
         }
       }
     </ul>
-    <div class="text-center mt-3">
-      <a href="javascript:" class="b-b-primary text-primary f-w-500">
-        View all
-        <i class="ti ti-chevron-right"></i>
-      </a>
-    </div>
+
+    @if (!isLoading && !error && ListGroup.length > 0) {
+      <div class="pagination-container mt-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <button 
+            class="btn btn-outline-primary" 
+            [disabled]="currentPage === 1"
+            (click)="changePage(currentPage - 1)">
+            Previous
+          </button>
+          
+          <span class="pagination-info">
+            Page {{ currentPage }} of {{ totalPages }}
+            (Total: {{ totalItems }})
+          </span>
+          
+          <button 
+            class="btn btn-outline-primary" 
+            [disabled]="currentPage === totalPages"
+            (click)="changePage(currentPage + 1)">
+            Next
+          </button>
+        </div>
+      </div>
+    }
   </div>
 </div>

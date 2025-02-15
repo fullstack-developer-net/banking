@@ -7,12 +7,17 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
 import { ListAccountCardComponent } from 'src/app/components/list-account-card/list-account-card.component';
 import { Router } from '@angular/router';
+import { LatestTransactionsCardComponent } from 'src/app/components/latest-transactions-card/latest-transactions-card.component';
 
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.scss'],
-  imports: [CommonModule, SharedModule,ListAccountCardComponent]
+  imports: [CommonModule,
+    SharedModule,
+    ListAccountCardComponent,
+    LatestTransactionsCardComponent
+  ]
 })
 export class AdminDashboardComponent implements OnInit {
   profileCard = [

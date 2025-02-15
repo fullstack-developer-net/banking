@@ -1,8 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { TransactionModel } from 'src/app/shared/models/transaction.model';
 
 @Component({
   selector: 'app-transaction-item',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './transaction-item.component.html',
   styleUrl: './transaction-item.component.scss'
 })
@@ -19,7 +22,12 @@ export class TransactionItemComponent {
     return this.value.transactionTime.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
-      year: 'numeric'
+      hour: '2-digit',
+      minute: '2-digit'
     });
+  }
+
+  get statusClass(): string {
+    return this.status.toLowerCase();
   }
 }
