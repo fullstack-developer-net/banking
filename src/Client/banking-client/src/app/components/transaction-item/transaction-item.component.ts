@@ -28,6 +28,6 @@ export class TransactionItemComponent {
   }
 
   get statusClass(): string {
-    return this.status.toLowerCase();
+    return this.value.status.toLowerCase();
   }
 }
