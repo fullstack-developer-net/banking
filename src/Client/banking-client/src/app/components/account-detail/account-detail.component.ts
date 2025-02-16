@@ -34,40 +34,7 @@ export class AccountDetailComponent  implements OnInit{
     { location: "Chicago, USA", timestamp: new Date(2024, 0, 12, 11, 20) },
     { location: "Miami, USA", timestamp: new Date(2024, 0, 11, 16, 10) }
   ];
-
-  chartOptions = {
-    series: [{
-      name: "Balance",
-      data: [30000, 40000, 35000, 50000, 49000, 60000, 70000, 91000]
-    }],
-    chart: {
-      type: "line" as ApexChart["type"],
-      height: 250,
-      toolbar: {
-        show: false
-      }
-    },
-    stroke: {
-      curve: "smooth" as ApexStroke["curve"],
-      width: 3
-    },
-    colors: ["#2563eb"],
-    xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"]
-    },
-    dataLabels: {
-      enabled: false
-    },
-    title: {
-      text: "Balance History",
-      align: "left" as ApexTitleSubtitle["align"],
-      style: {
-        fontSize: "16px",
-        fontWeight: 600
-      }
-    }
-  };
-
+ 
   constructor(private fb: FormBuilder, private accountsService: AccountsService,private route: ActivatedRoute) {
     this.accountForm = this.fb.group({
       accountNumber: [{ value: '', disabled: true }, Validators.required],
@@ -77,10 +44,9 @@ export class AccountDetailComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-    const accountId = this.route.snapshot.paramMap.get('accountId'); // Lấy ID từ route
+    const accountId = this.route.snapshot.paramMap.get('accountId');  
     if (accountId) {
       this.getAccountDetails(accountId);
-      console.log("accountId",accountId);
     }
   }
 

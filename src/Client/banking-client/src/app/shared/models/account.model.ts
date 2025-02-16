@@ -3,4 +3,5 @@ export interface AccountModel {
   accountNumber: string;
   balance: number;
   userId: number;
+  email: string;
 }

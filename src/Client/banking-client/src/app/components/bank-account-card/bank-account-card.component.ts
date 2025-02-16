@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthModel } from 'src/app/shared/models';
 import { CreditCardNumberPipe } from 'src/app/shared/pipes/credit-card-number.pipe';
- import { AccountsService } from '../../shared/services/accounts/accounts.service';
 import { AppStateManager } from 'src/app/shared/app.state-manager';
 import { UpperCasePipe } from '@angular/common';
 import { AccountModel } from 'src/app/shared/models/account.model';
@@ -14,7 +13,7 @@ import { AccountModel } from 'src/app/shared/models/account.model';
 })
 export class BankAccountCardComponent {
   auth: AuthModel | null = null;
-  accountNumber: string = '1234 5678 9012 12';
+  accountNumber: string ;
   accountBalance: any = 3400;
   account: AccountModel | null = null;
   // account$: Observable<AuthModel | null> = this.authService.auth$;

@@ -46,7 +46,7 @@ export class NavContentComponent implements OnInit {
 
   // Life cycle events
   ngOnInit() {
-    this.appState.user$.subscribe((user) => {
+    this.appState.auth$.subscribe((auth) => {
       this.navigations = NavigationItems.filter((x) => x.role?.includes(this.appState.currentRole));
     });    
     if (this.windowWidth < 1025) {
