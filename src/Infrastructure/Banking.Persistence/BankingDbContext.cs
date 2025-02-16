@@ -1,4 +1,5 @@
 ﻿using Banking.Common.Constants;
+using Banking.Core;
 using Banking.Core.Entities;
 using Banking.Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -7,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Persistence
 {
-    public class BankingDbContext(DbContextOptions<BankingDbContext> options)
+    public class BankingDbContext(DbContextOptions<BankingDbContext> options, CurrentLoginUser loginUser)
         : IdentityDbContext<User, Role, string>(options)
     {
         public DbSet<Account> Accounts { get; set; }

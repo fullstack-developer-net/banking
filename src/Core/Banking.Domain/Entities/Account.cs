@@ -2,7 +2,7 @@
 
 namespace Banking.Core.Entities
 {
-    public class Account
+    public class Account:BaseEntity
     {
         public string AccountNumber { get; set; } = string.Empty;
         public long AccountId { get; set; }

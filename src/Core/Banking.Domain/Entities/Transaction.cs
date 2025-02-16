@@ -3,7 +3,7 @@
 namespace Banking.Core.Entities
 {
     [Table("Transactions")]
-    public class Transaction
+    public class Transaction:BaseEntity
     {
         public string TransactionId { get; set; } = Guid.NewGuid().ToString();
         public long FromAccountId { get; set; }
