@@ -11,6 +11,7 @@ namespace Banking.Application.Requests.Queries
         public async Task<IEnumerable<TransactionMessage>> Handle(GetTransactionsByAccountIdQuery request, CancellationToken cancellationToken)
         {
             var allTransactions = await unitOfWork.TransactionRepository.AsQueryable()
+                .OrderByDescending(x => x.TransactionTime)
                 .Where(x => x.FromAccountId == request.AccountId || x.ToAccountId == request.AccountId)
               .Select(t => new TransactionMessage
               {

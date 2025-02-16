@@ -12,10 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/latest-transactions-card/latest-transactions-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/latest-transactions-card/latest-transactions-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/list-account-card/list-account-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/list-account-card/list-account-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/transaction-item/transaction-item.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/transaction-item/transaction-item.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/signalr/signalr.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/signalr/signalr.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactionByAccountId.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactionByAccountId.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetTransactions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
