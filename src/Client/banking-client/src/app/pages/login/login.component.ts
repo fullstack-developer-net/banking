@@ -11,6 +11,7 @@ import { AccountsService } from 'src/app/shared/services/accounts/accounts.servi
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { SignalRService } from 'src/app/shared/services/signalr/signalr.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent  implements OnInit {
     private appState: AppStateManager,
     private accountService: AccountsService,
     private signalrService: SignalRService,
+    private toastService:NgToastService
   ) {
 
   }
@@ -47,21 +49,24 @@ export class LoginComponent  implements OnInit {
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
-  emailExistsValidator(control: AbstractControl) {
-    return this.auth.checkEmailExists(control.value).pipe(map((exists: boolean) => (exists ? { emailExists: true } : null)));
-  }
 
   onSubmit() {
     if (this.loginForm.invalid) {
       return;
     }
 
-    this.auth.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((result) => {
-      console.log('Login result:', result);
-      if (result) {
-        this.router.navigateByUrl('/' + this.appState.currentRole?.toLowerCase());
-      } else {
-        this.router.navigateByUrl('/login');
+    this.auth.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+      next: (result) => {
+        if (result) {
+          this.toastService.success('Login successful');
+          this.router.navigateByUrl('/' + this.appState.currentRole?.toLowerCase());
+        } else {
+          this.toastService.danger('Invalid email or password');
+          this.router.navigateByUrl('/login');
+        }
+      },
+      error: (error) => {
+        this.toastService.danger('Invalid email or password');
       }
     });
   }

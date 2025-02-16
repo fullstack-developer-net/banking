@@ -2,7 +2,9 @@
   <div class="d-flex justify-content-between align-items-start">
     <div class="flex-grow-1">
       <div class="d-flex justify-content-between mb-2">
-        <small class="text-muted">#{{ value.transactionId }}</small>
+        <div class="text-muted">
+          {{ value.transactionTime | date: 'medium' }}
+        </div>
         <span class="transaction-status" [class]="value.status.toLowerCase()">
           {{ value.status }}
         </span>
@@ -12,14 +14,14 @@
         <br>
         <strong>To Account:</strong> {{ value.toAccount?.fullName }}
       </div>
-      <div class="text-muted small">
-        {{ value.transactionTime}}
-      </div>
+
       @if (value.note) {
         <div class="text-muted small mt-1">
           <em>Note: {{ value.note }}</em>
         </div>
       }
+      <small class="text-muted">({{ value.transactionId }})</small>
+
     </div>
     <div class="ms-3">
       <strong class="fs-5" [class]="{'text-success': value.amount > 0, 'text-danger': value.amount < 0}">

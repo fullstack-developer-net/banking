@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { AccountItemComponent } from '../account-item/account-item.component';
 import { CommonModule } from '@angular/common';
 import { AccountsService } from 'src/app/shared/services/accounts/accounts.service';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators, EmailValidator, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TextInputComponent } from "../../core/components/text-input/text-input.component";
-import { AuthService } from 'src/app/shared/services/auth/auth.service';
-import { catchError, map, Observable, of } from 'rxjs';
 import { emailExistsAsyncValidator } from 'src/app/shared/utils/validation.util';
+import { SignalRService } from '../../shared/services/signalr/signalr.service';
+import { SignalREventType } from 'src/app/shared/enums/event-type.enum';
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 interface AccountForm {
   isAdmin: boolean;
@@ -52,6 +53,7 @@ export class ListAccountCardComponent {
     private accountsService: AccountsService,
     private fb: FormBuilder,
     private router: Router,
+    private signalRService: SignalRService,
     private auth: AuthService
   ) {
     this.accountForm = this.fb.group({
@@ -71,6 +73,17 @@ export class ListAccountCardComponent {
 
   ngOnInit(): void {
     this.loadAccounts();
+    this.signalRService.eventMessageStream$.subscribe((message) => {
+      switch (message.type) {
+        case SignalREventType.AccountCreated:
+        case SignalREventType.AccountDeleted:
+          this.loadAccounts();
+          break;
+        default:
+          break;
+      }
+    });
+
   }
 
   loadAccounts(): void {

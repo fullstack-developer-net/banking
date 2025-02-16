@@ -5,6 +5,9 @@ import { TransactionModel } from 'src/app/shared/models/transaction.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SignalRService } from 'src/app/shared/services/signalr/signalr.service';
+import { SignalREventType } from 'src/app/shared/enums/event-type.enum';
+import { EventData } from 'src/app/shared/models/event.model';
 
 interface PaginatedResponse<T> {
   items: T[];
@@ -29,17 +32,28 @@ export class LatestTransactionsCardComponent {
 
   // Pagination
   currentPage: number = 1;
-  pageSize: number = 3;
+  pageSize: number = 5;
   totalItems: number = 0;
   totalPages: number = 0;
 
   constructor(
     private transactionService: TransactionsService,
+    private signalrService: SignalRService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadLatestTransactions();
+    // this.signalrService.hubConnection.on("event", (data:EventData) => {
+    //   if (
+    //     data.type === SignalREventType.TransactionCreated ||
+    //     data.type === SignalREventType.TransactionCompleted ||
+    //     data.type === SignalREventType.TransactionFailed
+    //   ) {
+    //     console.log('Received SignalR event:', data);
+    //     this.loadLatestTransactions();
+    //   }
+    // });
   }
 
   loadLatestTransactions(): void {

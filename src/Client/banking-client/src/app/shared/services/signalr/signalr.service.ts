@@ -14,19 +14,28 @@ import { NgToastService } from 'ng-angular-popup';
   providedIn: 'root'
 })
 export class SignalRService {
-  private hubConnection: signalR.HubConnection;
+  public readonly hubConnection: signalR.HubConnection;
 
   private eventMessageSubject = new Subject<EventData>();
-  public messageReceived$ = this.eventMessageSubject.asObservable();
+  public eventMessageStream$ = this.eventMessageSubject.asObservable();
 
   url = environment.apiUrl + '/eventhub';
 
   constructor(
-    private transactionsService: TransactionsService,
     private accountsService: AccountsService,
     private appState: AppStateManager,
     private toast: NgToastService
   ) {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+    .withUrl(this.url, {
+      skipNegotiation: true,
+      transport: signalR.HttpTransportType.WebSockets,
+    })
+    .withKeepAliveInterval(3000)
+    .withAutomaticReconnect()
+    .configureLogging(signalR.LogLevel.Information)
+    .build();
+
     this.initializeSignalR();
   }
   startConnection() {
@@ -40,16 +49,6 @@ export class SignalRService {
   }
   
   initializeSignalR() {
-    this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(this.url, {
-        skipNegotiation: true,
-        transport: signalR.HttpTransportType.WebSockets,
-      })
-      .withKeepAliveInterval(3000)
-      .withAutomaticReconnect()
-      .configureLogging(signalR.LogLevel.Information)
-      .build();
-  
     this.hubConnection.onclose(() => {
       console.error('SignalR connection closed');
       setTimeout(() => this.startConnection(), 3000);  
