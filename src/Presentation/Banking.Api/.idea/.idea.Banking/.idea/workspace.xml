@@ -12,10 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/account-detail/account-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/account-detail/account-detail.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/account.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/models/account.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Persistence/BankingDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Persistence/BankingDbContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banking.Api/appsettings.Production.json" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/appsettings.Production.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,10 +56,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Run",
-    ".NET Launch Settings Profile.Banking.Api: Production.executor": "Run",
+    ".NET Launch Settings Profile.Banking.Api: Production.executor": "Debug",
     ".NET Launch Settings Profile.Banking.Api: https.executor": "Run",
     "RunOnceActivity.git.unshallow": "true",
-    "XThreadsFramesViewSplitterKey": "0.3170103",
+    "XThreadsFramesViewSplitterKey": "0.6530612",
     "git-widget-placeholder": "develop",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -159,6 +157,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../../Infrastructure/Banking.Persistence/BankingDbContext.cs</url>
+          <line>126</line>
+          <properties documentPath="$PROJECT_DIR$/../../Infrastructure/Banking.Persistence/BankingDbContext.cs" containingFunctionPresentation="Method 'SaveChangesAsync'">
+            <startOffsets>
+              <option value="4845" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4905" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/../../Infrastructure/Banking.Persistence/BankingDbContext.cs</url>
+          <line>85</line>
+          <properties documentPath="$PROJECT_DIR$/../../Infrastructure/Banking.Persistence/BankingDbContext.cs" containingFunctionPresentation="Method 'BeforeSaveChanges'">
+            <startOffsets>
+              <option value="3362" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3424" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

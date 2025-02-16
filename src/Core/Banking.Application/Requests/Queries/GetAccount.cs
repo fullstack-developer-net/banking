@@ -31,6 +31,7 @@ namespace Banking.Application.Requests.Queries
             var totalCount = await query.CountAsync(cancellationToken);
 
             var accounts = await query
+                .OrderByDescending(x => x.AccountId)
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(a => new AccountDto

@@ -2,13 +2,14 @@
 using Banking.Core;
 using Banking.Core.Entities;
 using Banking.Core.Entities.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Persistence
 {
-    public class BankingDbContext(DbContextOptions<BankingDbContext> options, CurrentLoginUser loginUser)
+    public sealed class BankingDbContext(DbContextOptions<BankingDbContext> options)
         : IdentityDbContext<User, Role, string>(options)
     {
         public DbSet<Account> Accounts { get; set; }
@@ -75,14 +76,54 @@ namespace Banking.Persistence
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
+        private void BeforeSaveChanges()
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                var entityType = entry.Entity.GetType();
+
+                var createdAtProperty = entityType.GetProperty("CreatedAt");
+                var modifiedAtProperty = entityType.GetProperty("ModifiedAt");
+
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                    {
+                        if (createdAtProperty != null && createdAtProperty.PropertyType == typeof(DateTime))
+                        {
+                            createdAtProperty.SetValue(entry.Entity, DateTime.UtcNow);
+                        }
+
+                        if (modifiedAtProperty != null && modifiedAtProperty.PropertyType == typeof(DateTime))
+                        {
+                            modifiedAtProperty.SetValue(entry.Entity, DateTime.UtcNow);
+                        }
+
+                        break;
+                    }
+                    case EntityState.Modified:
+                    {
+                        if (modifiedAtProperty != null && modifiedAtProperty.PropertyType == typeof(DateTime))
+                        {
+                            modifiedAtProperty.SetValue(entry.Entity, DateTime.UtcNow);
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+
         public override int SaveChanges()
         {
+            BeforeSaveChanges();
             var result = base.SaveChanges();
             return result;
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
+            BeforeSaveChanges();
             var result = await base.SaveChangesAsync(cancellationToken);
             return result;
         }
