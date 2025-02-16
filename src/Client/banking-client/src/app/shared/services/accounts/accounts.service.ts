@@ -3,6 +3,9 @@ import { BaseApi } from '../base-api.service';
 import { map, Observable } from 'rxjs';
 import { AccountModel } from '../../models/account.model';
 import { environment } from 'src/environments/environment';
+import { User } from '../../models';
+import { userUpdate } from '../../models/user-update.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +60,9 @@ export class AccountsService {
 
   public getStatistical() {
     return this.api.get<any[]>(`${this.baseApiUrl}/statistical`);
+  }
+
+  public updateUser(user: userUpdate): Observable<userUpdate> {
+    return this.api.put<userUpdate>(`${this.baseApiUrl}/users/update-user`, user);
   }
 }
