@@ -47,14 +47,12 @@ export class MoneyTransferComponent implements OnInit {
     console.log('createTransaction called, showConfirmModal:', this.showConfirmModal);
   }
 
+    resetForm() {
+    this.recipientId = null;
+    this.amount = 0;
+    this.recipientUsername = null;
+  }
   confirmTransaction() {
-
-    function resetForm() {
-      this.recipientId = null;
-      this.amount = 0;
-      this.recipientUsername = null;
-    }
-
     if (this.amount <= 0) {
       this.toast.danger('Amount must be greater than 0', '', 5000);
       this.showConfirmModal = false;
@@ -64,14 +62,14 @@ export class MoneyTransferComponent implements OnInit {
     if (!this.recipientId) {
       this.toast.warning('Recipient ID is required', 'Warning', 5000);
       this.showConfirmModal = false;
-      resetForm();
+      this.resetForm();
       return;
     }
 
     if (this.appState.currentAccount?.accountId === this.recipientId) {
       this.toast.warning('You cannot transfer money to yourself', 'Warning', 5000);
       this.showConfirmModal = false;
-      resetForm();
+      this.resetForm();
       return;
     }
 
@@ -85,7 +83,7 @@ export class MoneyTransferComponent implements OnInit {
         console.log('Transaction created successfully:', response);
         this.toast.success('Transaction created successfully');
         this.showConfirmModal = false;
-        resetForm();
+        this.resetForm();
 
       },
       error: (error) => {
