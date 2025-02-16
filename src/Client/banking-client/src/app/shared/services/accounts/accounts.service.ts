@@ -4,6 +4,17 @@ import { map, Observable } from 'rxjs';
 import { AccountModel } from '../../models/account.model';
 import { environment } from 'src/environments/environment';
 
+interface ChangePasswordDto {
+  userId: string;
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+interface ChangePasswordRequest {
+  changePasswordDto: ChangePasswordDto;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -57,5 +68,12 @@ export class AccountsService {
 
   public getStatistical() {
     return this.api.get<any[]>(`${this.baseApiUrl}/statistical`);
+  }
+
+  public changePassword(data: ChangePasswordDto) {
+    const request: ChangePasswordRequest = {
+      changePasswordDto: data
+    };
+    return this.api.post<any>(`${this.baseApiUrl}/users/password`, request);
   }
 }

@@ -25,6 +25,11 @@ export class NavigationComponent implements OnInit {
     this.router.navigateByUrl('/login');
     
   }
+
+  changePassword() {
+    this.router.navigate(['/change-password']);
+  }
+
   currentRole: string;
   constructor(private appState: AppStateManager,private router: Router) {}
   ngOnInit(): void {

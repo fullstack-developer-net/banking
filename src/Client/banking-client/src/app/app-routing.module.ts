@@ -14,6 +14,7 @@ import { NgToastModule, NgToastService } from 'ng-angular-popup';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { TransactionListComponent } from './components/transaction-list/transaction-list.component';
 import { AccountDetailComponent } from './components/account-detail/account-detail.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -39,7 +40,10 @@ const routes: Routes = [
         component: TransactionListComponent
       },
       { path: 'account-detail/:accountId', component: AccountDetailComponent },
-      
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent
+      },
     ]
   },
 
