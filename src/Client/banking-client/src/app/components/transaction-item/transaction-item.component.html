@@ -3,7 +3,8 @@
     <div class="flex-grow-1">
       <div class="d-flex justify-content-between mb-2">
         <div class="text-muted">
-          {{ value.transactionTime | date: 'medium' }}
+          {{ value.transactionTime | date: 'medium' }} - <small class="text-muted">({{ value.transactionId }})</small>
+
         </div>
         <span class="transaction-status" [class]="value.status.toLowerCase()">
           {{ value.status }}
@@ -20,7 +21,6 @@
           <em>Note: {{ value.note }}</em>
         </div>
       }
-      <small class="text-muted">({{ value.transactionId }})</small>
 
     </div>
     <div class="ms-3">

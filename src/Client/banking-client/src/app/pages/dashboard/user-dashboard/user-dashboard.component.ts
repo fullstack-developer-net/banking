@@ -12,6 +12,10 @@ import { MoneyTransferComponent } from 'src/app/components/money-transfer/money-
 import { Router } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AccountsService } from 'src/app/shared/services/accounts/accounts.service';
+import { SignalRService } from 'src/app/shared/services/signalr/signalr.service';
+import { SignalREventType } from 'src/app/shared/enums/event-type.enum';
+import { EventData } from 'src/app/shared/models/event.model';
+import { TransactionModel } from 'src/app/shared/models/transaction.model';
 
 @Component({
   selector: 'app-default',
@@ -32,30 +36,16 @@ export class UserDashboardComponent implements OnInit {
   income: number = 0;
   expenditure: number = 0;
   // public method
-  profileCard = [
-    {
-      style: 'bg-primary-dark text-white',
-      background: 'bg-primary',
-      value: '$203k',
-      text: 'Net Profit',
-      color: 'text-white',
-      value_color: 'text-white'
-    },
-    {
-      background: 'bg-warning',
-      avatar_background: 'bg-light-warning',
-      value: '$550K',
-      text: 'Total Revenue',
-      color: 'text-warning'
-    }
-  ];
+ 
   account: AccountModel | null = null;
   showMoneyTransfer: boolean = false;
 
   constructor(
     private appState: AppStateManager,
     private router: Router,
-    private accountsService: AccountsService
+    private accountsService: AccountsService,
+    private signalrService: SignalRService,
+
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +53,19 @@ export class UserDashboardComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
     this.loadStatistical();
+    this.signalrService.hubConnection.on('event', (eventData: EventData) => {
+      var data = eventData.data as TransactionModel;
+      if (
+        ((this.appState?.currentRole == 'Admin' ||
+          this.appState?.currentAccount.accountId === data.fromAccountId ||
+          this.appState?.currentAccount.accountId === data.toAccountId) &&
+          eventData.type === SignalREventType.TransactionCreated) ||
+        eventData.type === SignalREventType.TransactionCompleted ||
+        eventData.type === SignalREventType.TransactionFailed
+      ) {
+        this.loadStatistical();
+      }
+    });
   }
 
   showMoneyTransferPopup(): void {
@@ -72,14 +75,15 @@ export class UserDashboardComponent implements OnInit {
   onShowMoneyTransferingClosed() {
     this.showMoneyTransfer = false;
   }
+
   onButtonCliked() {}
 
   loadStatistical(): void {
     this.accountsService.getStatistical()
       .subscribe({
         next: (data: any) => {
-          this.income = data.SpendingThisMonth;
-          this.expenditure = data.ReceivingThisMonth;
+          this.expenditure = data.SpendingThisMonth;
+          this.income = data.ReceivingThisMonth;
           console.info('Loading statistical data:', data);
         },
         error: (error) => {
