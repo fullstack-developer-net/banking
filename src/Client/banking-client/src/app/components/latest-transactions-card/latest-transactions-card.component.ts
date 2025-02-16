@@ -44,16 +44,16 @@ export class LatestTransactionsCardComponent {
 
   ngOnInit(): void {
     this.loadLatestTransactions();
-    // this.signalrService.hubConnection.on("event", (data:EventData) => {
-    //   if (
-    //     data.type === SignalREventType.TransactionCreated ||
-    //     data.type === SignalREventType.TransactionCompleted ||
-    //     data.type === SignalREventType.TransactionFailed
-    //   ) {
-    //     console.log('Received SignalR event:', data);
-    //     this.loadLatestTransactions();
-    //   }
-    // });
+    this.signalrService.hubConnection.on("event", (data:EventData) => {
+      if (
+        data.type === SignalREventType.TransactionCreated ||
+        data.type === SignalREventType.TransactionCompleted ||
+        data.type === SignalREventType.TransactionFailed
+      ) {
+        console.log('Received SignalR event:', data);
+        this.loadLatestTransactions();
+      }
+    });
   }
 
   loadLatestTransactions(): void {

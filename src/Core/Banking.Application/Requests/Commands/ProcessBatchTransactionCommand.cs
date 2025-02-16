@@ -33,8 +33,8 @@ namespace Banking.Application.Requests.Commands
                 .Include(x => x.ToAccount).ThenInclude(x => x.User)
                 .FirstOrDefault(x => x.TransactionId == request.TransactionId);
 
-            var fromAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.FromAccountId);
-            var toAccount = await unitOfWork.AccountRepository.GetByIdAsync(transaction.ToAccountId);
+            var fromAccount = transaction.FromAccount;
+            var toAccount =  transaction.ToAccount;
 
             var fromAccountBalance = fromAccount.Balance;
             var toAccountBalance = toAccount.Balance;
@@ -46,10 +46,9 @@ namespace Banking.Application.Requests.Commands
                 transaction.Note = "Transaction completed successfully.";
                 fromAccount.LockedBalance = fromAccountLockedBalance - transactionAmount;
                 toAccount.Balance = toAccountBalance + transactionAmount;
-                await unitOfWork.AccountRepository.UpdateAsync(toAccount);
-                await unitOfWork.AccountRepository.UpdateAsync(fromAccount);
+                context.Accounts.UpdateRange(toAccount, fromAccount);
                 context.Update(transaction);
-                await unitOfWork.CompleteAsync();
+                await context.SaveChangesAsync(cancellationToken);
                 eventData.Type = EventTypes.TransactionCompleted;
                 eventData.Message = "Transaction completed successfully.";
             }
@@ -60,15 +59,13 @@ namespace Banking.Application.Requests.Commands
                 fromAccount.Balance = fromAccountBalance + transactionAmount;
                 fromAccount.LockedBalance = fromAccountLockedBalance - transactionAmount;
                 toAccount.Balance = toAccountBalance;
-
-                await unitOfWork.AccountRepository.UpdateAsync(toAccount);
-                await unitOfWork.AccountRepository.UpdateAsync(fromAccount);
-                await unitOfWork.TransactionRepository.UpdateAsync(transaction);
+                context.Accounts.UpdateRange(toAccount, fromAccount);
+                context.Update(transaction);
                 await unitOfWork.CompleteAsync();
                 eventData.Type = EventTypes.TransactionFailed;
                 eventData.Message = "Transaction failed.";
             }
-            
+
             eventData.Data = new TransactionMessage
             {
                 TransactionId = transaction.TransactionId,
