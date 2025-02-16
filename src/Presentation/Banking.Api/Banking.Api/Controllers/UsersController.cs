@@ -99,7 +99,7 @@ namespace Banking.Api.Controllers
             return result == null ? BadRequest("Invalid token") : Ok(result);
         }
 
-        [HttpPost("exists")]
+        [HttpGet("exists")]
         public async Task<IActionResult> Exists(string email)
         {
             return Ok(await userManager.FindByEmailAsync(email) != null);

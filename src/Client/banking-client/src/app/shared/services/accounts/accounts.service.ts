@@ -20,11 +20,7 @@ export class AccountsService {
   }
 
   public createAccount(account: any): Observable<AccountModel> {
-    return this.api.post<AccountModel>(`${this.baseApiUrl}/accounts`, {
-      fullName: account.fullName,
-      email: account.email,
-      initialBalance: account.initialBalance
-    });
+    return this.api.post<AccountModel>(`${this.baseApiUrl}/accounts`, account);
   }
 
   public getAccountByUserId(id: string) {

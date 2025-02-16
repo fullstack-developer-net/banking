@@ -13,14 +13,17 @@ namespace Banking.Api.Controllers
         : BaseApiController
     {
         [HttpPost()]
-        public async Task<IActionResult> CreateAccount([FromBody] CreateAccountRequest command)
+        public async Task<IActionResult> CreateAccount([FromBody] CreateAccountRequest request)
         {
             if (!loginUser.Roles?.Contains("Admin") ?? false)
             {
                 return Forbid();
             }
-
-            var accountId = await mediator.Send(new CreateAccountCommand(command));
+            if(request.IsAdmin)
+            {
+                
+            }
+            var accountId = await mediator.Send(new CreateAccountCommand(request));
             return Ok(new { AccountId = accountId });
         }
 

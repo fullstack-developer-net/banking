@@ -2,6 +2,7 @@ using System.Globalization;
 using Banking.Application.Dtos;
 using Banking.Common.Constants;
 using Banking.Core;
+using Banking.Core.Interfaces;
 using Banking.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ namespace Banking.Application.Requests.Queries;
 
 public record GetStatisticalDataQuery : IRequest<Dictionary<string, string>>;
 
-public class GetStatisticalDataQueryHandler(CurrentLoginUser loginUser, BankingDbContext context)
+public class GetStatisticalDataQueryHandler(CurrentLoginUser loginUser, BankingDbContext context, IUnitOfWork unitOfWork)
     : IRequestHandler<GetStatisticalDataQuery, Dictionary<string, string>>
 {
     public async Task<Dictionary<string, string>> Handle(GetStatisticalDataQuery request,
@@ -45,8 +46,7 @@ public class GetStatisticalDataQueryHandler(CurrentLoginUser loginUser, BankingD
     {
         var totalActiveAccounts = await context.Accounts.Where(x => x.IsActive).CountAsync();
         var totalInactiveAccounts = await context.Accounts.Where(x => !x.IsActive).CountAsync();
-        var totalAdmins =
-            await context.Roles.CountAsync(x => x.Name == "Admin");
+        var totalAdmins = await  unitOfWork.UserRoleRepository.AsQueryable().CountAsync(x => x.RoleId == "admin");
 
         return new Dictionary<string, string>
         {

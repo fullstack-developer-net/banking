@@ -2,10 +2,15 @@ import { Component } from '@angular/core';
 import { AccountItemComponent } from '../account-item/account-item.component';
 import { CommonModule } from '@angular/common';
 import { AccountsService } from 'src/app/shared/services/accounts/accounts.service';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators, EmailValidator, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TextInputComponent } from "../../core/components/text-input/text-input.component";
+import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { catchError, map, Observable, of } from 'rxjs';
+import { emailExistsAsyncValidator } from 'src/app/shared/utils/validation.util';
 
 interface AccountForm {
+  isAdmin: boolean;
   fullName: string;
   email: string;
   initialBalance: number;
@@ -19,12 +24,12 @@ interface SortConfig {
 @Component({
   selector: 'app-list-account',
   standalone: true,
-  imports: [CommonModule, AccountItemComponent, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, AccountItemComponent, FormsModule, ReactiveFormsModule, TextInputComponent],
   templateUrl: './list-account-card.component.html',
   styleUrl: './list-account-card.component.scss'
 })
 export class ListAccountCardComponent {
-  ListGroup : any;
+  ListGroup: any;
   filteredAccounts: any;
   isLoading: boolean = false;
   error: string | null = null;
@@ -46,13 +51,22 @@ export class ListAccountCardComponent {
   constructor(
     private accountsService: AccountsService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {
     this.accountForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
+      isAdmin: [false],
+      fullName: ['', [Validators.required, Validators.minLength(3)],],
+      email: ['', [Validators.required, Validators.email], [emailExistsAsyncValidator(auth)]],
       initialBalance: [0, [Validators.required, Validators.min(0)]]
     });
+  }
+ 
+  get isFormValid(): boolean {
+    return (
+      this.accountForm.valid ||
+      (this.accountForm.value.isAdmin && this.accountForm.get('fullName')?.valid && this.accountForm.get('email')?.valid)
+    );
   }
 
   ngOnInit(): void {
@@ -63,20 +77,19 @@ export class ListAccountCardComponent {
     this.isLoading = true;
     this.error = null;
 
-    this.accountsService.getListAccounts()
-      .subscribe({
-        next: (data: any) => {
-          this.ListGroup = data.items;
-          this.filterAccounts();
-          this.isLoading = false;
-          console.info('Loading data accounts:', data);
-        },
-        error: (error) => {
-          console.error('Error fetching accounts:', error);
-          this.error = 'Failed to load accounts. Please try again later.';
-          this.isLoading = false;
-        }
-      });
+    this.accountsService.getListAccounts().subscribe({
+      next: (data: any) => {
+        this.ListGroup = data.items;
+        this.filterAccounts();
+        this.isLoading = false;
+        console.info('Loading data accounts:', data);
+      },
+      error: (error) => {
+        console.error('Error fetching accounts:', error);
+        this.error = 'Failed to load accounts. Please try again later.';
+        this.isLoading = false;
+      }
+    });
   }
 
   filterAccounts(): void {
@@ -84,9 +97,8 @@ export class ListAccountCardComponent {
       this.filteredAccounts = [...this.ListGroup];
     } else {
       const search = this.searchTerm.toLowerCase();
-      this.filteredAccounts = this.ListGroup.filter(account => 
-        account.fullName.toLowerCase().includes(search) ||
-        account.accountNumber.toLowerCase().includes(search)
+      this.filteredAccounts = this.ListGroup.filter(
+        (account) => account.fullName.toLowerCase().includes(search) || account.accountNumber.toLowerCase().includes(search)
       );
     }
     this.totalItems = this.filteredAccounts.length;
@@ -135,7 +147,9 @@ export class ListAccountCardComponent {
     if (this.accountForm.valid) {
       this.isLoading = true;
       const accountData: AccountForm = this.accountForm.value;
-
+      if (accountData.isAdmin) {
+        accountData.initialBalance = 0;
+      }
       this.accountsService.createAccount(accountData).subscribe({
         next: () => {
           this.loadAccounts();
@@ -167,7 +181,7 @@ export class ListAccountCardComponent {
 
     this.filteredAccounts.sort((a: any, b: any) => {
       const direction = this.sortConfig.direction === 'asc' ? 1 : -1;
-      
+
       switch (column) {
         case 'accountNumber':
           return direction * a.accountNumber.localeCompare(b.accountNumber);

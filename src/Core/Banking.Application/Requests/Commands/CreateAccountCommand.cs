@@ -11,9 +11,11 @@ namespace Banking.Application.Requests.Commands
 {
     public record CreateAccountCommand(CreateAccountRequest AccountDto) : IRequest<CreateAccountResponse>;
 
-    public class CreateAccountCommandHandler(IUnitOfWork unitOfWork, UserManager<User> userManager) : IRequestHandler<CreateAccountCommand, CreateAccountResponse>
+    public class CreateAccountCommandHandler(IUnitOfWork unitOfWork, UserManager<User> userManager)
+        : IRequestHandler<CreateAccountCommand, CreateAccountResponse>
     {
-        public async Task<CreateAccountResponse> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
+        public async Task<CreateAccountResponse> Handle(CreateAccountCommand request,
+            CancellationToken cancellationToken)
         {
             var password = $"P@ssw0rd{DateTime.UtcNow.Second}{CommonHelper.RandomString(6)}";
 
@@ -24,23 +26,32 @@ namespace Banking.Application.Requests.Commands
                 FullName = request.AccountDto.FullName,
                 TemporaryPassword = password,
                 IsActive = true,
-
             };
 
             var result = await userManager.CreateAsync(user, password);
-            await userManager.AddToRoleAsync(user, "User");
+            await userManager.AddToRoleAsync(user, request.AccountDto.IsAdmin ? "Admin" : "User");
 
             if (!result.Succeeded)
             {
                 throw new Exception("Failed to create user.");
             }
-
+            if(request.AccountDto.IsAdmin)
+            {
+                return new CreateAccountResponse
+                {
+                    Password = password,
+                    Email = user.Email,
+                    FullName = user.FullName,
+                    UserId = user.Id,
+                };
+                
+            }
+            
             await unitOfWork.AccountRepository.AddAsync(new Account
             {
                 Balance = request.AccountDto.InitialBalance ?? 0,
                 UserId = user.Id,
                 IsActive = true,
-
             });
 
             await unitOfWork.CompleteAsync();

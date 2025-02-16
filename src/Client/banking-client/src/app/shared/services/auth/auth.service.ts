@@ -23,7 +23,6 @@ export class AuthService {
   baseApiUrl = environment.apiUrl + '/api/v1';
 
   public checkEmailExists(email: string) {
-    if (!isValidEmail(email)) return of(false);
     return this.api.get<boolean>(`${this.baseApiUrl}/users/exists?email=${email}`);
   }
 

@@ -101,57 +101,34 @@
         </div>
 
         <form [formGroup]="accountForm" (ngSubmit)="onSubmitAccount()">
+          <label class="form-group form-check">
+            <input type="checkbox" class="form-check-input" formControlName="isAdmin" />
+            <span class="form-check-label required">Is admin</span>
+          </label>
           <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input 
-              type="text" 
-              id="fullName" 
-              formControlName="fullName"
-              class="form-control"
-              [class.is-invalid]="formControls['fullName'].invalid && formControls['fullName'].touched">
-            @if (formControls['fullName'].invalid && formControls['fullName'].touched) {
-              <div class="invalid-feedback">
-                Please enter a valid full name (minimum 3 characters).
-              </div>
-            }
+            <app-text-input 
+           label="Full Name"
+            formControlName="fullName"></app-text-input>     
           </div>
 
           <div class="form-group">
-            <label for="email">Email</label>
-            <input 
-              type="email" 
-              id="email" 
-              formControlName="email"
-              class="form-control"
-              [class.is-invalid]="formControls['email'].invalid && formControls['email'].touched">
-            @if (formControls['email'].invalid && formControls['email'].touched) {
-              <div class="invalid-feedback">
-                Please enter a valid email address.
-              </div>
-            }
+            <app-text-input 
+             label="Email"
+              formControlName="email"></app-text-input>             
           </div>
-
+          @if(!formControls['isAdmin'].value) {
           <div class="form-group">
-            <label for="initialBalance">Initial Balance</label>
-            <input 
-              type="number" 
-              id="initialBalance" 
-              formControlName="initialBalance"
-              class="form-control"
-              [class.is-invalid]="formControls['initialBalance'].invalid && formControls['initialBalance'].touched">
-            @if (formControls['initialBalance'].invalid && formControls['initialBalance'].touched) {
-              <div class="invalid-feedback">
-                Initial balance must be 0 or greater.
-              </div>
-            }
+            <app-text-input 
+             label="Initial Balance"
+              formControlName="initialBalance"></app-text-input>
           </div>
-
+          }
           <div class="modal-footer">
             <button type="button" class="btn-cancel" (click)="closeAddAccountModal()">Cancel</button>
             <button 
               type="submit" 
               class="btn-submit" 
-              [disabled]="accountForm.invalid || isLoading">
+              [disabled]="!isFormValid || isLoading">
               {{ isLoading ? 'Creating...' : 'Create Account' }}
             </button>
           </div>

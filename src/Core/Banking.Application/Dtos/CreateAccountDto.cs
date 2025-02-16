@@ -2,6 +2,7 @@
 {
     public class CreateAccountRequest : CreateUserDto
     {
+        public bool IsAdmin { get; set; } 
         public decimal? InitialBalance { get; set; }
     }
     public class CreateAccountResponse : UserDto

@@ -12,7 +12,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Domain/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Domain/BaseEntity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/list-account-card/list-account-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/list-account-card/list-account-card.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/list-account-card/list-account-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/components/list-account-card/list-account-card.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/accounts/accounts.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/accounts/accounts.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/services/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/utils/validation.util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../../Client/banking-client/src/app/shared/utils/validation.util.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CreateAccountDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Dtos/CreateAccountDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/CreateAccountCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Commands/CreateAccountCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetStatisticalDataQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Application/Requests/Queries/GetStatisticalDataQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/AccountsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banking.Api/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Banking.Api/Controllers/UsersController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
