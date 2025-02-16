@@ -46,7 +46,7 @@ public class GetStatisticalDataQueryHandler(CurrentLoginUser loginUser, BankingD
         var totalActiveAccounts = await context.Accounts.Where(x => x.IsActive).CountAsync();
         var totalInactiveAccounts = await context.Accounts.Where(x => !x.IsActive).CountAsync();
         var totalAdmins =
-            await context.Users.Include(x => x.Roles).CountAsync(x => x.Roles.Any(r => r.Name == "Admin"));
+            await context.Roles.CountAsync(x => x.Name == "Admin");
 
         return new Dictionary<string, string>
         {
