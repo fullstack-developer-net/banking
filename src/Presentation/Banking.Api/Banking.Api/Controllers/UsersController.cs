@@ -123,5 +123,18 @@ namespace Banking.Api.Controllers
 
             return Ok(userDto);
         }
+
+                [HttpPut("update-user")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserDto updateUserDto)
+        {
+            if (updateUserDto == null || string.IsNullOrEmpty(updateUserDto.UserId))
+            {
+                return BadRequest("Invalid user data.");
+            }
+
+            var command = new UpdateUserCommand(updateUserDto);
+            await mediator.Send(command);
+            return NoContent(); 
+        }
     }
 }

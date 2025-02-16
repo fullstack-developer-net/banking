@@ -6,6 +6,9 @@ import { ApexChart, ApexStroke, ApexTitleSubtitle } from "ng-apexcharts";
 import { AuthModel } from "../../shared/models/auth.model";
 import { AccountsService } from "../../shared/services/accounts/accounts.service";
 import { AccountModel } from "../../shared/models/account.model";
+import { userUpdate } from "src/app/shared/models/user-update.model";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-user-detail",
@@ -25,52 +28,12 @@ export class UserDetailComponent implements OnInit {
 
   accountDetails: AccountModel | null = null;
 
-  loginHistory = [
-    { location: "New York, USA", timestamp: new Date(2024, 0, 15, 14, 30) },
-    { location: "New York, USA", timestamp: new Date(2024, 0, 14, 9, 15) },
-    { location: "Boston, USA", timestamp: new Date(2024, 0, 13, 18, 45) },
-    { location: "Chicago, USA", timestamp: new Date(2024, 0, 12, 11, 20) },
-    { location: "Miami, USA", timestamp: new Date(2024, 0, 11, 16, 10) }
-  ];
 
-  chartOptions = {
-    series: [{
-      name: "Balance",
-      data: [30000, 40000, 35000, 50000, 49000, 60000, 70000, 91000]
-    }],
-    chart: {
-      type: "line" as ApexChart["type"],
-      height: 250,
-      toolbar: {
-        show: false
-      }
-    },
-    stroke: {
-      curve: "smooth" as ApexStroke["curve"],
-      width: 3
-    },
-    colors: ["#2563eb"],
-    xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"]
-    },
-    dataLabels: {
-      enabled: false
-    },
-    title: {
-      text: "Balance History",
-      align: "left" as ApexTitleSubtitle["align"],
-      style: {
-        fontSize: "16px",
-        fontWeight: 600
-      }
-    }
-  };
-
-  constructor(private fb: FormBuilder, private accountsService: AccountsService) {
+  constructor(private fb: FormBuilder, private accountsService: AccountsService, private snackBar: MatSnackBar, private router: Router) {
     this.profileForm = this.fb.group({
       fullName: ["", [Validators.required, Validators.minLength(2)]],
       dob: ["", Validators.required],
-      gender: ["", Validators.required]
+      email: ["", [Validators.required, Validators.email]]
     });
   }
 
@@ -83,18 +46,34 @@ export class UserDetailComponent implements OnInit {
       });
       
       const userId = authModel.userId;
-      const email = authModel.email;
-      console.log('User ID:', userId);
-      console.log('Email:', email);
-
       this.getAccountDetails(userId);
     }
   }
 
+  onSubmit(): void {
+    const authData = localStorage.getItem('auth');
+    const authModel: AuthModel = JSON.parse(authData);
+    const updatedUser: userUpdate = {
+      UserId: authModel.userId,
+      fullName: this.profileForm.value.fullName,
+      Email: this.profileForm.value.email,
+    };
+    console.log("email",this.profileForm.value.email);
+    this.accountsService.updateUser(updatedUser).subscribe({
+      next: () => {
+        console.log('User updated successfully!');
+      },
+      error: (err) => {
+        console.error('Error updating user:', err);
+      }
+    });
+
+}
   getAccountDetails(userId: string): void {
     this.accountsService.getAccountByUserId(userId).subscribe({
       next: (account: AccountModel) => {
         this.accountDetails = account;
+        console.log("acc",this.accountDetails);
       },
       error: (err) => {
         console.error('Error fetching account details:', err);
