@@ -15,10 +15,10 @@ namespace Banking.Core.Entities.Identity
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
         public IEnumerable<Role> Roles { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime ModifiedAt { get; set; }
-        public string CreatedBy { get; set; }
-        public string ModifiedBy { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? ModifiedAt { get; set; }
+        public string? CreatedBy { get; set; }
+        public string? ModifiedBy { get; set; }
 
     }
 }

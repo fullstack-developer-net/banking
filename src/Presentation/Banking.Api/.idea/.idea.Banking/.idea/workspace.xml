@@ -12,8 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc77fa-df3a-4c44-bbc8-f2db23ca64e4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Infrastructure/Banking.Persistence/BankingDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Infrastructure/Banking.Persistence/BankingDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Banking/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Core/Banking.Domain/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../../Core/Banking.Domain/BaseEntity.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +55,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     ".NET Launch Settings Profile.Banking.Api: Develop.executor": "Run",
-    ".NET Launch Settings Profile.Banking.Api: Production.executor": "Debug",
+    ".NET Launch Settings Profile.Banking.Api: Production.executor": "Run",
     ".NET Launch Settings Profile.Banking.Api: https.executor": "Run",
     "RunOnceActivity.git.unshallow": "true",
     "XThreadsFramesViewSplitterKey": "0.6530612",
