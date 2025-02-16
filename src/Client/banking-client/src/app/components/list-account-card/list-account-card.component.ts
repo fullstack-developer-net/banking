@@ -163,18 +163,26 @@ export class ListAccountCardComponent {
       if (accountData.isAdmin) {
         accountData.initialBalance = 0;
       }
-      this.accountsService.createAccount(accountData).subscribe({
-        next: () => {
-          this.loadAccounts();
-          this.closeAddAccountModal();
-          this.isLoading = false;
-        },
-        error: (error) => {
-          console.error('Error creating account:', error);
-          this.error = 'Failed to create account. Please try again.';
-          this.isLoading = false;
-        }
-      });
+
+      this.accountsService
+        .createAccount({
+          isAdmin: accountData.isAdmin ?? false,
+          fullName: accountData.fullName,
+          email: accountData.email,
+          initialBalance: accountData.initialBalance ?? 0
+        })
+        .subscribe({
+          next: () => {
+            this.loadAccounts();
+            this.closeAddAccountModal();
+            this.isLoading = false;
+          },
+          error: (error) => {
+            console.error('Error creating account:', error);
+            this.error = 'Failed to create account. Please try again.';
+            this.isLoading = false;
+          }
+        });
     }
   }
   navigateToAccountDetail(accountId: string): void {
