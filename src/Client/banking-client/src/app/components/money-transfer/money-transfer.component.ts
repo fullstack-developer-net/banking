@@ -21,7 +21,7 @@ export class MoneyTransferComponent implements OnInit {
   @Input() show: boolean = false;
   @Output() closeModal = new EventEmitter<any>();
   senderId: string;
-  recipientId: string | null = null;
+  recipientId: number | null = null;
   amount: number = 0;
   transactionSuccess: boolean = false;
   transactionError: boolean = false;
@@ -48,15 +48,28 @@ export class MoneyTransferComponent implements OnInit {
   }
 
   confirmTransaction() {
+
+    function resetForm() {
+      this.recipientId = null;
+      this.amount = 0;
+      this.recipientUsername = null;
+    }
+
     if (this.amount <= 0) {
-      this.toast.danger('Amount must be greater than 0');
+      this.toast.danger('Amount must be greater than 0','', 5000);
       this.showConfirmModal = false;
 
       return;
     }
+    if (this.appState.currentAccount.accountId == this.recipientId) {
+      this.toast.warning('You cound not transfer money to yourself','Warning', 5000 );
+      this.showConfirmModal = false;
+      resetForm();
+      return;
+    }
 
     const transaction: TransferModel = {
-      toAccountId: parseInt(this.recipientId),
+      toAccountId: this.recipientId,
       amount: this.amount
     };
 
@@ -65,9 +78,8 @@ export class MoneyTransferComponent implements OnInit {
         console.log('Transaction created successfully:', response);
         this.toast.success('Transaction created successfully');
         this.showConfirmModal = false;
-        this.recipientId = null;
-        this.amount = 0;
-        this.recipientUsername = null;
+        resetForm();
+
       },
       error: (error) => {
         console.error('Error creating transaction', error);
@@ -78,12 +90,13 @@ export class MoneyTransferComponent implements OnInit {
 
   getUserInfoByAccountId() {
     if (this.recipientId) {
-      this.authService.getUserByAccountId(parseInt(this.recipientId)).subscribe({
+      this.authService.getUserByAccountId(this.recipientId).subscribe({
         next: (user) => {
           this.recipientUsername = user.fullName;
         },
         error: (error) => {
           console.error('Error fetching user information', error);
+          this.toast.danger('Failed to fetch user information');
           this.recipientUsername = null;
         }
       });

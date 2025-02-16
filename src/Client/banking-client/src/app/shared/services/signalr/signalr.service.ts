@@ -2,7 +2,6 @@ import { Injectable, signal } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment';
 import { Subject } from 'rxjs';
-import { TransactionsService } from '../transactions/transactions.service';
 import { EventData } from '../../models/event.model';
 import { AppStateManager } from '../../app.state-manager';
 import { TransactionModel } from '../../models/transaction.model';
@@ -81,7 +80,6 @@ export class SignalRService {
     switch (eventData.type) {
       case SignalREventType.TransactionCreated:
         this.refreshAccount();
-        this.onTransactionCreated(eventData);
         break;
       case SignalREventType.TransactionCompleted:
         this.refreshAccount();
@@ -93,7 +91,6 @@ export class SignalRService {
         break;
       case SignalREventType.AccountCreated:
       case SignalREventType.AccountUpdated:
-        break;
       case SignalREventType.AccountDeleted:
       default:
         break;
@@ -107,10 +104,11 @@ export class SignalRService {
     }
   }
   onTransactionCompleted(eventData: EventData) {
-    console.log('Transaction completed:', eventData);
     const data = eventData.data as TransactionModel;
     if (data.toAccountId === this.appState.currentAccount?.accountId) {
-      this.toast.info('Transaction', `${data.fromAccount?.fullName} transfered to you: $${data.amount}`,5000);
+      this.toast.info('Transaction', `${data.fromAccount?.fullName} transfered to you: $${data.amount}`, 5000);
+    } else if (data.fromAccountId === this.appState.currentAccount?.accountId) {
+      this.toast.info('Transaction', `You transfered to ${data.toAccount?.fullName}: $${data.amount}`, 5000);
     }
   }
 
@@ -128,12 +126,6 @@ export class SignalRService {
         console.error('Error refreshing account', error);
       }
     });
-  }
-  onTransactionCreated(eventData: EventData) {
-    const data = eventData.data as TransactionModel;
-    if (data.fromAccountId === this.appState.currentAccount?.accountId) {
-      this.toast.info('Transaction', `You transfered to ${data.toAccount?.fullName}: $${data.amount}`,5000);
-    }
   }
 }
 
